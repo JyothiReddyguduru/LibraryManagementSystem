@@ -1,0 +1,56 @@
+<body ng-controller="viewhistoryctrl">
+
+			<div class="col-md-7">
+			
+				<h1  style="color:hotpink" ><b>List Of Books borrowed by<b></h1><br>
+				<div class="panel"  style="background-color: rgba(223, 243, 245, 0.73); border: 2px solid cyan;height: 284px;">
+				
+				<!-- top row div end -->
+				<div class="row" style="
+    padding-top: 30px;
+    padding-left: 30px;
+    padding-right: 40px; height: 230px;
+">
+				<!-- image to the left -->
+					<div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+						<div class="hovereffect">
+							<img src="images/team3.jpg"  style="
+    height: 210px;
+"class="img-responsive"
+								alt="team img 1"> <br>
+
+							<div class="overlay" style="
+    height: 231px;
+">
+								<br> <br>
+								<h4 style="color: cyan">{{x.title}}</h4>
+							</div>
+						</div>
+					</div>
+					<!-- image to the left end-->
+					<!-- data to the right end-->
+					<div  class="col-lg-4 col-md-4 col-sm-6 col-xs-12" font-size="300px"
+						font-weight="300px" style="text-align:left">
+						<h4 style="color: purple;width:600px">
+							Title:{{x.title}} <br> <br> Author :{{x.author}} 
+							<br><br> Issue Date :{{}}
+							<br><br> Due Date :{{}}
+							<br><br> Return Date :{{}}
+							<br> <br>Fine :{{}}
+						</h4>
+
+					</div>
+					<!-- data to the right end-->
+			
+			</div>
+			</div>
+		
+				</div>
+			</div>
+
+</body>
+
+
+
+
+

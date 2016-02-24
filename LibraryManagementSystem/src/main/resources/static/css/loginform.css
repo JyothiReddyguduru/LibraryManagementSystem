@@ -1,0 +1,55 @@
+@CHARSET "ISO-8859-1";
+
+
+body { margin-bottom: 30px; }
+h1 {
+	font-weight: 300;
+	font-size: 36px;
+	line-height: normal;
+	margin: auto;
+	margin-top: 0px;
+	text-align: center;
+}
+
+.list-container { max-width: 600px; }
+.icon-container { position: relative; }
+.icon-container .fa {
+	color: snow;
+	position: absolute;
+	left: 10px;
+	top: 10px;
+}
+.icon-container input, 
+.icon-container textarea {
+	padding-left: 30px;
+	background-color: snow;color: snow;
+	}
+
+.login-form-2 {
+	background-color: rgba(83, 78, 78, 0.35);
+    border-radius: 8px;
+	color: #080808;
+	border: 1px;
+	font-weight: 300;
+	max-width: 650px;
+	padding: 30px 30px 30px 30px;
+	margin: 5%;
+		font-family: 'Times New Roman', Times, serif
+}
+.login-form-2 h1 { color: CaptionText; margin-bottom: 40px; }
+.login-form-2 a { color: #DBDBDB; }
+.login-form-2 .form-control {
+	background-color: rgba(83, 78, 78, 0.35);
+	border: 0px solid lavender;
+	color: snow;
+	
+}
+.login-form-2 .icon-container .fa {	color: snow; }
+.login-form-2 .control-label { margin-bottom: 10px; }
+.login-form-2 .btn {width: 20%; text-align: center }
+.login-form-2 label { font-weight: 400;font-family: 'Georgia, 'Times New Roman', Times, serif';font-size:18px;  }
+.form-horizontal {
+	margin-left: 10%;
+	margin-top: -5%;
+	
+}

@@ -1,0 +1,73 @@
+<body id="top" ng-controller="viewprofilectrl">
+	<div class="container">
+		<div class="col-md-10">
+			<br> <br> <br>
+
+			<!-- panel div -->
+			<div class="panel" style="background-color: rgba(56, 53, 53, 0.93); border: 2px solid cyan;margin-left: 100px;"">
+				<!-- top row div end -->
+				<div class="row"
+					style="padding-top: 30px; padding-left: 30px; padding-right: 40px; height: 230px;">
+
+					<!-- image to the left -->
+					<div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+						<div class="">
+							<img style=" border-radius: 50%;" src="images/3.jpg" class="img-responsive"
+								alt="team img 1"> <br>
+
+							<!-- <div class="overlay" style=" border-radius: 10%;height: 200px;">
+								<br> <br>
+								<h4 style="color: cyan">{{x.title}}</h4>
+							</div> -->
+						</div>
+					</div>
+					<!-- image to the left end-->
+					<!-- data to the right end-->
+					<div class="col-lg-4 col-md-4 col-sm-6 col-xs-12" font-size="300px"
+						font-weight="300px" style="text-align: left">
+						<h3 style="color: white; width: 600px;margin-top: 0px;">
+							Name:{{x.firstName}}&nbsp;{{x.lastName}} <br> <br> Date Of Birth :{{x.dateOfBirth}} <br>
+							<br> Contact :{{x.contact}}
+							<br> <br> Email-Id :{{x.email}}
+						</h3>
+
+					</div>
+					<!-- data to the right end-->
+					<div>
+						<a href="#editprofile" style="color: cyan"> <i style="color: cyan"
+							class="fa fa-pencil fa-2x"></i>&nbsp;Edit</a>
+					</div>
+				</div>
+				<!-- top row div end -->
+				<!-- bottom table row div  -->
+				<div
+					style="padding-left: 50px; padding-right: 50px; text-align: left;">
+
+
+				</div>
+				<!-- bottom table row div  -->
+			</div>
+			<!--end panel div -->
+			<!-- Description of fines -->
+			<div align="center">
+				<!-- list will start here -->
+				<ul>
+					<div>
+						<!-- list item will start here -->
+						<li class="overlay panel" style="background-color: rgba(0, 0, 0, 0.55);margin-left: 200px;margin-right: 100px;">
+
+							<div style="padding-top: 10px;">
+								<p style="color: white">
+									<b>Reminder to submit <b style="color: cyan" >&nbsp;MidSummer's Night Dream</b>&nbsp; Book</b>
+								</p>
+							</div>
+					</div>
+					<!-- list item will start here -->
+					</li>
+				</ul>
+				<!-- list will end here -->
+
+			</div>
+		</div>
+	</div>
+</body>

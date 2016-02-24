@@ -1,0 +1,101 @@
+<!--   History for clerk    -->
+
+<!-- 
+<body ng-controller="accesshistoryctrl">
+
+<div class="container">
+
+<form class="col-md-7" style="padding-top:20px;margin-left: 200px;">
+									<div id="custom-search-input">
+										<div class="input-group col-md-12">
+											<input type="text" class="form-control input-lg"
+												placeholder="Search for a Member..." /> <span
+												class="input-group-btn">
+												<button class="btn btn-info btn-lg"
+													ng-click="fetchbytitle();sho='true'" type="button">
+													<i class="glyphicon glyphicon-search"></i>
+												</button>
+											</span>
+										</div>
+									</div>
+								</form>
+		<div class="row">
+		
+		
+			<div class="col-md-10">
+				&nbsp;&nbsp;
+				<h1  style="color:hotpink" ><b>List Of Members<b></h1><br>
+				<div class="col-lg-4 col-md-4 col-sm-6 col-xs-12" ng-repeat="x in history">
+				<div class="overlay panel " style="background-color: rgba(0, 0, 0, 0.47);border-radius:80%;-webkit-border-radius: 99px 0px 99px 0px;-moz-border-radius: 99px 0px 99px 0px">
+				<h2 style="color: cyan" >{{x.firstName}}&nbsp;{{x.lastName}}</h2>
+				<h4 style="color: hotpink" >{{x.email}}</h4>
+				<h4>
+								<br>
+								 <a style="color: White" href=#viewhistory/{{x.memid}}>View</a>
+								&nbsp;&nbsp; 
+								
+							</h4>
+				
+				</div>
+			
+					</div>
+				</div>
+			</div>
+		</div>
+</body> 
+
+
+
+
+ -->
+
+
+<body ng-controller="accesshistoryctrl">
+<div class="container">
+<h2>Pankaj kumar</h2>
+<form class="col-md-7" style="padding-top:20px;margin-left: 200px;">
+                                <input type="text" placeholder="Search by member id" ng-model="search.members.memid" required>
+                               <!--  <input type="button" value="Search" href=#memhistory> -->
+                               <br />
+                                <input type="text" placeholder="Search by accountId" ng-model="search.quantity.accountId" required>
+                               
+                                
+</form>
+
+<div class="panel">
+<div class="panel-heading">
+ <table>
+ <thead>
+ <th>
+</th>
+ <th>
+ MEMBER</th>
+ </thead>
+ </table>
+ <div class="panel-body">
+ <table class="table table-bordered">
+ <thead>
+ <tr>
+ <th>Id</th>
+ <th>Memberid</th>
+ <th>Accountid</th>
+ <th>Issued Date</th>
+ <th>Submission Date</th>
+ <th>Return Date</th>
+ <th>fine</th>
+ </tr>
+ <tbody ng-repeat="book in bookdetails| filter : search">
+ <tr>
+ <td>{{book.id}}</td>
+  <td>{{book.members.memid}}</td>
+  <td>{{book.quantity.accountId}}</td>
+  <td>{{book.issueDate | date: 'yyyy-MM-dd' }}</td>
+  <td>{{book.dueDate | date: 'yyyy-MM-dd'}}</td>
+  <td>{{book.returnDate | date: 'yyyy-MM-dd'}}</td>
+  <td>{{book.fine}}</td>
+  </tr>
+ </tbody>
+ </table></div>
+ </div></div>
+ </div>
+ </body>

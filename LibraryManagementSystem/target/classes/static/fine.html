@@ -1,0 +1,92 @@
+
+
+<body ng-controller="viewfinectrl" align="centre">
+	<div class="container">
+		<div class=" col-md-offset-4 "
+			style="padding-top =: 40px; padding-top: 60px; margin-left: 260px;">
+			<!-- Description of fines -->
+			<div>
+				<!-- list will start here -->
+				<ul>
+					<div>
+						<!-- list item will start here -->
+						<li class="overlay panel"
+							style="background-color: rgba(0, 0, 0, 0.55)"
+							ng-repeat="x in finesview">
+
+							<div style="padding-top: 10px;">
+								<p style="color: white">
+									<b>Late Submission of any book by {{x.numberOfDays}} Days
+										will lead to a fine of {{x.amount}} per day</b> &nbsp;&nbsp;
+
+									<button class="btn btn-primary" type="submit"
+										style="margin-top: 5px; margin-bottom: 5px;" ng-click=""
+										data-toggle="modal" data-dismiss="modal">Edit</button>
+								</p>
+							</div>
+					</div>
+					<!-- list item will start here -->
+					</li>
+				</ul>
+				<!-- list will end here -->
+
+			</div>
+			<button ng-click="addrule='true'" class="btn btn-info">Add a
+				Fine Rule</button>
+
+		</div>
+
+
+		<div class="panel  col-md-offset-4 " ng-show=addrule
+			style="height: 242px; width: 502px; padding-left: 30px; border-right-width: 40px; padding-top: 40px; margin-left: 460px;">
+			<form>
+				<b>Number Of Days</b> <input type="text" id="days"
+					placeholder="Number Of Days" class="form-control"
+					ng-model="finesview.numberOfDays" /> <b>Amount</b> <input
+					type="text" id="amount" placeholder="Amount" class="form-control"
+					ng-model="finesview.amount" />
+				<button class="btn btn-info" type="submit"
+					ng-click="addfinerule()">Submit</button>
+			</form>
+
+		</div>
+	</div>
+
+
+<!-- Modal for editing a fine rule by Admin -->
+
+	<div ng-controller="editfinectrl">
+		<div class="container">
+			<!-- Trigger the modal with a button -->
+			<!-- <button type="button" class="btn btn-info btn-lg" data-toggle="modal"
+			data-target="#editModal">Edit</button>
+		 -->
+			<!-- Modal -->
+			<div class="modal fade" id="editfineModal" role="dialog">
+				<div class="modal-dialog">
+
+					<!-- Modal content-->
+					<div class="modal-content" align="centre"
+						style="background-color: none;">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal">&times;</button>
+							<h4 class="modal-title" style="color: Hotpink;">Edit Fine
+								Rule</h4>
+						</div>
+						<div class="modal-body"
+							style="padding-left: 30px; padding-right: 30px; padding-bottom: 30px;">
+							<form>
+								Fine Rules <input type="text" id="fineid" class="form-control"
+									ng-model="finesview.numberOfDays" /> <input type="text"
+									id="fineid" class="form-control" ng-model="finesview.amount" />
+								<br> <br>
+								<button class="btn btn-primary" type="submit"
+									ng-click="editfinerule()" data-dismiss="modal">Submit</button>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+
+		</div>
+</body>

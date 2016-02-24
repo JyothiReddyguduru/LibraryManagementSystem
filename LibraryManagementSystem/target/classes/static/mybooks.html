@@ -1,0 +1,44 @@
+<body ng-controller="viewmybooksctrl">
+<div class="container">
+<div class="col-md-7">
+			
+				<h1  style="color:hotpink" ><b>My Books<b></h1><br>
+			<div class="panel"
+				style="background-color: rgba(223, 243, 245, 0.73); border: 2px solid cyan; height: 204px; width: 404px">
+
+				<!-- top row div end -->
+				<div class="row"
+					style="padding-top: 30px; padding-left: 30px; padding-right: 40px; height: 204px;">
+					<!-- image to the left -->
+					<div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+						<div class="hovereffect">
+							<img src="images/team3.jpg" style="height: 140px;"
+								class="img-responsive" alt="team img 1"> <br>
+
+							<div class="overlay" style="height: 155px;"">
+								<br> <br><br>
+								<h4 style="color: cyan">{{x.title}}</h4>
+							</div>
+						</div>
+					</div>
+					<!-- image to the left end-->
+					<!-- data to the right end-->
+					<div class="col-lg-4 col-md-4 col-sm-6 col-xs-12" font-size="300px"
+						font-weight="300px" style="text-align: left">
+						<h4 style="color: purple; width: 600px">
+							Title:{{x.title}} <br> Author :{{x.author}} <br> Issue
+							Date :{{}} <br> Due Date :{{}} <br> Return Date :{{}} <br>
+							Fine :{{}}
+						</h4>
+
+					</div>
+					<!-- data to the right end-->
+
+				</div>
+			</div>
+
+		</div>
+			</div>
+
+
+</body>

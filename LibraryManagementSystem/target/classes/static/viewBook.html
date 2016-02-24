@@ -1,0 +1,72 @@
+<body id="top" ng-controller="viewcopyctrl">
+	<div class="container">
+		<div class="col-md-10">
+			<br> <br> <br>
+			<!-- panel div -->
+			<div class="panel"
+				style="background-color: rgba(255, 255, 255, 0.47); border: 2px solid cyan;">
+				<!-- top row div end -->
+				<div class="row"
+					style="padding-top: 30px; padding-left: 30px; padding-right: 40px; height: 230px;">
+
+					<!-- image to the left -->
+					<div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+						<div class="hovereffect">
+							<img src="images/team3.jpg" class="img-responsive"
+								alt="team img 1"> <br>
+
+							<div class="overlay">
+								<br> <br>
+								<h4 style="color: cyan">{{x.title}}</h4>
+							</div>
+						</div>
+					</div>
+					<!-- image to the left end-->
+					<!-- data to the right end-->
+					<div class="col-lg-4 col-md-4 col-sm-6 col-xs-12" font-size="300px"
+						font-weight="300px" style="text-align: left">
+						<h3 style="color: purple; width: 600px">
+							Title:{{x.title}} <br> <br> Author :{{x.author}} <br>
+							<br> Isbn :{{x.isbn}}
+						</h3>
+
+					</div>
+					<!-- data to the right end-->
+					<div>
+						<a href="#home" style="color: cyan"> <i style="color: cyan"
+							class="fa fa-chevron-left fa-3x"></i></a>
+					</div>
+				</div>
+				<!-- top row div end -->
+				<!-- bottom table row div  -->
+				<div style="padding-left: 50px; padding-right: 50px; text-align: left;">
+					<h2>{{title}}</h2>
+					<a role="button" ng-show=admin ng-click="addcopy(x.bookid)" href="" style="color: cyan; padding-bottom: 15px;"> <i
+						class="fa fa-plus-circle fa-3x"></i>&nbsp;&nbsp;<b>add copy </b><span
+						style="color: cyan" class="arrow"></span></a>
+					<table class="table" border="1"
+						style="background-color: rgba(23, 195, 195, 0.86);">
+						<thead style="text-align: centre">
+							<tr>
+								<th><h3>accountid</h3></th>
+								<th><h3>status</h3></th>
+								<th ng-show=admin><h3>delete</h3></th>
+							</tr>
+						</thead>
+						<tbody ng-repeat="y in x.quantity">
+							<tr>
+								<td>{{y.accountId}}</td>
+								<td>{{y.status}}</td>
+								<td ng-show=admin><button  ng-click="delete(y,$index)" class="btn btn-sm" 
+								style="margin-bottom: 0px; margin-right: 0px; margin-top: 0px; 
+								margin-left: 0px; width: 74px;">delete</button></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				<!-- bottom table row div  -->
+			</div>
+			<!--end panel div -->
+		</div>
+	</div>
+</body>

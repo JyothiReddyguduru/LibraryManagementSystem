@@ -1,0 +1,53 @@
+<!-- Html page to mark a book as return -->
+<body style="text-decoration:blink;" ng-controller="returnbookctrl">
+	<div class="row">
+		<div class="container">
+			<div class="col-md-8 ">
+				<div class="col-md-offset-4 panel"
+					style="padding-left: 70px; padding-right: 70px; margin-left: 140px; padding-top: 30px; padding-bottom: 50px; 
+					background-color: rgba(4, 8, 8, 0.62); margin-top: 50px; border: 2px solid cyan; margin-left: 100px; width: 894px;">
+					<h2 style="color: hotpink">Mark a Book</h2>
+					<br>
+					
+					<div>
+					<form ng-submit="fetchbymember()">
+						<b style="color: whitesmoke">Filter By Member id:</b>
+					     
+						<input type="text"
+							style="margin-left: 260px; margin-right: 200px; width: 226px;"
+							class="form-control" placeholder="Enter MemberId to mark a book"
+							ng-model="member.id" />
+							<input type="submit" value="fetch"></input>
+					</form>
+					</div>
+					
+					
+					<h3 style="color: cyan">Books issued</h3>
+					<table class="table" border="0"
+						style="font-weight: 600; background-color:none;">
+						<thead>
+							<tr>
+								<th ><b>Book Detail Id</b></th>
+								<th ><b>Account Id</b></th>
+								<th><b>Member Id</b></th>
+								<th><b>Status</b></th>
+								<th ><b>Mark</b></th>
+							</tr>
+						</thead>
+						<tbody ng-repeat="book in bookdetails| filter : search">
+							<tr ng-show="book.quantity.status=='Unavailable'">
+								<td>{{book.id}}</td>
+								<td>{{book.quantity.accountId}}</td>
+								<td>{{book.members.memid}}</td>
+								<td>{{book.quantity.status}}</td>
+								<td><button ng-click="mark(book.id)" class="btn btn-info"
+										style="margin-bottom: 0px; margin-top: 0px; margin-left: 0px; margin-right: 0px;">Mark
+										a book</button></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
