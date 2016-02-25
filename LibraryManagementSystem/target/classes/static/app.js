@@ -131,12 +131,16 @@ $rootScope.logOut= function(){
 		$rootScope.authenticated = false;
 		$rootScope.admin=false;
 		$rootScope.user=false;
-		location.reload();
+		$rootScope.auth.userName="";
+		$rootScope.auth.password="";
 	}, function (response){
 		alert('Logout error call back Successfully');
         
-			
-		
+		$rootScope.authenticated = false;
+		$rootScope.admin=false;
+		$rootScope.user=false;
+		$rootScope.auth.userName="";
+		$rootScope.auth.password="";	
 	});
 	alert('Logout Successfully');
 	
