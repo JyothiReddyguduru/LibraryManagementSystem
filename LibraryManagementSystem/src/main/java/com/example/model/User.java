@@ -10,16 +10,15 @@ import javax.persistence.Table;
 
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name="user")
 public class User {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	int id;
-
-	@OneToOne
-	Member member;
+	int id;	
 	
 	@Column(unique=true)
 	String userName;
@@ -29,6 +28,17 @@ public class User {
 	
 	@Column
 	String roles;
+	
+  /*  @OneToOne
+    Member member;*/
+/*
+	public Member getMember() {
+		return member;
+	}
+
+	public void setMember(Member member) {
+		this.member = member;
+	}*/
 
 	public int getId() {
 		return id;
@@ -38,14 +48,7 @@ public class User {
 		this.id = id;
 	}
 
-	public Member getMember() {
-		return member;
-	}
-
-	public void setMember(Member member) {
-		this.member = member;
-	}
-
+	
 	public String getUserName() {
 		return userName;
 	}

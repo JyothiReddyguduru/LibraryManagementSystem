@@ -87,7 +87,7 @@
  <tbody ng-repeat="book in bookdetails| filter : search">
  <tr>
  <td>{{book.id}}</td>
-  <td>{{book.members.memid}}</td>
+  <td>{{book.members.user.userName}}</td>
   <td>{{book.quantity.accountId}}</td>
   <td>{{book.issueDate | date: 'yyyy-MM-dd' }}</td>
   <td>{{book.dueDate | date: 'yyyy-MM-dd'}}</td>

@@ -194,7 +194,9 @@ public class BookController {
 	
 	@RequestMapping("/bookdetails")
 	public List<BookDetail> bookdetail() {
+		
 		return (List<BookDetail>) bookdetailrepository.findAll();
+		
 	}
 
 	@SuppressWarnings("unchecked")
@@ -365,10 +367,19 @@ public HashMap<String,Object>addcopy(@PathVariable("bookid") int bookid) {
 
 @RequestMapping("/viewmybooks")
 public List<BookDetail> getmybooks(){
- String s=	SecurityContextHolder.getContext().getAuthentication().getName();
-  User u=userrepository.findByUserName(s);
-  
-  return u.getMember().getBookdetail();
-
+ String s=	SecurityContextHolder.getContext().getAuthentication().getName();  
+ User user=userrepository.findByUserName(s);
+ int j=user.getId();
+ return  memberrespository.findByUserId(j).getBookdetail();
+ 
+ /*return userrepository.findByUserName(s).getMember().getBookdetail();*/
 }
+
+/*
+@RequestMapping("\test")
+public void test(){
+	int memidd=1;
+	User u;
+	userrepository.findByMemId(memidd);
+}*/
 }

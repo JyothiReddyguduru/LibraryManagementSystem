@@ -13,6 +13,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
 import com.example.Gender;
@@ -36,7 +38,18 @@ public class Member {
     @OneToMany(mappedBy="members")
     @JsonIgnore
     List<BookDetail> bookdetail;
+    
+  @OneToOne(cascade=CascadeType.ALL)
+  User user;
 	
+	public User getUser() {
+	return user;
+}
+
+public void setUser(User user) {
+	this.user = user;
+}
+
 	@Column
 	String email;
 		
@@ -48,6 +61,8 @@ public class Member {
 	
 	@Enumerated(EnumType.STRING)
     private Gender gender;
+
+	
 
 	public List<BookDetail> getBookdetail() {
 		return bookdetail;
