@@ -31,12 +31,14 @@ import com.example.model.Category;
 import com.example.model.Fine;
 import com.example.model.Member;
 import com.example.model.Quantity;
+import com.example.model.User;
 import com.example.repositories.BookDetailRepository;
 import com.example.repositories.BookRepository;
 import com.example.repositories.CategoryRepository;
 import com.example.repositories.FineRepository;
 import com.example.repositories.MemberRepository;
 import com.example.repositories.QuantityRepository;
+import com.example.repositories.UserRepository;
 
 @RestController
 public class BookController {
@@ -53,6 +55,8 @@ public class BookController {
 	MemberRepository memberrespository;
 	@Autowired
 	QuantityRepository quantityrepository;
+	@Autowired
+	UserRepository userrepository; 
 
 	@RequestMapping("/categories")
 	public List<Category> getCategories() {
@@ -357,5 +361,14 @@ public HashMap<String,Object>addcopy(@PathVariable("bookid") int bookid) {
 	}
 
 	return returnParams;
-}	
+}
+
+@RequestMapping("/viewmybooks")
+public List<BookDetail> getmybooks(){
+ String s=	SecurityContextHolder.getContext().getAuthentication().getName();
+  User u=userrepository.findByUserName(s);
+  
+  return u.getMember().getBookdetail();
+
+}
 }

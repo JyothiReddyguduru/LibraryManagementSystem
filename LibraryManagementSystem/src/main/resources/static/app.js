@@ -131,6 +131,7 @@ $rootScope.logOut= function(){
 		$rootScope.authenticated = false;
 		$rootScope.admin=false;
 		$rootScope.user=false;
+		$rootScope.clerk=false;
 		$rootScope.auth.userName="";
 		$rootScope.auth.password="";
 	}, function (response){
@@ -139,6 +140,7 @@ $rootScope.logOut= function(){
 		$rootScope.authenticated = false;
 		$rootScope.admin=false;
 		$rootScope.user=false;
+		$rootScope.clerk=false;
 		$rootScope.auth.userName="";
 		$rootScope.auth.password="";	
 	});
