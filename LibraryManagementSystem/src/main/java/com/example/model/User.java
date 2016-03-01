@@ -23,6 +23,7 @@ public class User {
 	@Column(unique=true)
 	String userName;
 	
+	@JsonIgnore
 	@Column
 	String password;
 	

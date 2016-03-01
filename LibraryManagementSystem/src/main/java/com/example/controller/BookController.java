@@ -1,17 +1,17 @@
 package com.example.controller;
 
-import java.text.DateFormat;
-
-
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collection;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Iterator;
 //import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,6 +39,8 @@ import com.example.repositories.FineRepository;
 import com.example.repositories.MemberRepository;
 import com.example.repositories.QuantityRepository;
 import com.example.repositories.UserRepository;
+
+import javassist.expr.NewArray;
 
 @RestController
 public class BookController {
@@ -366,20 +368,53 @@ public HashMap<String,Object>addcopy(@PathVariable("bookid") int bookid) {
 }
 
 @RequestMapping("/viewmybooks")
-public List<BookDetail> getmybooks(){
+public List<Map<String, Object>> getmybooks(){
+	List<BookDetail>bookdetail;
  String s=	SecurityContextHolder.getContext().getAuthentication().getName();  
  User user=userrepository.findByUserName(s);
  int j=user.getId();
- return  memberrespository.findByUserId(j).getBookdetail();
- 
- /*return userrepository.findByUserName(s).getMember().getBookdetail();*/
+ bookdetail=memberrespository.findByUserId(j).getBookdetail();
+ Iterator<BookDetail> it= bookdetail.iterator();
+ List<Map<String,Object>> result = new ArrayList<>();
+ while(it.hasNext()){
+	 
+	 Map<String,Object> resultMap = new HashMap<>();
+	 BookDetail b=(BookDetail)it.next();
+	 String acc=b.getQuantity().getAccountId();
+
+	 Quantity qu=quantityrepository.findByAccountId(acc);
+	 int bookid=qu.getBook().getBookid();
+    String title= bookrepository.findOne(bookid).getTitle();
+    resultMap.put("bookDetail", b);
+    resultMap.put("title", title);
+   result.add(resultMap);
+ }
+ return result;
 }
 
-/*
-@RequestMapping("\test")
-public void test(){
-	int memidd=1;
-	User u;
-	userrepository.findByMemId(memidd);
-}*/
+@RequestMapping("/testforview/{bookid}")
+public Map<Object,Object>getbook(@PathVariable("bookid")int bookid)
+{
+	
+	Map<Object,Object>returncat=new HashMap<>();
+	Book b=bookrepository.findOne(bookid);
+	List<String>cat=new ArrayList<>();
+	List<Category>c=b.getCats();
+	Iterator<Category>it=c.iterator();
+	while(it.hasNext())
+	{
+		Category c1=(Category)it.next();
+		String name=c1.getCategoryname();
+		
+		cat.add(name);
+	}
+	Set<String> uniqueCat = new HashSet<String>(cat);
+returncat.put("Categories",uniqueCat);
+returncat.put("book",b);
+
+
+
+return returncat;
+}
+
 }

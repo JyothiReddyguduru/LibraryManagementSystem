@@ -6,6 +6,8 @@ import org.springframework.data.repository.query.Param;
 
 import com.example.model.Member;
 public interface MemberRepository extends JpaRepository<Member, Integer> {
-@Query(value="select mem from Member mem where mem.id=:userid")
-public Member findByUserId(@Param("userid")int userid);
+
+	@Query(value="select mem from Member mem where mem.id=:userid")
+     public Member findByUserId(@Param("userid")int userid);
+
 }
