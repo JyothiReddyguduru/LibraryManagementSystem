@@ -187,8 +187,8 @@ public class BookController {
 	}
 
 	@RequestMapping("/searchbytitle/{title}")
-	public Book searchbookbytitle(@PathVariable("title") String title) {
-			return bookrepository.findByTitle(title);
+	public List<Book> searchbookbytitle(@PathVariable("title") String title) {
+		return bookrepository.findByTitle(title+ "%");
 	}
 
 	
@@ -392,7 +392,7 @@ public List<Map<String, Object>> getmybooks(){
  return result;
 }
 
-@RequestMapping("/testforview/{bookid}")
+@RequestMapping("/book/category/{bookid}")
 public Map<Object,Object>getbook(@PathVariable("bookid")int bookid)
 {
 	
@@ -410,8 +410,8 @@ public Map<Object,Object>getbook(@PathVariable("bookid")int bookid)
 	}
 	Set<String> uniqueCat = new HashSet<String>(cat);
 returncat.put("Categories",uniqueCat);
-returncat.put("book",b);
-
+/*returncat.put("book",b);
+*/
 
 
 return returncat;

@@ -77,7 +77,10 @@ app.config(['$routeProvider', '$httpProvider',
             templateUrl: 'index.html',
             controller: 'animationctrl'
         })
-
+        .when('/viewcat/:bookid', {
+                templateUrl: 'viewcatofbook.html',
+                controller: 'viewcatofbookctrl'
+            })
 
         //.otherwise({
         // redirectTo: '/view'
@@ -168,6 +171,23 @@ app.controller('viewbooks', ['$scope', '$rootScope', '$http', '$routeParams', fu
     });
 
 }])
+
+app.controller('viewcatofbookctrl', ['$scope', '$rootScope', '$http', '$routeParams', function($scope, $rootScope, $http, $routeParams) {
+
+    $scope.title = 'List of Categories../';
+
+    $http({
+        method: 'GET',
+        url: '/book/category/'+$routeParams.bookid,
+        /*
+         * headers : { 'Authorization' : 'Basic ' + encodedAuthData }
+         */
+    }).then(function(response) {
+        $rootScope.catofbooks = response.data;
+    });
+
+}])
+
 
 
 app.controller('viewmybooksctrl', ['$scope', '$rootScope', '$http', '$routeParams', function($scope, $rootScope, $http, $routeParams) {
