@@ -76,6 +76,7 @@
   </ul>
   <ul class="nav navbar-nav pull-right">
   <li class="nav-item active">
+  <i class="fa fa-angle-double-right  bounce" ></i><a  class="btn btn-success" ng-hide=authenticated data-toggle="modal" data-target="#register">Register here</a>
       <a class="nav-link" href="#viewprofile"  ng-show=authenticated style="padding-top: 30px;"> <i style="color:cyan" class="fa fa-user fa-lg"></i>&nbsp;User Name</a>
     </li>
 	   <li class="nav-item active">
@@ -229,3 +230,108 @@
     </body>
     
 </html>
+
+<!--Registre  -->
+<div ng-controller="registerctrl">
+<div class="container">
+<!-- <button type="button" class="btn btn-info btn-sm"
+							data-toggle="modal" data-target="#register">
+							Register
+						</button> -->
+	<!-- Modal -->
+<div class="modal fade" id="register" role="dialog" style="width:100%;height:100%">
+	<div class="modal-dialog">
+				<!-- Modal content-->
+	<div class="modal-content">
+	<div class="modal-header">
+	<!-- <button type="button" class="close" >&times;</button> -->
+	<div class="panel panel-default">
+             <div class="panel-heading"><h1>Sign Up</h1></div></div>
+	 		<div class="modal-body">
+              <form name="registerform" method="post" novalidate>
+               <div class="form-group">
+                 <div class="row">
+                  <div class="col-sm-12">     
+             <label for="Name" class="control-label pull-left">Name</label>
+             <div class="col-sm-6"> <div style="padding-left:30px"><input type="text" name="firstname" placeholder="firstname" class="form-control"  ng-model="members.firstName" ng-pattern="/^[a-zA-Z]*$/" ng-required="true"></div>
+             <span style="color:red;font-style:italic;" ng-show="registerform.firstname.$touched&&registerform.firstname.$error.required">Firstname is required.</span>
+          <p style="color:red;font-style:italic;" ng-show="registerform.firstname.$error.pattern">Firstname contains only characters.</p></div>
+          <div class="col-sm-5"><input type="text" name="lastname" class="form-control"  placeholder="lastname" ng-model="members.lastName"></div>                    
+		</div>
+	</div>     
+	 </div> 
+<div class="form-group">
+ <div class="row">
+  <div class="col-sm-12">   
+ <label for="dateofbirth" class="control-label pull-left">Birthday</label>
+<div class="col-sm-6"> <div style="padding-left:10px"><input type="date" name="Bday" class="form-control" ng-model="members.dateOfBirth" ng-pattern="/^(\d{2})\/(\d{2})\/(\d{4})$/" placeholder="dd/mm/yyyy"></div>
+<!--  <p class="text-muted" ng-show="register.Bday.$touched &&loginform.Bday.$error.required">Required!!</p> -->
+</div>
+</div>
+</div>
+</div>
+<br>
+<div class="form-group">
+<div class="row">
+<div class="col-sm-12">
+<label for="gender" class="control-label pull-left">Gender</label>
+<div class="col-sm-6"><div style="padding-left:20px"><input type="radio" name="gender"  value="Male" ng-model="members.gender" >MALE
+&nbsp;&nbsp;<input type="radio" name="gender"  value="Female" ng-model="members.gender">FEMALE</div>
+ <p style="color:red;font-style:italic;"  ng-show="registerform.gender.$touched && registerform.gender.$error.required">Required!!</p>
+</div></div></div><br>
+<div class="form-group">
+ <div class="row">
+  <div class="col-sm-12">   
+ <label for="email" class="control-label pull-left">Email</label>
+<div class="col-sm-10"> <div style="padding-left:30px"><input type="email" name="email" class="form-control" ng-model="members.email" ng-pattern="/^[a-z]+[a-z0-9._]+@[a-z]+\.[a-z.]{2,5}$/"  placeholder="abc@ad.com" ng-required="true"></div>
+ <span style="color:red;font-style:italic;" ng-show="registerform.email.$touched && registerform.email.$error.required">Email is required to register.</span>
+ <p style="color:red;font-style:italic;" ng-show="registerform.email.$error.pattern">Sorry!!This email pattern cannot be taken.</p></div>
+</div></div>
+</div><br>
+<div class="form-group">
+ <div class="row">
+  <div class="col-sm-12">   
+ <label for="Username" class="control-label pull-left">Username</label>
+<div class="col-sm-6"> <input type="text" name="username" class="form-control" ng-model="members.user.userName" ng-pattern="/^[a-zA-Z0-9]*$/" ng-required="true">
+ <p style="color:red;font-style:italic;" ng-show="registerform.username.$touched &&registerform.username.$error.required">UserName is required!!</p>
+<p style="color:red;font-style:italic;" ng-show="registerform.username.$error.pattern">UserName is only alphanumeric</p></div>
+</div></div>
+</div>
+<br>
+<div class="form-group">
+ <div class="row">
+  <div class="col-sm-12">   
+ <label for="password" class="control-label pull-left">Password</label>&nbsp;&nbsp;
+ <div class="col-sm-6"><input type="password" name="pwd" class="form-control" ng-model="members.user.password" ng-pattern="/^[a-zA-Z0-9]*$/" ng-required="true">
+ <p style="color:red;font-style:italic;"  ng-show="registerform.pwd.$touched && registerform.pwd.$error.required">Password is required.</p>
+ <p style="color:red;font-style:italic;" ng-show="registerform.pwd.$error.pattern">Password contains only alphanumeric</p></div>
+</div></div></div><br>
+<div class="form-group">
+<div class="row">
+<div class="col-sm-12">
+<label for="rpassword" class="control-label pull-left">Confirm Password</label>
+ <div class="col-sm-6"><input  type="password" ng-model='members.user.password_verify' class="form-control" name='confirm_password' placeholder='confirm password' required data-password-verify="members.user.password" ng-required="true">
+      <p style="color:red;font-style:italic;"  ng-show="registerform.confirm_password.$touched && registerform.confirm_password.$error.required">
+        Field required!</p>
+      <p style="color:red;font-style:italic;"  ng-show="registerform.confirm_password.$error.passwordVerify">
+        Fields are not equal!</p>
+</div></div></div></div><br>
+<div class="form-group">
+<div class="row">
+<div class="col-sm-12">
+<label for="contact" class="control-label pull-left">Contact</label>
+ <div class="col-sm-8"><div style="padding-left:10px"><input type="tel" name="contact" class="form-control" ng-model="members.contact" ng-pattern="/^[0-9]+$/" ng-required="true" placeholder="(optional)"></div>
+<!-- <span style="color:red;font-style:italic;" ng-show="register.contact.$touched&&register.contact.$error.required">Required!!</span>
+ <p style="color:red;font-style:italic;" ng-show="register.contact.$error.pattern">Sorry!!This  pattern cannot be taken.</p>
+ --></div></div></div></div>
+<br><br>&nbsp;&nbsp;&nbsp;<button type="button" class="btn btn-info" ng-click="register()"  data-dismiss="modal">SignUp</button>
+                         </form>
+                         </div>
+					</div>
+					
+				</div>
+			</div>
+		</div>
+</div>
+</div>
+</div>

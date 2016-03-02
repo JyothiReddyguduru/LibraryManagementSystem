@@ -11,10 +11,10 @@ import com.example.model.Book;
 
 public interface BookRepository extends JpaRepository<Book, Integer> {
 
-	 @Query(value="select book from Book book where book.title LIKE :title||'%'")
-	public List<Book> findByTitle(@Param("title") String title);
+	 @Query(value="select book.title from Book book where book.title LIKE :title||'%'")
+	public List<String> findByTitBook(@Param("title") String title);
 	
-	
+	public Book findByTitle(String title);
 	
 	
 }

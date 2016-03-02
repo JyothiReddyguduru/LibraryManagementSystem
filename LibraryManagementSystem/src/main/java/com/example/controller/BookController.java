@@ -171,24 +171,10 @@ public class BookController {
 		return returnParams;
 	}
 
-	@RequestMapping("/savemember")
-	public HashMap<String, Object> addmember(@RequestBody Member mem) {
-		HashMap<String, Object> returnParams = new HashMap<String, Object>();
-
-		try {
-			memberrespository.save(mem);
-			returnParams.put("status", true);
-		} catch (Exception e) {
-			returnParams.put("status", false);
-			returnParams.put("msg", "Failed to Register the user!!!!!!");
-		}
-
-		return returnParams;
-	}
 
 	@RequestMapping("/searchbytitle/{title}")
-	public List<Book> searchbookbytitle(@PathVariable("title") String title) {
-		return bookrepository.findByTitle(title+ "%");
+	public Book searchbookbytitle(@PathVariable("title") String title) {
+		return bookrepository.findByTitle(title);
 	}
 
 	
@@ -410,11 +396,26 @@ public Map<Object,Object>getbook(@PathVariable("bookid")int bookid)
 	}
 	Set<String> uniqueCat = new HashSet<String>(cat);
 returncat.put("Categories",uniqueCat);
-/*returncat.put("book",b);
-*/
-
-
 return returncat;
 }
+
+@RequestMapping("/savemember")
+public HashMap<String,Object> addmember(@RequestBody Member mem) {
+	HashMap<String, Object> returnParams = new HashMap<String, Object>();
+	
+	try {
+	
+		mem.getUser().setRoles("USER");
+		memberrespository.save(mem);
+/*		((List<Member>) userrepository).add(mem);
+*/		returnParams.put("status", true);
+	} catch (Exception e) {
+		returnParams.put("status", false);
+		returnParams.put("msg", "Failed to Register the user!!!!!!");
+	}
+
+	return returnParams;
+}
+
 
 }

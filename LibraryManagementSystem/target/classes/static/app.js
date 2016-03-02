@@ -81,7 +81,10 @@ app.config(['$routeProvider', '$httpProvider',
                 templateUrl: 'viewcatofbook.html',
                 controller: 'viewcatofbookctrl'
             })
-
+          .when('/register', {
+            templateUrl: 'register.html',
+            controller: 'registerctrl'
+        })
         //.otherwise({
         // redirectTo: '/view'
         //});
@@ -153,7 +156,56 @@ $rootScope.logOut= function(){
 
 });
 
+app.directive("passwordVerify", function() {
+	   return {
+	      require: "ngModel",
+	      scope: {
+	        passwordVerify: '='
+	      },
+	      link: function(scope, element, attrs, ctrl) {
+	        scope.$watch(function() {
+	            var combined;
 
+	            if (scope.passwordVerify || ctrl.$viewValue) {
+	               combined = scope.passwordVerify + '_' + ctrl.$viewValue; 
+	            }                    
+	            return combined;
+	        }, function(value) {
+	            if (value) {
+	                ctrl.$parsers.unshift(function(viewValue) {
+	                    var origin = scope.passwordVerify;
+	                    if (origin !== viewValue) {
+	                        ctrl.$setValidity("passwordVerify", false);
+	                        return undefined;
+	                    } else {
+	                        ctrl.$setValidity("passwordVerify", true);
+	                        return viewValue;
+	                    }
+	                });
+	            }
+	        });
+	     }
+	   };
+	});
+
+
+app.controller('registerctrl', ['$scope', '$rootScope', '$http', '$routeParams', function($scope, $rootScope, $http, $routeParams) {
+	 $rootScope.members = {};
+		    $scope.register = function() {
+	        $http({
+	            method: 'POST',
+	            url: '/savemember',
+	            data: $rootScope.members
+
+
+	        }).then(function(response) {
+	                alert('registered Successfully!');
+	                $rootScope.members = response.data;
+	                $rootScope.user=response.data;
+	              
+	                });
+	    };
+  }])
 
 
 app.controller('viewbooks', ['$scope', '$rootScope', '$http', '$routeParams', function($scope, $rootScope, $http, $routeParams) {

@@ -39,7 +39,7 @@ public class Member {
     @JsonIgnore
     List<BookDetail> bookdetail;
     
-  @OneToOne(cascade=CascadeType.ALL)
+  @OneToOne(cascade=CascadeType.ALL,orphanRemoval=true)
   User user;
 	
 	public User getUser() {

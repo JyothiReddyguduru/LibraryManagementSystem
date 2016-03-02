@@ -11,6 +11,8 @@ import javax.persistence.Table;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonProperty.Access;
 
 @Entity
 @Table(name="user")
@@ -23,7 +25,7 @@ public class User {
 	@Column(unique=true)
 	String userName;
 	
-	@JsonIgnore
+	 @JsonIgnore
 	@Column
 	String password;
 	
@@ -56,16 +58,20 @@ public class User {
 
 	public void setUserName(String userName) {
 		this.userName = userName;
+		System.out.println("\n\nggg");
 	}
 
+	@JsonProperty(access=Access.WRITE_ONLY)
 	public String getPassword() {
 		return password;
 	}
 
+	@JsonProperty(access=Access.WRITE_ONLY)
 	public void setPassword(String password) {
 		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-		String hashedPassword = passwordEncoder.encode(password);
-		this.password = hashedPassword;
+		password = passwordEncoder.encode(password);
+		this.password = password;
+	System.out.println("\n\nst"+password);
 	}
 
 	public String getRoles() {
