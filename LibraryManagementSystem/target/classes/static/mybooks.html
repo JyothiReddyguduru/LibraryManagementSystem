@@ -1,44 +1,51 @@
 <body ng-controller="viewmybooksctrl">
-<div class="container">
-<div class="col-md-7">
-			
-				<h1  style="color:hotpink" ><b>My Books<b></h1><br>
-			<div class="panel"
-				style="background-color: rgba(223, 243, 245, 0.73); border: 2px solid cyan; height: 204px; width: 404px">
+	<div class="container">
+		<div class="col-md-10">
 
-				<!-- top row div end -->
+			<h1 style="color: hotpink">
+			<br>
+				<b>My Books<b>
+			</h1>
+			<br>
+			<div class="panel"align="center" 
+				style="background-color:rgb(19, 20, 21); border: 2px solid cyan; height: 214px; width: 700px;" ng-repeat="x in mybooks">
+
+				<!-- top row div -->
 				<div class="row"
-					style="padding-top: 30px; padding-left: 30px; padding-right: 40px; height: 204px;">
+					style="padding-top: 15px; padding-left: 30px; padding-right: 40px; height: 204px;">
 					<!-- image to the left -->
-					<div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
-						<div class="hovereffect">
+					<!-- <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+						<div class="hovereffect pull-left">
 							<img src="images/team3.jpg" style="height: 140px;"
 								class="img-responsive" alt="team img 1"> <br>
 
-							<div class="overlay" style="height: 155px;"">
-								<br> <br><br>
+							<div class="overlay" style="height: 155px;" >
+							<br>
+							<br>
 								<h4 style="color: cyan">{{x.title}}</h4>
 							</div>
 						</div>
-					</div>
+					</div> -->
 					<!-- image to the left end-->
 					<!-- data to the right end-->
-					<div class="col-lg-4 col-md-4 col-sm-6 col-xs-12" font-size="300px"
+					<div  font-size="300px" 
 						font-weight="300px" style="text-align: left">
-						<h4 style="color: purple; width: 600px">
-							Title:{{x.title}} <br> Author :{{x.author}} <br> Issue
-							Date :{{}} <br> Due Date :{{}} <br> Return Date :{{}} <br>
-							Fine :{{}}
-						</h4>
+						<h4 style="color:cyan;line-height:1.8; width: 500px;margin-left: 80px;">
+							Title &nbsp;&nbsp;: &nbsp;&nbsp;{{x.title}} <br>
+						Author &nbsp;&nbsp;: &nbsp;&nbsp;{{x.author}} <br>
+							Quantity Id  &nbsp;&nbsp;: &nbsp;&nbsp;{{x.bookDetail.quantity.accountId}}<br>
+							Issue Date  &nbsp;&nbsp;: &nbsp;&nbsp;{{x.bookDetail.issueDate | date: 'yyyy-MM-dd'}} <br> 
+							Due Date  &nbsp;&nbsp;: &nbsp;&nbsp;{{x.bookDetail.dueDate | date: 'yyyy-MM-dd'}} <br>
 
 					</div>
 					<!-- data to the right end-->
 
 				</div>
+				<!-- top row div end -->
 			</div>
 
 		</div>
-			</div>
+	</div>
 
 
 </body>

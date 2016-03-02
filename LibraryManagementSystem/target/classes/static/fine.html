@@ -11,25 +11,42 @@
 					<div>
 						<!-- list item will start here -->
 						<li class="overlay panel"
-							style="background-color: rgba(0, 0, 0, 0.55)"
+							style="background-color: black"
 							ng-repeat="x in finesview">
 
 							<div style="padding-top: 10px;">
 								<p style="color: white">
 									<b>Late Submission of any book by {{x.numberOfDays}} Days
-										will lead to a fine of {{x.amount}} per day</b> &nbsp;&nbsp;
+										will lead to a fine of Rs.{{x.amount}} per day</b> &nbsp;&nbsp;
 
 									<button class="btn btn-primary" type="submit"
 										style="margin-top: 5px; margin-bottom: 5px;" ng-click=""
 										data-toggle="modal" data-dismiss="modal">Edit</button>
 								</p>
 							</div>
-					</div>
+							
+					
 					<!-- list item will start here -->
 					</li>
+					<li class="overlay panel"
+							style="background-color: black"
+							ng-repeat="x in finesview">
+
+							<div style="padding-top: 10px;">
+								<p style="color: white">
+									<b>Late Submission of any book after {{x.numberOfDays}} Days
+										will lead to a fine of Rs.{{x.amount+4}} per day</b> &nbsp;&nbsp;
+										<button class="btn btn-primary" type="submit"
+										style="margin-top: 5px; margin-bottom: 5px;" ng-click=""
+										data-toggle="modal" data-dismiss="modal">Edit</button>
+								</p>
+							</div>
+							
+					</li>
+					</div>
 				</ul>
 				<!-- list will end here -->
-
+				
 			</div>
 			<!-- <button ng-click="addrule='true'" class="btn btn-info">Add a
 				Fine Rule</button> -->

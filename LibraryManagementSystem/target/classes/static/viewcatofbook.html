@@ -4,13 +4,17 @@
 		<div class="container">
 			<div class="col-md-8 ">
 				<div class="col-md-offset-4 panel"
-					style="padding-left: 70px; padding-right: 70px; padding-top: 20px; padding-bottom: 50px; background-color: rgba(255, 255, 255, 0.47); margin-top: 50px; border: 2px solid cyan; margin-left: 250px; width: 604px;">
-<h2>{{title}}</h2>
+					style="padding-left: 70px; padding-right: 70px;padding-top: 20px;padding-bottom: 20px; background-color: rgba(29, 24, 24, 0.85); margin-top: 50px; border: 2px solid cyan; margin-left: 250px; width: 604px;">
+<h2 style="color:hotpink">{{title}}
+
+						<a href="#home" style="color: cyan"> <i style="color: cyan"
+							class="fa fa-chevron-left "></i></a></h2>
+				
 <table>
 
 <tr ng-repeat="x in catofbooks.Categories">
-<td>
-{{x}}
+<td align=left>
+<h3>{{x}}</h3>
 </td>
 </tr>
 </table>

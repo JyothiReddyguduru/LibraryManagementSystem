@@ -58,7 +58,9 @@ public class BookController {
 	@Autowired
 	QuantityRepository quantityrepository;
 	@Autowired
-	UserRepository userrepository; 
+	UserRepository userrepository;
+	private String lastName;
+	private String DateofBirth; 
 
 	@RequestMapping("/categories")
 	public List<Category> getCategories() {
@@ -322,6 +324,19 @@ public HashMap<String, String> loggedIn(){
 	return returnparams;
 }
 
+@RequestMapping("/getProfile")
+public Member getmyprofile(){
+
+ String s=	SecurityContextHolder.getContext().getAuthentication().getName();  
+ User user=userrepository.findByUserName(s);
+ int j=user.getId();
+ Member result;
+
+    result= memberrespository.findByUserId(j);
+
+ return result;
+}
+
 
 @RequestMapping("/addcopy1/{bookid}")
 public HashMap<String,Object>addcopy(@PathVariable("bookid") int bookid) {
@@ -359,11 +374,11 @@ public List<Map<String, Object>> getmybooks(){
  String s=	SecurityContextHolder.getContext().getAuthentication().getName();  
  User user=userrepository.findByUserName(s);
  int j=user.getId();
+ 
  bookdetail=memberrespository.findByUserId(j).getBookdetail();
  Iterator<BookDetail> it= bookdetail.iterator();
  List<Map<String,Object>> result = new ArrayList<>();
  while(it.hasNext()){
-	 
 	 Map<String,Object> resultMap = new HashMap<>();
 	 BookDetail b=(BookDetail)it.next();
 	 String acc=b.getQuantity().getAccountId();
@@ -371,8 +386,10 @@ public List<Map<String, Object>> getmybooks(){
 	 Quantity qu=quantityrepository.findByAccountId(acc);
 	 int bookid=qu.getBook().getBookid();
     String title= bookrepository.findOne(bookid).getTitle();
+    String author= bookrepository.findOne(bookid).getAuthor();
     resultMap.put("bookDetail", b);
     resultMap.put("title", title);
+    resultMap.put("author",author);
    result.add(resultMap);
  }
  return result;
@@ -381,7 +398,6 @@ public List<Map<String, Object>> getmybooks(){
 @RequestMapping("/book/category/{bookid}")
 public Map<Object,Object>getbook(@PathVariable("bookid")int bookid)
 {
-	
 	Map<Object,Object>returncat=new HashMap<>();
 	Book b=bookrepository.findOne(bookid);
 	List<String>cat=new ArrayList<>();

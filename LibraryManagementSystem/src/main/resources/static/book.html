@@ -1,37 +1,46 @@
 <!-- html page to display the list of books in the database -->
 
 <body id="top" ng-controller="viewbooks">
-	<div class="container">
-		<div class="col-md-10">
-			<form class="col-md-11" style="padding-top: 10px">
-				<div id="custom-search-input" style="height: 58px;">
-					<div class="input-group col-md-12">
-						<input type="text" class="form-control input-lg" 
-							placeholder="Enter title..." /> <span class="input-group-btn">
-							<button class="btn btn-info btn-lg" ng-click="" type="button">
-								<i class="glyphicon glyphicon-search"></i>
-							</button>
-						</span>
-					</div>
-			</form>
-			<br>
-			<h2 style="color: hotpink">List Of Books</h2>
-			<br> <br>
-			<div class="col-lg-4 col-md-4 col-sm-6 col-xs-12"
-				ng-repeat="x in books">
-				<div class="hovereffect ">
-					<img src="images/portfolio-img2.jpg" class="img-responsive"
-						alt="team img 1">
-					<div class="overlay" style="height: 175px;">
-						<h4 style="color: cyan">{{x.title}}</h4>
-						<h4 style="color: white">By</h4>
-						<h4 style="color: hotpink">{{x.author}}</h4><br>
-						<a style="color: white" ng-show=admin href=#edit/{{x.bookid}}><i class="fa fa-pencil"></i>Edit</a>&nbsp; 
-						<a style="color: white" href=#viewcat/{{x.bookid}}><i class="fa fa-eye"></i>View Categories</a>&nbsp;
-						<a style="color: white" href=#viewcopy/{{x.bookid}}><i class="fa fa-eye"></i>View Copies</a>&nbsp;
+	<div class="container" style="
+    width: 1230px;
+">
+			<div class="col-xs-4 pull-left">
+				<h2 style="color: hotpink">List Of Books</h2>
+			</div>
+			<div class="col-xs-4 pull-right">
+				<form class="col-md-11" style="padding-top: 10px">
+					<div id="custom-search-input" style="height: 58px;">
+						<div class="input-group col-md-12">
+							<input type="text" class="form-control input-lg"
+								placeholder="Enter title..." /> <span class="input-group-btn">
+								<button class="btn btn-info btn-lg" ng-click="" type="button">
+									<i class="glyphicon glyphicon-search"></i>
+								</button>
+							</span>
 						</div>
+					</div>
+				</form>
+			</div>
+			<br>
+			<div class="col-md-10">
+				<br> <br>
+				<div class="col-lg-4 col-md-4 col-sm-6 col-xs-12"
+					ng-repeat="x in books" style="width: 320px;">
+					<div class="">
+						<div class="overlay panel"
+							style="height: 175px; background-color: black">
+							<h4 style="color: cyan">{{x.title}}</h4>
+							<h4 style="color: white">By</h4>
+							<h4 style="color: hotpink">{{x.author}}</h4>
+							<br> <a style="color: white" ng-show=admin
+								href=#edit/{{x.bookid}}><i class="fa fa-pencil"></i>Edit</a>&nbsp;
+							<a style="color: white" href=#viewcat/{{x.bookid}}><i
+								class="fa fa-eye"></i>View Categories</a>&nbsp; <a
+								style="color: white" href=#viewcopy/{{x.bookid}}><i
+								class="fa fa-eye"></i>View Copies</a>&nbsp;
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>
-	</div>
 </body>

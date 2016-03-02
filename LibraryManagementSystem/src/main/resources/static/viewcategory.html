@@ -2,11 +2,33 @@
 <body ng-controller="viewcategories">
 	<div class="container">
 		<div class="row">
+		
+		
+		<div class="col-xs-4 pull-left">
+		
+				<h2 style="color: hotpink">List Of Categories</h2>
+			</div>
+			<div class="col-xs-4 pull-right">
+				<form class="col-md-11" style="padding-top: 10px">
+					<div id="custom-search-input" style="height: 58px;">
+						<div class="input-group col-md-12">
+							<input type="text" class="form-control input-lg"
+								placeholder="Enter title..." /> <span class="input-group-btn">
+								<button class="btn btn-info btn-lg" ng-click="" type="button">
+									<i class="glyphicon glyphicon-search"></i>
+								</button>
+							</span>
+						</div>
+					</div>
+				</form>
+			</div>
+			<br>
 			<div class="col-md-10">
-				&nbsp;&nbsp;
-				<h1  style="color:hotpink" ><b>List Of Categories<b></h1><br>
+				<br> <br>
+		
+				<div>
 				<div class="col-lg-4 col-md-4 col-sm-6 col-xs-12" ng-repeat="x in categories">
-				<div class="overlay panel" style="background-color :rgba(0, 0, 0, 0.55);">
+				<div class="overlay panel" style="background-color :black;">
 				<h2 style="color: cyan" >{{x.categoryname}}</h2>
 				<h4>
 								<br>

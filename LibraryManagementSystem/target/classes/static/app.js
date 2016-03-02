@@ -226,7 +226,7 @@ app.controller('viewbooks', ['$scope', '$rootScope', '$http', '$routeParams', fu
 
 app.controller('viewcatofbookctrl', ['$scope', '$rootScope', '$http', '$routeParams', function($scope, $rootScope, $http, $routeParams) {
 
-    $scope.title = 'List of Categories../';
+    $scope.title = 'Categories';
 
     $http({
         method: 'GET',
@@ -349,6 +349,12 @@ $rootScope.authenticated=false;
 //controller to view a member's profile and notifications
 app.controller('viewprofilectrl', ['$scope', '$rootScope', '$http', function($scope, $rootScope, $http) {
         $scope.title = 'hai welcome to profile!';
+        $http({
+            method: 'GET',
+            url : '/getProfile',
+        }).then(function(response) {
+            $rootScope.profile= response.data;
+        });
 
 
 
@@ -356,8 +362,7 @@ app.controller('viewprofilectrl', ['$scope', '$rootScope', '$http', function($sc
     //controller to edit a member's profile
 app.controller('editprofilectrl', ['$scope', '$rootScope', '$http', function($scope, $rootScope, $http) {
     $scope.title = 'Edit your profile!';
-
-
+    
 
 }])
 
@@ -423,12 +428,10 @@ app.controller('viewhistoryctrl', ['$scope', '$rootScope', '$http', '$routeParam
 
     $http({
         method: 'GET',
-        url: '/member/' + $routeParams.memid,
+        url: '/viewmybooks',
     }).then(function(response) {
-        $rootScope.track = response.data;
+        $rootScope.mybooks= response.data;
     });
-
-
 
 }])
 
