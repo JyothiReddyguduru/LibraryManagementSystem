@@ -32,10 +32,10 @@
 				<h2 style="color: cyan" >{{x.categoryname}}</h2>
 				<h4>
 								<br>
-								 <a style="color: White" href=#viewbook/{{$index}}>View</a>
+								 <a style="color: White" href=#viewbook/{{x.catid}}>View</a>
 								&nbsp;&nbsp; 
-								<a ng-show=admin style="color: White" href="#editcategory/{{x.catid}}" data-toggle="modal" 
-								data-target="#editModal">Edit
+								<a role=button ng-show=admin style="color: White" data-toggle="modal" 
+								data-target="#editModal" ng-click="showcat(x.catid)">Edit
 								</a> &nbsp;&nbsp; 
 							</h4>
 				
@@ -86,9 +86,9 @@
 ">
 							<form>
 								Category Name<input type="text" id="categoryname" 
-									class="form-control" ng-model="categories.categoryname" /> <br>
+									class="form-control" ng-model="catname" /> <br>
 								<br>
-								<button class="btn btn-primary" type="submit"
+								<button class="btn btn-info" type="submit"
 									ng-click="editCategory()" data-dismiss="modal">Submit</button>
 							</form>
 						</div>

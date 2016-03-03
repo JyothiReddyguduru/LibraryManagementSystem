@@ -43,4 +43,12 @@
 				</div>
 			</div>
 		</div>
+		<div>
+	<ul class="pagination" >
+			<li><a href="" ng-click="prevPage()">&laquo;</a></li>
+ <li ng-repeat="n in page track by $index" >
+  <a ng-click="toPageId($index)">{{$index+1}}</a>
+  </li>
+  <li><a href="" ng-click="nextPage()">&raquo;</a></li></ul>  
+</div>
 </body>

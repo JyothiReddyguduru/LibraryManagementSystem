@@ -1,4 +1,4 @@
-var app = angular.module('app', ['ngRoute']);
+var app = angular.module('app', ['ngRoute','ngTagsInput']);
 app.config(['$routeProvider', '$httpProvider',
     function($routeProvider, $httpProvider) {
         $httpProvider.defaults.headers.common["X-Requested-With"] = 'XMLHttpRequest';
@@ -60,7 +60,7 @@ app.config(['$routeProvider', '$httpProvider',
                 templateUrl: 'return.html',
                 controller: 'returnbookctrl'
             })
-            .when('/editcategory/:categoryId', {
+           .when('/editcategory/:categoryId', {
                 templateUrl: 'editcategory.html',
                 controller: 'editcategoryctrl'
             })
@@ -102,11 +102,12 @@ $http({
 
     $rootScope.response = response.data;
     if ($rootScope.response.status == 'true') {
-        $rootScope.authenticated = true;
+        $rootScope.authenticated = true;  
         if ($rootScope.response.role == 'user') {
             $rootScope.user = true;
             $rootScope.admin = false;
             $rootScope.clerk=false;
+            
         } 
         else
         	if ($rootScope.response.role == 'clerk') {
@@ -132,7 +133,6 @@ $rootScope.logOut= function(){
 		url : '/logout',     
 	
 	}).then(function(response) {
-		alert('Logout  succes call backSuccessfully');
 	    
 		$rootScope.authenticated = false;
 		$rootScope.admin=false;
@@ -141,8 +141,8 @@ $rootScope.logOut= function(){
 		$rootScope.auth.userName="";
 		$rootScope.auth.password="";
 	}, function (response){
-		alert('Logout error call back Successfully');
-        
+/*		alert('Logout error call back Successfully');
+  */      
 		$rootScope.authenticated = false;
 		$rootScope.admin=false;
 		$rootScope.user=false;
@@ -150,7 +150,7 @@ $rootScope.logOut= function(){
 		$rootScope.auth.userName="";
 		$rootScope.auth.password="";	
 	});
-	alert('Logout Successfully');
+	/*alert('Logout Successfully');*/
 	
 }
 
@@ -199,7 +199,7 @@ app.controller('registerctrl', ['$scope', '$rootScope', '$http', '$routeParams',
 
 
 	        }).then(function(response) {
-	                alert('registered Successfully!');
+	              /*  alert('registered Successfully!');*/
 	                $rootScope.members = response.data;
 	                $rootScope.user=response.data;
 	              
@@ -207,22 +207,41 @@ app.controller('registerctrl', ['$scope', '$rootScope', '$http', '$routeParams',
 	    };
   }])
 
-
 app.controller('viewbooks', ['$scope', '$rootScope', '$http', '$routeParams', function($scope, $rootScope, $http, $routeParams) {
 
     $scope.title = 'List of Books';
 
-    $http({
-        method: 'GET',
-        url: '/books',
-        /*
-         * headers : { 'Authorization' : 'Basic ' + encodedAuthData }
-         */
-    }).then(function(response) {
-        $rootScope.books = response.data;
-    });
+    $scope.intitPage=function(){
+	 	$scope.page={
+	    		 pageSize: 3,
+	    		 pageCount: 0
+	     };
+	 }
+	 	     
 
+	 			
+	 	$scope.getBooks=function(){
+	 		$http.post('/books' , $scope.page).then(function(response) {
+	 			$rootScope.books = response.data.content;	
+	 			$scope.page=$rootScope.getNumber(response.data.totalPages);
+	 		
+	 		});
+	 	}
+
+	 	$scope.toPageId = function(data){
+	 		$scope.intitPage();
+	 		$scope.page.pageCount = data;
+	 		$scope.getBooks();
+	 	}
+	 	$scope.intitPage();
+	 	$scope.getBooks();
+	
+		$rootScope.getNumber=function(num){
+			return new Array(num);
+		}
 }])
+
+
 
 app.controller('viewcatofbookctrl', ['$scope', '$rootScope', '$http', '$routeParams', function($scope, $rootScope, $http, $routeParams) {
 
@@ -265,17 +284,19 @@ app.controller('viewmybooksctrl', ['$scope', '$rootScope', '$http', '$routeParam
 
 
 
-app.controller('addbookctrl', ['$scope', '$rootScope', '$http', function($scope, $rootScope, $http) {
-    $scope.title = 'Add new Book!';
-    $rootScope.books = {};
-    $http({
-        method: 'GET',
-        url: '/categories',
-    }).then(function(response) {
-        $rootScope.categories = response.data;
-    })
-
+app.controller('addbookctrl', ['$scope', '$rootScope', '$location', '$http', function($scope, $rootScope, $location, $http) {
+	$scope.title = 'Add new Book!';
+    $rootScope.books={};
+    
+    $scope.loadTags = function(query) {
+        return $http({
+            method: 'GET',
+            url: '/categories',
+        });
+    }
+        
     $scope.savebook = function() {
+    	debugger;
         $http({
             method: 'POST',
             url: '/addBook',
@@ -284,6 +305,7 @@ app.controller('addbookctrl', ['$scope', '$rootScope', '$http', function($scope,
             if (response.data.status) {
                 alert('book Added Successfully!');
                 $rootScope.books = {};
+                $location.url("/home");
             } else {
                 alert('book Addition Failed!');
             }
@@ -293,7 +315,8 @@ app.controller('addbookctrl', ['$scope', '$rootScope', '$http', function($scope,
 }])
 
 
-app.controller('animationctrl', ['$scope', '$rootScope', '$http', function($scope, $rootScope, $http) {
+
+app.controller('animationctrl', ['$scope', '$rootScope', '$http','$location', function($scope, $rootScope, $http,$location) {
     $scope.title = 'hai welcome to LMS!';
 $rootScope.auth={};
 $rootScope.authenticated=false;
@@ -309,10 +332,14 @@ $rootScope.authenticated=false;
         }).then(function(response) {
 
             $rootScope.response = response.data;
+           
+            $rootScope.CurrentUser=response.data.name;
             alert('authentication Successfull');
             $rootScope.authenticated = true;
+            $location.url("/view");
             if ($rootScope.response.role == 'user') {
                 $rootScope.user = true;
+            
                 $rootScope.admin = false;
                 $rootScope.clerk=false;
             }
@@ -336,8 +363,9 @@ $rootScope.authenticated=false;
 
         }, function(response) {
             $rootScope.authenticated = false;
-            alert('authentication failed');
+       /*     alert('authentication failed');*/
             alert($rootScope.authenticated);
+            
         });
     }
 }]);
@@ -387,11 +415,11 @@ app.controller('returnbookctrl', ['$scope', '$rootScope', '$http', function($sco
 					url :'/markabook/'+accountid,
 				}).then(function(response) {
 					if(response.data.status){
-						alert('Book Successfully Returned...!');
+					/*	alert('Book Successfully Returned...!');*/
 						location.reload();
 					}
 					else {
-						alert('Return not successfull...!');
+						/*alert('Return not successfull...!');*/
 					}
 				});
 					
@@ -403,21 +431,25 @@ app.controller('editcategoryctrl', ['$scope', '$rootScope', '$http', '$routePara
 
     $http({
         method: 'GET',
-        url: '/categories',
+        url: '/editCategory/'+$routeParams.categoryId,
     }).then(function(response) {
         $rootScope.categories = angular.copy(response.data);
     });
 
+    
+    $scope.test=function(){
+    	alert("You");
+    }
     $scope.editCategory = function() {
         $http({
             method: 'POST',
-            url: '/editCategory/',
+            url: '/editCategory/'+$routeParams.categoryId,
             data: $rootScope.categories
         }).then(function(response) {
             if (response.data.status) {
-                alert('Category edited Successfully!');
+               /* alert('Category edited Successfully!');*/
             } else {
-                alert('Category editing Failed!');
+               /* alert('Category editing Failed!');*/
             }
         });
     }
@@ -440,7 +472,15 @@ app.controller('viewhistoryctrl', ['$scope', '$rootScope', '$http', '$routeParam
 app.controller('viewcategories', ['$scope', '$rootScope', '$http', '$routeParams', function($scope, $rootScope, $http, $routeParams) {
 
     $scope.title = 'List of Categories';
-
+    $scope.showcat=function(catId){
+    	$http({
+    	        method: 'GET',
+    	        url: '/category/'+catId,
+    	    }).then(function(response) {
+    	    	alert(response.data);
+    	        $scope.catname = response.data;
+    })
+    }
     $http({
         method: 'GET',
         url: '/categories',
@@ -452,7 +492,7 @@ app.controller('viewcategories', ['$scope', '$rootScope', '$http', '$routeParams
 
 }])
 
-app.controller('addcategoryctrl', ['$scope', '$rootScope', '$http', '$routeParams', function($scope, $rootScope, $http, $routeParams) {
+app.controller('addcategoryctrl', ['$scope', '$rootScope', '$http', '$routeParams','$location', function($scope, $rootScope, $http, $routeParams, $location) {
 
 
     $rootScope.categories = {};
@@ -463,9 +503,10 @@ app.controller('addcategoryctrl', ['$scope', '$rootScope', '$http', '$routeParam
             data: $rootScope.categories
         }).then(function(response) {
             if (response.data.status) {
-                alert('Category Added Successfully!');
+            	$location.url("/view");
+               /* alert('Category Added Successfully!');*/
             } else {
-                alert('Category Addition Failed!');
+               /* alert('Category Addition Failed!');*/
             }
         });
     }
@@ -493,9 +534,9 @@ app.controller('viewfinectrl', ['$scope', '$rootScope', '$http', '$routeParams',
             data: $rootScope.finesview
         }).then(function(response) {
             if (response.data.status) {
-                alert('finerule Added Successfully!');
+               /* alert('finerule Added Successfully!');*/
             } else {
-                alert('finerule Addition Failed!');
+              /*  alert('finerule Addition Failed!');*/
             }
         });
     }
@@ -535,9 +576,9 @@ app.controller('editfinectrl', ['$scope', '$rootScope', '$http', '$routeParams',
             data: $rootScope.categories
         }).then(function(response) {
             if (response.data.status) {
-                alert('Category edited Successfully!');
+               /* alert('Category edited Successfully!');*/
             } else {
-                alert('Category editing Failed!');
+                /*alert('Category editing Failed!');*/
             }
         });
     }
@@ -551,7 +592,7 @@ app.controller('issuebookctrl', ['$scope', '$rootScope', '$http', '$location', f
 
     $http({
         method: 'GET',
-        url: '/books',
+        url: '/viewallbooks',
         /*
          * headers : { 'Authorization' : 'Basic ' + encodedAuthData }
          */
@@ -582,12 +623,12 @@ app.controller('issuebookctrl', ['$scope', '$rootScope', '$http', '$location', f
 
         }).then(function(response) {
             if (response.data.status) {
-                alert('issued Successfully!');
+               /* alert('issued Successfully!');*/
                 $location.url("/view");
                 $rootScope.bookdetail = {};
                 $rootScope.books = {};
             } else {
-                alert('issuing Failed!');
+               /* alert('issuing Failed!');*/
             }
         });
     }
@@ -612,12 +653,12 @@ app.controller('viewbookctrl', ['$scope', '$rootScope', '$http', '$routeParams',
 
     $http({
         method: 'GET',
-        url: '/categories',
+        url: '/viewcatbooks/book/'+$routeParams.categoryId,
     }).then(function(response) {
-        $rootScope.categories = response.data;
+        $rootScope.booksbycategories = response.data;
     });
 
-    $scope.index = $rootScope.categories[$routeParams.categoryId];
+   /* $scope.index = $rootScope.categories[$routeParams.categoryId];*/
 
 }])
 
@@ -659,11 +700,11 @@ app.controller('viewcopyctrl', ['$scope', '$rootScope', '$http', '$routeParams',
                 location.reload();
             })
             .error(function(data, status, header, config) {
-                alert("deleted failed");
+               /* alert("deleted failed");*/
             });
     	}
     	else{
-    		alert("Can't be deleted because the status is Unavailable..")
+    		/*alert("Can't be deleted because the status is Unavailable..")*/
     	}
     }
 

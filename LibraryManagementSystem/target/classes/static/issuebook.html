@@ -3,9 +3,9 @@
 		<div class="container">
 			<div class="col-md-8 ">
 				<div class="col-md-offset-4 panel"
-					style="padding-left: 70px; padding-right: 70px; padding-top: 20px; padding-bottom: 50px; background-color: rgba(255, 255, 255, 0.47); margin-top: 50px; border: 2px solid cyan; margin-left: 250px; width: 604px;">
+					style="padding-left: 70px; padding-right: 70px; color: white; padding-top: 20px; padding-bottom: 50px; background-color: rgba(62, 56, 56, 0.89); margin-top: 50px; border: 2px solid cyan; margin-left: 250px; width: 604px;">
 					<h2 style="color: hotpink">Issue Book</h2>
-					<form class="col-md-11">
+					<!-- <form class="col-md-11">
 						<div id="custom-search-input">
 							<div class="input-group col-md-12">
 								<input type="text" class="form-control input-lg"
@@ -17,18 +17,29 @@
 								</span>
 							</div>
 						</div>
-					</form>
+					</form> -->
 					<form>
-						<br> <br> <br> <b>TITLE</b> <select
-							class="form-control" ng-model="state.title">
-							<option ng-repeat="book in books| filter : filterEntity"
-								value="{{book.title}}">{{book.title}}</option>
-						</select> <br> <b>ISBN</b><input type="text" id="isbn"
+						<br> <br> <br>
+						<div>
+							<div class=""><b>TITLE</b> <select style="width: 426px;" class="form-control"
+								ng-model="state.title">
+								<option ng-repeat="book in books| filter : filterEntity"
+									value="{{book.title}}">{{book.title}}</option>
+
+							</select></div>
+							<div>
+							<button class="btn btn-info btn-sm pull-right"
+								ng-click="fetchbytitle();sho='true'" type="button">
+								<i class="glyphicon glyphicon-search"></i>
+							</button>
+							</div>
+						</div>
+						<br> <b>ISBN</b><input type="text" id="isbn"
 							class="form-control" ng-model="books.isbn" /> <br>
 						<div>
 							<b ng-show=sho>AVAILABLE COPIES</b>
 							<table ng-show=sho class="table" border="1"
-								style="font-weight: 600; padding-right: 25px;background-color: rgba(0, 0, 0, 0.58);">
+								style="font-weight: 600; padding-right: 25px; background-color: rgba(0, 0, 0, 0.58);">
 								<thead font-size="50px">
 									<tr>
 										<th>Accountid</th>
@@ -40,11 +51,10 @@
 										<td>{{y.accountId}}</td>
 										<td>{{y.status}}</td>
 
-										<td><button class="btn" ng-click="bookdetai.quantity.accountId={{y.accountId}}"
-												style="margin-bottom: 0px; margin-right: 0px;
-												 margin-top: 0px; margin-left: 0px; width: 74px;">select
-										    </button>
-										</td>
+										<td><button class="btn btn-info"
+												ng-click="bookdetai.quantity.accountId={{y.accountId}}"
+												style="margin-bottom: 0px; margin-right: 0px; margin-top: 0px; margin-left: 0px; width: 74px;">select
+											</button></td>
 									</tr>
 								</tbody>
 							</table>
@@ -55,7 +65,7 @@
 							class="form-control" ng-model="books.author" /> <br> <b>MEMBER
 							ID</b> <input type="text" class="form-control"
 							ng-model="bookdetail.members.memid"> <input type="submit"
-							class="btn btn-sm " ng-click="issueBook()" value="Issue" />
+							class="btn btn-info " ng-click="issueBook()" value="Issue" />
 					</form>
 				</div>
 			</div>

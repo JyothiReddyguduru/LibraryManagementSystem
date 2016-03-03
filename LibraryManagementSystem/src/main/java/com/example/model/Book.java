@@ -16,6 +16,8 @@ import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonProperty.Access;
 
 import javax.persistence.JoinColumn;
 
@@ -77,7 +79,8 @@ public class Book {
 		public List<Category> getCats() {
 			return cats;
 		}
-
+        
+		 @JsonProperty(access=Access.WRITE_ONLY)
        		public void setCats(List<Category> cats) {
 			this.cats = cats;
 		}

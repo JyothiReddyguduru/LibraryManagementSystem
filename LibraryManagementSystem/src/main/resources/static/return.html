@@ -10,20 +10,20 @@
 					<br>
 					
 					<div>
-					<form ng-submit="fetchbymember()">
+					<form ng-submit="fetchbymember();showtable='true'"">
 						<b style="color: whitesmoke">Filter By Member id:</b>
 					     
 						<input type="text"
-							style="margin-left: 260px; margin-right: 200px; width: 226px;"
+							style="margin-left: 260px; margin-right: 210px; width: 226px;"
 							class="form-control" placeholder="Enter MemberId to mark a book"
 							ng-model="member.id" />
-							<input type="submit" value="fetch"></input>
+							<input class="btn btn-info " type="submit"  value="fetch"></input>
 					</form>
 					</div>
 					
 					
-					<h3 style="color: cyan">Books issued</h3>
-					<table class="table" border="0"
+					<h3 style="color: cyan" ng-show=showtable >Books issued</h3>
+					<table class="table" border="0" ng-show=showtable 
 						style="font-weight: 600; background-color:none;">
 						<thead>
 							<tr>

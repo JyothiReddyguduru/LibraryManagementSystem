@@ -1,32 +1,39 @@
 <div ng-controller="addcategoryctrl">
-	<div class="container">
-		<!-- Trigger the modal with a button -->
-		<button type="button" class="btn btn-info btn-lg" data-toggle="modal"
-			data-target="#myModal">New Category</button>
-
-		<!-- Modal -->
-		<div class="modal fade" id="myModal" role="dialog">
-			<div class="modal-dialog">
-
-				<!-- Modal content-->
-				<div class="modal-content">
-					<div class="modal-header">
-						<button type="button" class="close" data-dismiss="modal">&times;</button>
-						<h4 class="modal-title">Add Category</h4>
-					</div>
-					<div class="modal-body">
-						<form>
-							Category Name<input type="text" id="categoryname"
-								class="form-control" ng-model="categories.categoryname" /> <br>
-							<br>
-							<button class="btn btn-primary" type="submit"
-								ng-click="addcategory()" data-dismiss="modal">Add</button>
+	<div class="container ">
+			<div class="col-md-8 ">
+				<div class="col-md-offset-4 panel" style="
+    padding-left: 70px;
+    padding-right: 70px;
+    padding-top: 30px;
+    padding-bottom: 30px;
+    background-color: rgba(27, 26, 26, 0.85);
+    margin-top: 50px;
+    border: 2px solid cyan;
+    margin-left: 250px;
+    width: 604px;color:white;
+    " > 
+<h2 style="color:hotpink">Add Category</h2>
+<br>
+					<form name="addcatform" novalidate>
+					<div class="form-group">
+						<label> Category Name</label><input type="text" name="categorynameadd"
+							class="form-control" ng-model="categories.categoryname" ng-pattern="/^[a-zA-Z]*$/" ng-required="true">
+							<p ng-show="addcatform.categorynameadd.$invalid">
+												<p style="color: red; font-style: italic;"
+													ng-show="addcatform.categorynameadd.$touched && addcatform.categorynameadd.$error.required">Required!!</p>
+												<p style="color: red; font-style: italic;"
+													ng-show="addcatform.categorynameadd.$error.pattern">Category
+													contains only characters.</p> 
+							
+						<button type="button" class="btn btn-mid btn-info"
+							ng-click="addcategory()" ng-disabled="addcatform.$invalid">
+						Add
+						</button>
+						</div>
 						</form>
-					</div>
-				</div>
-			</div>
-		</div>
-
-	</div>
+						</div>
 
 </div>
+</div>
+</div>
+

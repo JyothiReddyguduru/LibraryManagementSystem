@@ -1,30 +1,45 @@
 <!-- View Book By Category -->
 
-<body ng-controller="viewbookctrl">
+ <body ng-controller="viewbookctrl">
     		<div class="container">
-    		<div style="padding-bottom:12px"><br>
-<h2 style="color:hotpink">&nbsp;&nbsp; List of books in {{index.categoryname}}</h2>
+    		<div style="padding-bottom:12px" ng-repeat="y in booksbycategories" ><br>
+    		<a  class="pull-right" href="#view" style="color:cyan"> <i  style="color:cyan" class="fa fa-chevron-left fa-3x"></i> <span class="sr-only"></span></a>
+<h2 style="color:hotpink">&nbsp;&nbsp; List of books in {{y.categoryname}}</h2>
 
-           <a  href="#view" style="color:cyan"> <i  style="color:cyan" class="fa fa-chevron-left fa-3x"></i> <span class="sr-only"></span></a>
+           
      
-</div>
+
     			<div class="row">
     				<div class="col-md-10" >
     					
     				
     				<br>
-    				<div   class="col-lg-4 col-md-4 col-sm-6 col-xs-12" ng-repeat="x in index.book" >
-    					<div class="">
-    							<div class="overlay panel" style="background-color:black">
+    				<div   class="col-lg-4 col-md-4 col-sm-6 col-xs-12" >
+    					<div class=""  >
+    							<div class="overlay panel" style="background-color:black" ng-repeat="x in y.book">
     									 <h4 style="color:cyan">{{x.title}}</h4>
     								 <h4 style="color:White">By<br> <h4 style="color:hotpink">{{x.author}}</h4></h4>
     							<h4 style="color:cyan">{{x.isbn}}</h4>
     							</div>
     					</div>
     				</div>
-    				
+    				</div>
     				</div>    			
     		</div>
     		</div>
     		
-</body>
+</body> 
+<!-- <body ng-controller="viewbookctrl">
+    	<table>
+    	<tr>
+    	<th>title</th>
+    	<th>author</th>
+    	</tr>
+    	<tbody ng-repeat="y in booksbycategories">
+    	<tr ng-repeat="x in y.book">
+    	<td>{{x.title}}</td>
+    	<td>{{x.author}}</td>
+    	</tr>
+    	</tbody>
+    	</table>
+    	</body> -->

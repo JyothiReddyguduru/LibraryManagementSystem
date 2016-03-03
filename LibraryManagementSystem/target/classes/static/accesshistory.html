@@ -52,38 +52,36 @@
 
 <body ng-controller="accesshistoryctrl">
 <div class="container">
-<h2>Pankaj kumar</h2>
-<form class="col-md-7" style="padding-top:20px;margin-left: 200px;">
-                                <input type="text" placeholder="Search by member id" ng-model="search.members.memid" required>
+<div class="panel col-md-10" style="background-color: Black;margin-top: 80px;color:whitesmoke">
+<h2 style="color:hotpink" > Access History</h2>
+<form class="col-md-7" style="padding-top:40px;margin-left: 200px;margin-bottom: 40px;">
+                            <label class="pull-left">Search by Member Id</label> <input type="text"
+							style="margin-left: 170px; margin-right: 210px; width: 226px;"
+							class="form-control" placeholder="Enter MemberId"
+							ng-model="search.members.memid" required>
                                <!--  <input type="button" value="Search" href=#memhistory> -->
                                <br />
-                                <input type="text" placeholder="Search by accountId" ng-model="search.quantity.accountId" required>
+                             <label class="pull-left"> Search By Account ID</label> <input type="text"
+							style="margin-left: 170px; margin-right: 210px; width: 226px;"
+							class="form-control" placeholder="Enter AccountId" ng-model="search.quantity.accountId" required>
                                
                                 
 </form>
 
-<div class="panel">
-<div class="panel-heading">
- <table>
- <thead>
- <th>
-</th>
- <th>
- MEMBER</th>
- </thead>
- </table>
- <div class="panel-body">
- <table class="table table-bordered">
+ <div>
+
+ <table class="table" style="margin-top: 80px">
  <thead>
  <tr>
  <th>Id</th>
- <th>Memberid</th>
+ <th>Name</th>
  <th>Accountid</th>
  <th>Issued Date</th>
  <th>Submission Date</th>
  <th>Return Date</th>
  <th>fine</th>
  </tr>
+ </thead>
  <tbody ng-repeat="book in bookdetails| filter : search">
  <tr>
   <td>{{book.id}}</td>
@@ -97,5 +95,5 @@
  </tbody>
  </table></div>
  </div></div>
- </div>
+ 
  </body>

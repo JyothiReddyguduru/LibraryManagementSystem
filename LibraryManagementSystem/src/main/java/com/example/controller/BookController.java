@@ -15,6 +15,8 @@ import java.util.Set;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -67,10 +69,20 @@ public class BookController {
 		return (List<Category>) categoryrepository.findAll();
 	}
 
-	@RequestMapping("/books")
-	public List<Book> getBooks() {
-		return (List<Book>) bookrepository.findAll();
+	@RequestMapping("/viewallbooks")
+	public List<Book> getBooks(){
+		return bookrepository.findAll();
 	}
+	
+	@RequestMapping("/books")
+public Page<Book> getbooks(@RequestBody HashMap<String , Integer> map ) {
+	
+	int pageCount= map.get("pageCount");
+	int pageSize=map.get("pageSize");
+	PageRequest pageRequest=new PageRequest(pageCount,pageSize);
+  return (Page<Book>) bookrepository.findAll(pageRequest);
+}
+	
 
 	@RequestMapping("/book/{bookid}")
 	public Book get(@PathVariable("bookid") int bookid) {
@@ -78,7 +90,12 @@ public class BookController {
 
 	}
 
-	
+	//viewing books of a particular category
+		@RequestMapping("/viewcatbooks/book/{bookid}")
+		public List<Book> getbooks(@PathVariable("bookid") int bookid){
+			return (List<Book>)  categoryrepository.findBookByCatid(bookid);
+		}
+		
 	
 	
 	@RequestMapping("/deletecopy/{accountid}")
@@ -122,6 +139,34 @@ public class BookController {
 
 		return returnParams;
 	}
+	
+	@RequestMapping("/editCategory/{categoryid}")
+	public HashMap<String, Object> editcategory(@PathVariable("categoryid") int categoryid) {
+		HashMap<String, Object> returnParams = new HashMap<String, Object>();
+
+		try {
+			Category catname=categoryrepository.findOne(categoryid);
+			System.out.println(catname.getCategoryname());
+			categoryrepository.save(catname);
+			returnParams.put("status", true);
+		} catch (Exception e) {
+			returnParams.put("status", false);
+			returnParams.put("msg", "Failed to add Category!!");
+		}
+
+		return returnParams;
+	}
+	
+	@RequestMapping("/category/{catId}")
+	public String getcatname(@PathVariable("catId") int catId){
+		Category catname=categoryrepository.findOne(catId);
+		return catname.getCategoryname();
+		
+	}
+	
+	
+	
+	
 	
 	@RequestMapping("/addfinerule")
 	public HashMap<String, Object> addfinerules(@RequestBody Fine fine) {
@@ -302,14 +347,20 @@ public HashMap<String, String> loggedIn(){
 	HashMap<String, String> returnparams=new HashMap<String, String>();
 	if(!(SecurityContextHolder.getContext().getAuthentication() instanceof AnonymousAuthenticationToken) && SecurityContextHolder.getContext().getAuthentication().isAuthenticated()==true)
 	{
+		System.out.println(SecurityContextHolder.getContext().getAuthentication().getName() );
+		String username=SecurityContextHolder.getContext().getAuthentication().getName();
+		returnparams.put("name", username);
 		returnparams.put("status", "true");	
 	
 	Collection<? extends GrantedAuthority> authorities = SecurityContextHolder.getContext().getAuthentication().getAuthorities();
 	Boolean authorityuser = authorities.contains(new SimpleGrantedAuthority("USER"));
 	Boolean authorityclerk = authorities.contains(new SimpleGrantedAuthority("CLERK"));
 	Boolean auth = true;
-	if(authorityuser==auth)
+	
+	if(authorityuser==auth){
+		
 	returnparams.put("role", "user");
+	}
 	else
 	if(authorityclerk==auth)
 	returnparams.put("role", "clerk");

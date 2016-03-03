@@ -3,15 +3,23 @@
 
 <body ng-controller="viewhistoryctrl">
 
-<div class="col-md-9">
-			 <br>
-		<h1 style="color: hotpink">
-				<b>List Of Books Borrowed Till Now<b>
-			</h1><br>
+<div class="container">
+		<div class="row">
+		
+		
+		<div>
+		
+				<h2 style="color: hotpink">List Of Books</h2>
+			</div>
+			<br>
+			<div class="col-md-10">
+				<br> <br>
+		
 				<div>
 				<div class="col-lg-4 col-md-4 col-sm-6 col-xs-12" ng-repeat="x in mybooks">
-				<div ng-hide=x.bookDetail.returnDate==null class="overlay panel" style="background-color :black;">
-				<h4 style="color: cyan; width: 600px">
+				<div class="overlay panel" style="background-color :black;">
+				<div ng-hide=x.bookDetail.returnDate==null ">
+				<h4 style="color: cyan; width: 280px;">
 						Title:{{x.title}} <br> <br> Author :{{x.author}} <br>
 						<br> Issue Date :{{x.bookDetail.issueDate | date:
 						'yyyy-MM-dd'}} <br>
@@ -21,10 +29,17 @@
 						'yyyy-MM-dd'}} <br> <br>Fine
 						:{{x.bookDetail.fine}}
 					</h4>
+				</div>
 				
-				</div>	</div>
 				</div>
+			
+					
+					</div>
 				</div>
+			</div>
+			</div>
+			</div>
+			
 			
 </body>
 
