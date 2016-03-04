@@ -21,19 +21,41 @@
 					<form>
 						<br> <br> <br>
 						<div>
-							<div class=""><b>TITLE</b> <select style="width: 426px;" class="form-control"
+							<!-- <div class=""><b>TITLE</b> <select style="width: 426px;" class="form-control"
 								ng-model="state.title">
 								<option ng-repeat="book in books| filter : filterEntity"
 									value="{{book.title}}">{{book.title}}</option>
 
-							</select></div>
-							<div>
-							<button class="btn btn-info btn-sm pull-right"
+							</select></div> -->
+							<form class="col-md-11" >
+					<div id="custom-search-input">
+						<div class="input-group col-md-12">
+							<input list="title" name="title"  class="form-control"
+								ng-model="state.title" placeholder="Enter title to issue"/> <datalist id="title">
+    <option ng-repeat="book in books| filter : filterEntity" value="{{book.title}}">{{book.title}}</option>
+     </datalist><span class="input-group-btn">
+								<button class="btn btn-info btn-lg"  ng-click="fetchbytitle();sho='true'" type="button">
+									<i class="glyphicon glyphicon-search"></i>
+								</button>
+							</span>
+						</div>
+					</div>
+				</form>
+							<!-- <input list="title" name="title" style="width: 426px;" class="form-control"
+								ng-model="state.title" placeholder="Enter title to issue"><span class="input-group-btn">
+								<button class="btn btn-info btn-lg" ng-click="fetchbytitle();sho='true'" type="button">
+									<i class="glyphicon glyphicon-search"></i>
+								</button>
+  <datalist id="title">
+    <option ng-repeat="book in books| filter : filterEntity" value="{{book.title}}">{{book.title}}</option>
+     </datalist><div class="col-sm-6"><button class="btn btn-info btn-sm pull-right" 
 								ng-click="fetchbytitle();sho='true'" type="button">
 								<i class="glyphicon glyphicon-search"></i>
-							</button>
-							</div>
-						</div>
+							</button></div></span></div> -->
+							
+							
+							
+						
 						<br> <b>ISBN</b><input type="text" id="isbn"
 							class="form-control" ng-model="books.isbn" /> <br>
 						<div>
@@ -52,7 +74,7 @@
 										<td>{{y.status}}</td>
 
 										<td><button class="btn btn-info"
-												ng-click="bookdetai.quantity.accountId={{y.accountId}}"
+												ng-click="ab:{{y.accountId}}"
 												style="margin-bottom: 0px; margin-right: 0px; margin-top: 0px; margin-left: 0px; width: 74px;">select
 											</button></td>
 									</tr>
@@ -60,7 +82,7 @@
 							</table>
 						</div>
 						<b>ACCOUNT ID</b> <input type="text" id="author"
-							class="form-control" ng-model="bookdetail.quantity.accountId" />
+							class="form-control" ng-bind="ab" />
 						<br> <b>AUTHOR</b> <input type="text" id="author"
 							class="form-control" ng-model="books.author" /> <br> <b>MEMBER
 							ID</b> <input type="text" class="form-control"
