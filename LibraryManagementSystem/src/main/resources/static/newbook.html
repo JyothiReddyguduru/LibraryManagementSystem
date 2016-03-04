@@ -17,7 +17,7 @@
     " > 
 <h2 style="color:hotpink">Add Book</h2>
 					<form name="addbookform" method="post" novalidate>
-						<label ng-hide="true"> ISBN</label><input type="text" name="bookisbn"
+						<label> ISBN</label><input type="text" name="bookisbn"
 							class="form-control" ng-model="books.isbn" ng-pattern="/^[0-9]+$/">
 								<p style="color:white; font-style:italic;"
 														ng-show="addbookform.bookisbn.$error.required">

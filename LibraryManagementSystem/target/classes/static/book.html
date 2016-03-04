@@ -32,8 +32,10 @@
 							<h4 style="color: cyan">{{x.title}}</h4>
 							<h4 style="color: white">By</h4>
 							<h4 style="color: hotpink">{{x.author}}</h4>
-							<br> <a style="color: white" ng-show=admin
-								href=#edit/{{x.bookid}}><i class="fa fa-pencil"></i>Edit</a>&nbsp;
+							<br> <i class="fa fa-pencil"></i>
+								<a role=button ng-show=admin  style="color: White" data-toggle="modal" 
+								data-target="#editbookmodal" ng-click="showbook(x.bookid)">Edit
+								</a> &nbsp;&nbsp;</a>
 							<a style="color: white" href=#viewcat/{{x.bookid}}><i
 								class="fa fa-eye"></i>View Categories</a>&nbsp; <a
 								style="color: white" href=#viewcopy/{{x.bookid}}><i
@@ -41,14 +43,46 @@
 						</div>
 					</div>
 				</div>
-			</div>
-		</div>
-		<div>
+			
+			<div>
 	<ul class="pagination" >
 			<li><a href="" ng-click="prevPage()">&laquo;</a></li>
  <li ng-repeat="n in page track by $index" >
   <a ng-click="toPageId($index)">{{$index+1}}</a>
   </li>
   <li><a href="" ng-click="nextPage()">&raquo;</a></li></ul>  
-</div>
+</div></div>
+		</div>
+		
 </body>
+<div ng-controller="editbookctrl">
+	<div class="container">
+		<!-- Trigger the modal with a button -->
+		
+		<!-- Modal -->
+		<div class="modal fade" id="editbookmodal" role="dialog">
+			<div class="modal-dialog">
+
+				<!-- Modal content-->
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal">&times;</button>
+						<h4 class="modal-title">Edit Book Details</h4>
+					</div>
+					<div class="modal-body">
+						<form>
+							Book Title<input type="text" id="booktitle"
+								class="form-control" ng-model="abc.title" /> <br>
+							<br>
+							Author<input type="text" id="author"
+								class="form-control" ng-model="abc.author" /> <br>
+							<br>
+							<button class="btn btn-default" type="submit"
+								ng-click="EditBook()" data-dismiss="modal">Edit and Save</button>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+</div>
+	</div>

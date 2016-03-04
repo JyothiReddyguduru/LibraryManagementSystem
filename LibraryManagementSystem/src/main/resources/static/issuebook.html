@@ -64,7 +64,7 @@
 								style="font-weight: 600; padding-right: 25px; background-color: rgba(0, 0, 0, 0.58);">
 								<thead font-size="50px">
 									<tr>
-										<th>Accountid</th>
+										<th>AccountId</th>
 										<th>Status</th>
 										<th>Select</th>
 									</tr>
@@ -73,16 +73,19 @@
 										<td>{{y.accountId}}</td>
 										<td>{{y.status}}</td>
 
-										<td><button class="btn btn-info"
-												ng-click="ab:{{y.accountId}}"
+										<td>
+										 <button class="btn btn-info"
+												 ng-click="change(y.accountId)"
 												style="margin-bottom: 0px; margin-right: 0px; margin-top: 0px; margin-left: 0px; width: 74px;">select
-											</button></td>
+											</button> </td>
 									</tr>
 								</tbody>
 							</table>
 						</div>
+						
 						<b>ACCOUNT ID</b> <input type="text" id="author"
-							class="form-control" ng-bind="ab" />
+							class="form-control" ng-model="bookdetail.quantity.accountId"/>
+							
 						<br> <b>AUTHOR</b> <input type="text" id="author"
 							class="form-control" ng-model="books.author" /> <br> <b>MEMBER
 							ID</b> <input type="text" class="form-control"
@@ -93,3 +96,7 @@
 			</div>
 		</div>
 	</div>
+	<!-- ng-model="y.accountId" ng-value="accountId"
+              id="{{accountId}}"
+              name="accountId" -->
+              <!-- <div class="btn-group"><label class="btn btn-success" btn-radio="''" ng-change="change()" ng-model="newItemType"> -->

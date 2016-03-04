@@ -1,0 +1,32 @@
+<div ng-controller="editbookctrl">
+	<div class="container">
+		<!-- Trigger the modal with a button -->
+		
+		<!-- Modal -->
+		<div class="modal fade" id="editbookmodal" role="dialog">
+			<div class="modal-dialog">
+
+				<!-- Modal content-->
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal">&times;</button>
+						<h4 class="modal-title">Edit Book Details</h4>
+					</div>
+					<div class="modal-body">
+						<form>
+							Book Title<input type="text" id="booktitle"
+								class="form-control" ng-model="books.title" /> <br>
+							<br>
+							Author<input type="text" id="author"
+								class="form-control" ng-model="booksd
+								.author" /> <br>
+							<br>
+							<button class="btn btn-default" type="submit"
+								ng-click="EditBook()" data-dismiss="modal">Edit and Save</button>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+</div>
+	</div>

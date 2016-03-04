@@ -165,7 +165,12 @@ public Page<Book> getbooks(@RequestBody HashMap<String , Integer> map ) {
 	}
 	
 	
-	
+	@RequestMapping("/bookk/{bookId}")
+	public Book getbookname(@PathVariable("bookId") int bookId){
+		Book bookname=bookrepository.findOne(bookId);
+		return bookname;
+		
+	}
 	
 	
 	@RequestMapping("/addfinerule")
@@ -445,6 +450,7 @@ public List<Map<String, Object>> getmybooks(){
  }
  return result;
 }
+
 
 @RequestMapping("/book/category/{bookid}")
 public Map<Object,Object>getbook(@PathVariable("bookid")int bookid)

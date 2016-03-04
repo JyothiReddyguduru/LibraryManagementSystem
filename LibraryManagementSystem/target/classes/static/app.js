@@ -25,7 +25,7 @@ app.config(['$routeProvider', '$httpProvider',
             })
             .when('/edit/:id', {
                 templateUrl: 'editbook.html',
-                controller: 'editbook'
+                controller: 'editbookctrl'
             })
             .when('/view', {
                 templateUrl: 'viewcategory.html',
@@ -218,7 +218,15 @@ app.controller('viewbooks', ['$scope', '$rootScope', '$http', '$routeParams', fu
 	     };
 	 }
 	 	     
-
+    $scope.showbook=function(bookid){
+    	$http({
+    	        method: 'GET',
+    	        url: '/bookk/'+bookid,
+    	    }).then(function(response) {
+    	    	alert(response.data);
+    	        $scope.abc = response.data;
+    })
+    }
 	 			
 	 	$scope.getBooks=function(){
 	 		$http.post('/books' , $scope.page).then(function(response) {
@@ -281,7 +289,6 @@ app.controller('viewmybooksctrl', ['$scope', '$rootScope', '$http', '$routeParam
      * $rootScope.mybookdetails= response.data; });
      */
 }])
-
 
 
 app.controller('addbookctrl', ['$scope', '$rootScope', '$location', '$http', function($scope, $rootScope, $location, $http) {
@@ -543,20 +550,7 @@ app.controller('viewfinectrl', ['$scope', '$rootScope', '$http', '$routeParams',
 
 }])
 
-//no idea
-app.controller('trackctrl', ['$scope', '$rootScope', '$http', function($scope, $rootScope, $http) {
 
-    $http({
-
-        method: 'GET',
-        url: '/track',
-
-
-    }).then(function(response) {
-        $rootScope.track = response.data;
-    });
-
-}])
 
 //modal for edit a fine rule
 app.controller('editfinectrl', ['$scope', '$rootScope', '$http', '$routeParams', function($scope, $rootScope, $http, $routeParams) {
@@ -612,7 +606,19 @@ app.controller('issuebookctrl', ['$scope', '$rootScope', '$http', '$location', f
             $rootScope.books = response.data;
         });
     }
-
+    $scope.accountId={};
+    $scope.change=function(accountId){
+    	$scope.a=accountId;
+    	
+    }
+   /* $scope.newItemType = 'abc';
+    $scope.change = function () {
+        console.log($scope.newItemType)
+    };*/
+    /*$scope.change=function(accountId){
+    	$scope.a=$scope.books[bookId].quantity.accountId;
+    }*/
+/*$scope.a=$scope.books[bookId].quantity.accountId;*/
     $rootScope.bookdetail = {};
     $scope.issueBook = function() {
         $http({
@@ -623,12 +629,12 @@ app.controller('issuebookctrl', ['$scope', '$rootScope', '$http', '$location', f
 
         }).then(function(response) {
             if (response.data.status) {
-               /* alert('issued Successfully!');*/
+                alert('issued Successfully!');
                 $location.url("/view");
-                $rootScope.bookdetail = {};
-                $rootScope.books = {};
+               /* $rootScope.bookdetail = {};
+                $rootScope.books = {};*/
             } else {
-               /* alert('issuing Failed!');*/
+                alert('issuing Failed!');
             }
         });
     }
@@ -712,5 +718,13 @@ app.controller('viewcopyctrl', ['$scope', '$rootScope', '$http', '$routeParams',
 
 
 
-
+app.controller('editbookctrl',['$scope', '$rootScope', '$location', '$http', function($scope, $rootScope, $location, $http) {
+	$scope.title = 'Edit Book!';
+	/*$http({
+        method: 'GET',
+        url: '/editBook/'+$routeParams.categoryId,
+    }).then(function(response) {
+        $rootScope.categories = angular.copy(response.data);
+    });*/
+}])
 

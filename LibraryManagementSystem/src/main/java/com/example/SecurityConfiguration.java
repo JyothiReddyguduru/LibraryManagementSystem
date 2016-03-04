@@ -21,7 +21,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
 		http.httpBasic().and().authorizeRequests().antMatchers("/").permitAll()
 		.antMatchers("/admin/**").access("hasRole('ADMIN')")
-		.antMatchers("/").access("hasRole('USER')")
+		.antMatchers("/member/**").access("hasRole('USER')")
 		.antMatchers("/clerk/**").access("hasRole('CLERK')")
 				.and().logout().invalidateHttpSession(false)
                 .logoutUrl("/logout").logoutSuccessUrl("/index.html")

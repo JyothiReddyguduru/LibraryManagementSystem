@@ -4,7 +4,7 @@
 
 			<h1 style="color: hotpink">
 			<br>
-				<b>My Books<b>
+				<b>My Books</b>
 			</h1>
 			<br>
 			<div class="panel"align="center" 
@@ -31,12 +31,12 @@
 					<div  font-size="300px" 
 						font-weight="300px" style="text-align: left">
 						<h4 style="color:Whitesmoke;line-height:1.8; width: 500px;margin-left: 80px;">
-							Title &nbsp;&nbsp;: &nbsp;&nbsp;{{x.title}} <br>
-						Author &nbsp;&nbsp;: &nbsp;&nbsp;{{x.author}} <br>
-							Quantity Id  &nbsp;&nbsp;: &nbsp;&nbsp;{{x.bookDetail.quantity.accountId}}<br>
-							Issue Date  &nbsp;&nbsp;: &nbsp;&nbsp;{{x.bookDetail.issueDate | date: 'yyyy-MM-dd'}} <br> 
-							Due Date  &nbsp;&nbsp;: &nbsp;&nbsp;{{x.bookDetail.dueDate | date: 'yyyy-MM-dd'}} <br>
-
+							<p>title: {{x.title}} </p><br>
+						Author {{x.author}} <br>
+							Quantity Id  {{x.bookDetail.quantity.accountId}}<br>
+							Issue Date {{x.bookDetail.issueDate | date: 'yyyy-MM-dd'}} <br> 
+							Due Date {{x.bookDetail.dueDate | date: 'yyyy-MM-dd'}} <br>
+</h4>
 					</div>
 					<!-- data to the right end-->
 

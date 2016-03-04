@@ -85,8 +85,8 @@
 	type="text/javascript"></script>
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-<!-- <script
-	src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script> -->
+ <script
+	src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script> 
 <!--  <link rel="stylesheet" href="css/panel.css"> -->
  <link rel="stylesheet" href="css/loginform.css">
  <!-- <link rel="stylesheet" href="css/slideshow.css"> -->
@@ -182,7 +182,7 @@ color:whitesmoke;
     padding-top: 4px;
 "
 				class="btn btn-success" ng-hide=authenticated data-toggle="modal"
-				data-target="#register">Register here</a> <a class="nav-link"
+				data-target="#register" data-keyboard="true">Register here</a> <a class="nav-link"
 				href="#viewprofile" ng-show=authenticated style="padding-top: 10px;">
 					<i style="color: cyan" class="fa fa-user fa-lg"></i>&nbsp;{{CurrentUser}}
 			</a></li>
@@ -281,7 +281,7 @@ color:whitesmoke;
 		<div class="col-md-11">
 			<form
 				style="padding-left: 150px; background-color: rgba(223, 235, 236, 0.93); margin-left: 240px; padding-top: 30px; margin-top: 80px;"
-				class="form-horizontal login-form-2 panel" role="form">
+				class="form-horizontal login-form-2 panel" role="form" name="loginform">
 				<div class="row">
 					<div class="col-md-7">
 						<h1>Sign In!</h1>
@@ -293,8 +293,11 @@ color:whitesmoke;
 						<label for="username" class="control-label">Username</label>
 						<div class="icon-container">
 							<i class="fa fa-user"></i> <input type="text"
-								style="width: 342px;" class="form-control" id="username"
-								ng-model="auth.userName" placeholder="">
+								style="width: 342px;" class="form-control" name="username"
+								ng-model="auth.userName" ng-pattern="/^[a-zA-Z0-9]*$/" required>
+				             <!-- <span style="color:black" ng-show="loginform.username.$invalid"> -->
+				             <p class="text-muted" ng-show="loginform.username.$touched &&loginform.username.$error.required">UserName is required!!</p>
+				         <p class="text-muted" ng-show="loginform.username.$error.pattern">UserName is only alphanumeric</p>
 						</div>
 					</div>
 				</div>
@@ -303,14 +306,15 @@ color:whitesmoke;
 						<label for="password" class="control-label">Password</label>
 						<div class="icon-container">
 							<i class="fa fa-lock"></i> <input type="password"
-								style="width: 342px;" class="form-control" id="password"
-								ng-model="auth.password" placeholder="">
+								style="width: 342px;" class="form-control" name="upwd"
+								ng-model="auth.password" placeholder="" ng-pattern="/^[a-zA-Z0-9]*$/" ng-required="true">
+				            	<p class="text-muted"  ng-show="loginform.upwd.$touched &&loginform.upwd.$error.required">Password is required.</p>
 						</div>
 					</div>
 				</div>
 				<div style="margin-left: 10px; width: 300px;">
 					<a style="width: 124px; color: black" role="button"
-						ng-click="login()" class="btn btn-info">LOG IN</a>
+						ng-click="login()" ng-disabled="loginform.$invalid" class="btn btn-info">LOG IN</a>
 				</div>
 			</form>
 		</div>
@@ -343,14 +347,14 @@ color:whitesmoke;
 
 <!--Registre  -->
 <div ng-controller="registerctrl">
-	<div class="container">
+	<div class="container" tabindex='-1'>
 		<!-- <button type="button" class="btn btn-info btn-sm"
 							data-toggle="modal" data-target="#register">
 							Register
 						</button> -->
 		<!-- Modal -->
 		<div class="modal fade" id="register" role="dialog"
-			style="width: 100%; height: 100%">
+			style="width: 100%; height: 100%" tabindex=''>
 			<div class="modal-dialog">
 				<!-- Modal content-->
 				<div class="modal-content">
@@ -374,7 +378,7 @@ color:whitesmoke;
 														ng-pattern="/^[a-zA-Z]*$/" ng-required="true">
 												</div>
 												<span style="color: red; font-style: italic;"
-													ng-show="registerform.firstname.$touched&&registerform.firstname.$error.required">Firstname
+													ng-show="registerform.firstname.$touched && registerform.firstname.$error.required">Firstname
 													is required.</span>
 												<p style="color: red; font-style: italic;"
 													ng-show="registerform.firstname.$error.pattern">Firstname
@@ -395,7 +399,7 @@ color:whitesmoke;
 												<div style="padding-left: 10px">
 													<input type="date" name="Bday" class="form-control"
 														ng-model="members.dateOfBirth"
-														ng-pattern="/^(\d{2})\/(\d{2})\/(\d{4})$/"
+														
 														placeholder="dd/mm/yyyy">
 												</div>
 												<!--  <p class="text-muted" ng-show="register.Bday.$touched &&loginform.Bday.$error.required">Required!!</p> -->
