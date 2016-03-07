@@ -58,7 +58,7 @@ public class Category {
 	}
 
 
-	public void setCategoryname(String categoryname) {
+	public void setCategoryname() {
 		this.categoryname = categoryname;
 	}
 

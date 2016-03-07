@@ -140,28 +140,51 @@ public Page<Book> getbooks(@RequestBody HashMap<String , Integer> map ) {
 		return returnParams;
 	}
 	
-	@RequestMapping("/editCategory/{categoryid}")
-	public HashMap<String, Object> editcategory(@PathVariable("categoryid") int categoryid) {
+	@RequestMapping("/editcategoryname")
+	public HashMap<String, Object> ediyy(@RequestBody Category category) {
+		HashMap<String, Object> returnParams = new HashMap<String, Object>();
+		try{
+		
+		/*	System.out.println(category.getCategoryname());
+
+			System.out.println(category.getCatid());*/
+			categoryrepository.save(category);
+			returnParams.put("status", true);
+			returnParams.put("msg", "successfully edited Category!!");
+			}
+		catch(Exception e){
+			returnParams.put("status", false);
+			returnParams.put("msg", "Failed to edit Category!!");
+			
+		}
+		return returnParams;
+		}
+
+	
+	@RequestMapping("/BookEditing")
+	public HashMap<String, Object> editbook(@RequestBody Book book) {
 		HashMap<String, Object> returnParams = new HashMap<String, Object>();
 
 		try {
-			Category catname=categoryrepository.findOne(categoryid);
-			System.out.println(catname.getCategoryname());
-			categoryrepository.save(catname);
+		//Category categorynamee=categoryrepository.findOne(categoryid);
+			//System.out.println(categorynamee.getCategoryname());
+		bookrepository.save(book);
+		
 			returnParams.put("status", true);
+			returnParams.put("msg", "successfully edited Category!!");
 		} catch (Exception e) {
+			e.printStackTrace();
 			returnParams.put("status", false);
-			returnParams.put("msg", "Failed to add Category!!");
+			returnParams.put("msg", "Failed to edit Category!!");
 		}
 
 		return returnParams;
 	}
 	
 	@RequestMapping("/category/{catId}")
-	public String getcatname(@PathVariable("catId") int catId){
+	public Category getcatname(@PathVariable("catId") int catId){
 		Category catname=categoryrepository.findOne(catId);
-		return catname.getCategoryname();
-		
+		return catname;
 	}
 	
 	
@@ -427,7 +450,8 @@ public HashMap<String,Object>addcopy(@PathVariable("bookid") int bookid) {
 @RequestMapping("/viewmybooks")
 public List<Map<String, Object>> getmybooks(){
 	List<BookDetail>bookdetail;
- String s=	SecurityContextHolder.getContext().getAuthentication().getName();  
+
+	String s=	SecurityContextHolder.getContext().getAuthentication().getName();  
  User user=userrepository.findByUserName(s);
  int j=user.getId();
  
@@ -447,8 +471,10 @@ public List<Map<String, Object>> getmybooks(){
     resultMap.put("title", title);
     resultMap.put("author",author);
    result.add(resultMap);
+   
  }
  return result;
+ 
 }
 
 

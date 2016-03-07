@@ -2,6 +2,7 @@ package com.example.model;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -13,6 +14,8 @@ import javax.persistence.Table;
 
 import com.example.Status;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonProperty.Access;
 
 @Entity
 @Table(name="quantity")
@@ -25,7 +28,7 @@ public class Quantity {
 	@JsonIgnore
 	Book book;
 	
-	@OneToMany(fetch = FetchType.EAGER,orphanRemoval=true,mappedBy="quantity")
+	@OneToMany(fetch = FetchType.EAGER,mappedBy="quantity")
 	@JsonIgnore
 	List<BookDetail> bookdetail;
 	
@@ -47,6 +50,7 @@ public class Quantity {
 		return bookdetail;
 	}
 
+	
 	public void setBookdetail(List<BookDetail> bookdetail) {
 		this.bookdetail = bookdetail;
 	}

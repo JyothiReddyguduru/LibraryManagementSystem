@@ -9,16 +9,16 @@
 		
 		<div>
 		
-				<h2 style="color: hotpink">List Of Books</h2>
+				<h2 style="color: hotpink">History</h2>
 			</div>
 			<br>
 			<div class="col-md-10">
 				<br> <br>
 		
 				<div>
-				<div class="col-lg-4 col-md-4 col-sm-6 col-xs-12" ng-repeat="x in mybooks">
-				<div class="overlay panel" style="background-color :black;">
-				<div ng-hide=x.bookDetail.returnDate==null ">
+				<div  class="col-lg-4 col-md-4 col-sm-6 col-xs-12" ng-repeat="x in mybooks">
+				<div  ng-hide=x.bookDetail.returnDate==null " class="overlay panel" style="background-color :black;">
+				<div >
 				<h4 style="color: cyan; width: 280px;">
 						Title:{{x.title}} <br> <br> Author :{{x.author}} <br>
 						<br> Issue Date :{{x.bookDetail.issueDate | date:

@@ -29,15 +29,15 @@
 					<div class="">
 						<div class="overlay panel"
 							style="height: 175px; background-color: black">
-							<h4 style="color: cyan">{{x.title}}</h4>
+							<a style="color: cyan" href=#viewcat/{{x.bookid}}><h4>{{x.title}}</h4></a>
 							<h4 style="color: white">By</h4>
 							<h4 style="color: hotpink">{{x.author}}</h4>
-							<br> <i class="fa fa-pencil"></i>
+							<br> <i ng-show=admin  style="color: White" class="fa fa-pencil"></i>
 								<a role=button ng-show=admin  style="color: White" data-toggle="modal" 
 								data-target="#editbookmodal" ng-click="showbook(x.bookid)">Edit
 								</a> &nbsp;&nbsp;</a>
-							<a style="color: white" href=#viewcat/{{x.bookid}}><i
-								class="fa fa-eye"></i>View Categories</a>&nbsp; <a
+							<!-- <a style="color: white" href=#viewcat/{{x.bookid}}><i
+								class="fa fa-eye"></i>View Categories</a>&nbsp; --> <a
 								style="color: white" href=#viewcopy/{{x.bookid}}><i
 								class="fa fa-eye"></i>View Copies</a>&nbsp;
 						</div>
@@ -72,10 +72,10 @@
 					<div class="modal-body">
 						<form>
 							Book Title<input type="text" id="booktitle"
-								class="form-control" ng-model="abc.title" /> <br>
+								class="form-control" ng-model="abcde.title" /> <br>
 							<br>
 							Author<input type="text" id="author"
-								class="form-control" ng-model="abc.author" /> <br>
+								class="form-control" ng-model="abcde.author" /> <br>
 							<br>
 							<button class="btn btn-default" type="submit"
 								ng-click="EditBook()" data-dismiss="modal">Edit and Save</button>

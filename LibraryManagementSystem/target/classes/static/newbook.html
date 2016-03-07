@@ -29,7 +29,7 @@
 													ng-show="addbook.title.$touched&&addbook.title.$error.required">Required!!</span>
 												<p style="color: red; font-style: italic;"
 													ng-show="addbook.title.$error.pattern">Title
-													contains only characters.</p>  
+													contains only characters.</p>  <br>
 							<label>AUTHOR</label> <input
 							type="text" name="author" class="form-control"
 							ng-model="books.author" ng-pattern="/^[a-zA-Z]*$/" ng-required="true">
@@ -37,14 +37,14 @@
 													ng-show="addbook.author.$touched&&addbook.author.$error.required">Required!!</span>
 												<p style="color: red; font-style: italic;"
 													ng-show="addbook.author.$error.pattern">Author
-													contains only characters.</p>   
+													contains only characters.</p>   <br> 
 							<label>COPIES</label><input
 							type="number" id="copies" class="form-control"
 							ng-model="books.copies" ng-pattern="/^[0-9]+$/"
 															ng-required="true"/>
 								<p style="color: red; font-style: italic;"
 														ng-show="addbook.copies.$touched && addbook.copies.$error.required">
-														Enter only the number of copies!!</p> <br>  <br> 
+														Enter only the number of copies!!</p> <br>
 <label>CATEGORIES</label>
 						
 						

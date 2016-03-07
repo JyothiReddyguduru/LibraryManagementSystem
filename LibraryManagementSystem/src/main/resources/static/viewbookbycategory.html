@@ -7,24 +7,23 @@
 <h2 style="color:hotpink">&nbsp;&nbsp; List of books in {{y.categoryname}}</h2>
 
            
-     
-
-    			<div class="row">
-    				<div class="col-md-10" >
-    					
-    				
-    				<br>
-    				<div   class="col-lg-4 col-md-4 col-sm-6 col-xs-12" >
-    					<div class=""  >
-    							<div class="overlay panel" style="background-color:black" ng-repeat="x in y.book">
-    									 <h4 style="color:cyan">{{x.title}}</h4>
+		<div class="row">
+	
+			
+			<br>
+			<div class="col-md-10">
+				<br> <br>
+		
+				<div>
+				<div class="col-lg-4 col-md-4 col-sm-6 col-xs-12" ng-repeat="x in y.book">
+				<div class="overlay panel" style="background-color :black;">
+				<h4 style="color:cyan">{{x.title}}</h4>
     								 <h4 style="color:White">By<br> <h4 style="color:hotpink">{{x.author}}</h4></h4>
     							<h4 style="color:cyan">{{x.isbn}}</h4>
-    							</div>
-    					</div>
-    				</div>
-    				</div>
-    				</div>    			
+				</div>
+     
+
+    			 			
     		</div>
     		</div>
     		
