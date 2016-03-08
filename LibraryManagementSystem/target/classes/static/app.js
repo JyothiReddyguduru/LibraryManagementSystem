@@ -152,7 +152,7 @@ $rootScope.logOut= function(){
 		$rootScope.auth.password="";	
 	});
 	/*alert('Logout Successfully');*/
-	
+
 }
 
 });
@@ -214,7 +214,7 @@ app.controller('viewbooks', ['$scope', '$rootScope', '$http', '$routeParams', fu
 
     $scope.intitPage=function(){
 	 	$scope.page={
-	    		 pageSize: 3,
+	    		 pageSize: 9,
 	    		 pageCount: 0
 	     };
 	 }
@@ -377,6 +377,42 @@ $rootScope.authenticated=false;
             
         });
     }
+
+    
+    $http({
+		method : 'GET',
+		url : '/getProfile',
+	}).then(function(response) {
+	
+		$rootScope.Mydetails= angular.copy(response.data);
+	});	
+    $rootScope.EditProfile=function(){
+    	$http({
+			method : 'GET',
+			url : '/getProfile',
+		}).then(function(response) {
+		
+			$rootScope.Mydetails= angular.copy(response.data);
+		});	
+    }
+    
+    $scope.editsubmit=function(){
+    	$http({
+			method : 'POST',
+			url : '/editmember',
+			data:$rootScope.Mydetails
+		}).then(function(response) {
+            if (response.data.status) {
+                alert('Member Edited Successfully!');
+             /*   $rootScope.books = {};*/
+                $location.url("/viewprofile");
+            } else {
+                alert('Member Editing Failed!');
+            }
+        })	
+    }
+    
+    
 }]);
 
 
@@ -399,6 +435,14 @@ app.controller('viewprofilectrl', ['$scope', '$rootScope', '$http', function($sc
     //controller to edit a member's profile
 app.controller('editprofilectrl', ['$scope', '$rootScope', '$http', function($scope, $rootScope, $http) {
     $scope.title = 'Edit your profile!';
+    $scope.EditProfile=function(){
+    	$http({
+			method : 'GET',
+			url : '/getProfile',
+		}).then(function(response) {
+			$rootScope.Mydetails= response.data;
+		});	
+    }
     
     
 
@@ -438,31 +482,6 @@ app.controller('returnbookctrl', ['$scope', '$rootScope', '$http', function($sco
 
 app.controller('editcategoryctrl', ['$scope', '$rootScope', '$http', '$routeParams', function($scope, $rootScope, $http, $routeParams) {
 
-
-   /* $http({
-        method: 'GET',
-        url: '/editCategory/'+$routeParams.categoryId,
-    }).then(function(response) {
-        $rootScope.categories = angular.copy(response.data);
-    });
-*/
-    
-   /* $scope.test=function(catid){
-    	alert("You");
-    	
-    	 $http({
-             method: 'POST',
-             url: '/editCategory'+catid,
-             data: $rootScope.categories
-         }).then(function(response) {
-             if (response.data.status) {
-                 alert('Category edited Successfully!');
-             } else {
-                 alert('Category editing Failed!');
-             }
-         });
-    }*/
-
     $scope.editCategory = function() {
             $http({
             method: 'POST',
@@ -497,13 +516,12 @@ app.controller('viewhistoryctrl', ['$scope', '$rootScope', '$http', '$routeParam
 app.controller('viewcategories', ['$scope', '$rootScope', '$http', '$routeParams', function($scope, $rootScope, $http, $routeParams) {
 
     $scope.title = 'List of Categories';
-    $scope.showcat=function(catId){
+   $scope.showcat=function(catId){
     	$http({
     	        method: 'GET',
     	        url: '/category/'+catId,
     	    }).then(function(response) {
-    	    	alert(response.data);
-    	    	
+    	    	  	    	
     	        $rootScope.catname = angular.copy(response.data);
     })
     }

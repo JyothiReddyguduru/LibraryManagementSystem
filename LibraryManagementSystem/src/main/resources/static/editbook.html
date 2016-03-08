@@ -11,22 +11,34 @@
 					<div class="modal-header">
 						<button type="button" class="close" data-dismiss="modal">&times;</button>
 						<h4 class="modal-title">Edit Book Details</h4>
-					</div>
+					</div></div>
 					<div class="modal-body">
-						<form>
-							Book Title<input type="text" id="booktitle"
-								class="form-control" ng-model="books.title" /> <br>
+						<form name="editbookform" novalidate>
+							Book Title<input type="text" name="booktitle"
+								class="form-control" ng-model="books.title" ng-pattern="/^[a-zA-Z]*$/" ng-required="true">
+												
+												<span style="color: red; font-style: italic;"
+													ng-show="editbookform.booktitle.$touched && editbookform.booktitle.$error.required">Required!!</span>
+												<p style="color: red; font-style: italic;"
+													ng-show="editbookform.booktitle.$error.pattern">Title
+													contains only characters.</p> <br>
 							<br>
-							Author<input type="text" id="author"
-								class="form-control" ng-model="booksd
-								.author" /> <br>
+							Author<input type="text" name="author"
+								class="form-control" ng-model="books
+								.author" ng-pattern="/^[a-zA-Z]*$/" ng-required="true">
+												</div>
+												<span style="color: red; font-style: italic;"
+													ng-show="editbookform.author.$touched && editbookform.author.$error.required">Required!!</span>
+												<p style="color: red; font-style: italic;"
+													ng-show="editbookform.author.$error.pattern">Author
+													contains only characters.</p> <br> <br>
+													
 							<br>
 							<button class="btn btn-default" type="submit"
-								ng-click="EditBook()" data-dismiss="modal">Edit and Save</button>
-						</form>
-					</div>
-				</div>
-			</div>
-		</div>
-</div>
+								ng-click="EditBook()" data-dismiss="modal">Edit and Save</button>	
+				</form>		
 	</div>
+	</div>
+	</div>
+	</div>
+	

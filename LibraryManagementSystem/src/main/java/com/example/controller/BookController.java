@@ -409,6 +409,7 @@ public Member getmyprofile(){
  String s=	SecurityContextHolder.getContext().getAuthentication().getName();  
  User user=userrepository.findByUserName(s);
  int j=user.getId();
+ System.out.println(user.getPassword());
  Member result;
 
     result= memberrespository.findByUserId(j);
@@ -515,6 +516,25 @@ public HashMap<String,Object> addmember(@RequestBody Member mem) {
 
 	return returnParams;
 }
+
+
+@RequestMapping("/editmember")
+public HashMap<String,Object> editmember(@RequestBody Member mem) {
+	HashMap<String, Object> returnParams = new HashMap<String, Object>();
+	
+	try {
+	
+				memberrespository.save(mem);
+/*		((List<Member>) userrepository).add(mem);
+*/		returnParams.put("status", true);
+	} catch (Exception e) {
+		returnParams.put("status", false);
+		returnParams.put("msg", "Failed to Edit the user!!!!!!");
+	}
+
+	return returnParams;
+}
+
 
 
 }

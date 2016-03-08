@@ -14,7 +14,7 @@ h1 {
 .list-container { max-width: 600px; }
 .icon-container { position: relative; }
 .icon-container .fa {
-	color: snow;
+	color: Black;
 	position: absolute;
 	left: 10px;
 	top: 10px;
@@ -22,7 +22,7 @@ h1 {
 .icon-container input, 
 .icon-container textarea {
 	padding-left: 30px;
-	background-color: snow;color: snow;
+	background-color: snow;color: black;
 	}
 
 .login-form-2 {

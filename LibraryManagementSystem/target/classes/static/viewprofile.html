@@ -12,7 +12,7 @@
 					<!-- image to the left -->
 					<div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
 						<div class="">
-							<img style=" border-radius: 50%;" src="images/3.jpg" class="img-responsive"
+							<img style=" border-radius: 50%;" src="images/b.jpg" class="img-responsive"
 								alt="team img 1"> <br>
 
 							<!-- <div class="overlay" style=" border-radius: 10%;height: 200px;">
@@ -26,7 +26,7 @@
 					<div class="col-lg-4 col-md-4 col-sm-6 col-xs-12" font-size="300px"
 						font-weight="300px" style="text-align: left">
 						<h3 style="color: white; width: 600px;margin-top: 0px;">
-							Name:{{profile.firstName}}&nbsp;{{profile.lastName}} <br> <br> Date Of Birth :{{profile.dateOfBirth}} <br>
+							Name:{{profile.firstName}}&nbsp;{{profile.lastName}} <br> <br> Date Of Birth :{{profile.dateOfBirth | date: 'yyyy-MM-dd'}} <br>
 							<br> Contact :{{profile.contact}}
 							<br> <br> Email-Id :{{profile.email}}
 						</h3>

@@ -1,4 +1,4 @@
-<body id="top" ng-controller="viewprofilectrl">
+<body id="top" ng-controller="animationctrl">
 	<div style="color:WhiteSmoke" class="container">
 		<div class="col-md-7">
 			<br> <br> <br>
@@ -8,39 +8,42 @@
 				<!--  row div starts -->
 				<div class="row"">
 					<!-- form-->
-					<div><h2 style="color:hotpink">Edit My Profile</h2>
+					<div><h2 style="color:hotpink">Edit My Profile</h2></div>
 						<form style=" width: 400px; margin-left: 80px;margin-bottom: 20px; margin-top: 20px" name="editprofile">
+						
 						<b>FirstName</b>	<input type="text" name="firstname" placeholder="firstname"
-														class="form-control" ng-model="members.firstName"
-														ng-pattern="/^[a-zA-Z]*$/" ng-required="true">
-												</div>
+														class="form-control" ng-model="Mydetails.firstName"
+														ng-pattern="/^[a-zA-Z]*$/" ng-required="true" />
+												
 												<span style="color: red; font-style: italic;"
 													ng-show="editprofile.firstname.$touched&&editprofile.firstname.$error.required">Firstname
 													is required.</span>
 												<p style="color: red; font-style: italic;"
 													ng-show="editprofile.firstname.$error.pattern">Firstname
-													contains only characters.</p>
+													contains only characters.</p><br>
+													
 								<b>LastName</b>	<input type="text" name="lastname" placeholder="lastname"
-														class="form-control" ng-model="members.lastName"
+														class="form-control" ng-model="Mydetails.lastName"
 														ng-pattern="/^[a-zA-Z]*$/" ng-required="true">
-												</div>
+											
 												<span style="color: red; font-style: italic;"
 													ng-show="editprofile.lastname.$touched&&editprofile.lastname.$error.required">LastName
 													is required.</span>
 												<p style="color: red; font-style: italic;"
 													ng-show="editprofile.lastname.$error.pattern">
-													contains only characters.</p>
-								<b>UserName</b> <input type="text" name="username" placeholder=""
-								class="form-control" ng-model="members.user.userName" ng-pattern="/^[a-zA-Z]*$/" ng-required="true">
+													contains only characters.</p><br>
+													
+								<b>UserName</b> <input type="text" name="username" placeholder="Username"
+								class="form-control" ng-model="Mydetails.user.userName" ng-pattern="/^[a-zA-Z]*$/" ng-required="true">
 												<span style="color: red; font-style: italic;"
 													ng-show="editprofile.username.$touched&&editprofile.username.$error.required">Required!!</span>
 												<p style="color: red; font-style: italic;"
 													ng-show="editprofile.username.$error.pattern">UserName
 													contains only characters.</p>  <br> 
-													<br>
-													<br>
+												
+												
 													<b>Password</b><input type="password" name="pwd" class="form-control"
-														ng-model="members.user.password"
+														ng-model="Mydetails.user.password" placeholder='Enter new Password'
 														ng-pattern="/^[a-zA-Z0-9]*$/" ng-required="true">
 													<p style="color: red; font-style: italic;"
 														ng-show="editprofile.pwd.$touched && editprofile.pwd.$error.required">Password
@@ -52,10 +55,10 @@
 									
 													<b>Confirm Password</b>
 												<input type="password"
-														ng-model='members.user.password_verify'
+														ng-model='Mydetails.user.password_verify'
 														class="form-control" name='confirm_password'
 														placeholder='confirm password' required
-														data-password-verify="members.user.password"
+														data-password-verify="Mydetails.user.password"
 														ng-required="true">
 													<p style="color: red; font-style: italic;"
 														ng-show="editprofile.confirm_password.$touched && editprofile.confirm_password.$error.required">
@@ -63,23 +66,26 @@
 													<p style="color: red; font-style: italic;"
 														ng-show="editprofile.confirm_password.$error.passwordVerify">
 														Password doesn't match!!</p>
-																					<br>
+																					
 							<br> <b>Contact</b> <input type="text"name="contact"
-								placeholder="" class="form-control"  ng-pattern="/^[0-9]+$/"
+								placeholder="Contact" class="form-control" ng-model="Mydetails.contact" ng-pattern="/^[0-9]+$/"
 															ng-required="true"/>
 								<p style="color: red; font-style: italic;"
 														ng-show="editprofile.contact.$touched && editprofile.contact.$error.required">
 														Field required!</p> <br> 
-							<button ng-click="" class="btn btn-info"
+							<button ng-click="editsubmit()" class="btn btn-info"
 			 style="margin-bottom: 0px; margin-top: 0px; margin-left: 20px; 
 			 margin-right: 0px;width: 124px;">Submit</button>
-						</form>
+			 
+				</form>
 					</div>
+					
 				</div>
+				
 				<!--  row div end -->
 			</div>
+			
 			<!--end panel div -->
 			
 		</div>
-	</div>
 </body>

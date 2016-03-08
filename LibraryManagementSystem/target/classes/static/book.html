@@ -5,7 +5,7 @@
     width: 1230px;
 ">
 			<div class="col-xs-4 pull-left">
-				<h2 style="color: hotpink">List Of Books</h2>
+				<strong><h2 style="color:hotpink">List Of Books</h2></strong>
 			</div>
 			<div class="col-xs-4 pull-right">
 				<form class="col-md-11" style="padding-top: 10px">
@@ -43,16 +43,24 @@
 						</div>
 					</div>
 				</div>
+			<
 			
-			<div>
-	<ul class="pagination" >
+</div>
+
+<div class="footer" style="
+    margin-top: 400px;
+">
+	<ul class="pagination " >
 			<li><a href="" ng-click="prevPage()">&laquo;</a></li>
  <li ng-repeat="n in page track by $index" >
   <a ng-click="toPageId($index)">{{$index+1}}</a>
   </li>
   <li><a href="" ng-click="nextPage()">&raquo;</a></li></ul>  
-</div></div>
+</div>
+
+
 		</div>
+		
 		
 </body>
 <div ng-controller="editbookctrl">
