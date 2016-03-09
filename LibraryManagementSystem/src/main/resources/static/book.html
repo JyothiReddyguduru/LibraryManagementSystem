@@ -9,11 +9,14 @@
 			</div>
 			<div class="col-xs-4 pull-right">
 				<form class="col-md-11" style="padding-top: 10px">
-					<div id="custom-search-input" style="height: 58px;">
+					<div id="custom-search-input" >
 						<div class="input-group col-md-12">
-							<input type="text" class="form-control input-lg"
-								placeholder="Enter title..." /> <span class="input-group-btn">
-								<button class="btn btn-info btn-lg" ng-click="" type="button">
+							<!-- <input type="text" class="form-control input-lg"
+								placeholder="Enter title..." />  -->
+								<autocomplete ng-model="yourchoice" placeholder="abc" data="names" ng-keyup="autofetch(yourchoice)"></autocomplete>
+              
+								 													<span class="input-group-btn">
+								<button class="btn btn-info btn-lg" ng-click="fetchbytitle(yourchoice)" type="button">
 									<i class="glyphicon glyphicon-search"></i>
 								</button>
 							</span>
@@ -43,19 +46,19 @@
 						</div>
 					</div>
 				</div>
-			<
 			
+		
 </div>
 
 <div class="footer" style="
     margin-top: 400px;
 ">
 	<ul class="pagination " >
-			<li><a href="" ng-click="prevPage()">&laquo;</a></li>
+			<!-- <li><a href="" ng-click="prevPage()">&laquo;</a></li> -->
  <li ng-repeat="n in page track by $index" >
   <a ng-click="toPageId($index)">{{$index+1}}</a>
   </li>
-  <li><a href="" ng-click="nextPage()">&raquo;</a></li></ul>  
+ <!--  <li><a href="" ng-click="nextPage()">&raquo;</a></li> --></ul>  
 </div>
 
 
@@ -75,14 +78,14 @@
 				<div class="modal-content">
 					<div class="modal-header">
 						<button type="button" class="close" data-dismiss="modal">&times;</button>
-						<h4 class="modal-title">Edit Book Details</h4>
+						<h4 class="modal-title" style="color: Hotpink;">Edit Book Details</h4>
 					</div>
 					<div class="modal-body">
 						<form>
-							Book Title<input type="text" id="booktitle"
+							<label>Book Title</label><input type="text" id="booktitle"
 								class="form-control" ng-model="abcde.title" /> <br>
 							<br>
-							Author<input type="text" id="author"
+							<label>Author</label><input type="text" id="author"
 								class="form-control" ng-model="abcde.author" /> <br>
 							<br>
 							<button class="btn btn-default" type="submit"

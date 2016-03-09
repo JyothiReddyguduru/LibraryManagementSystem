@@ -1,5 +1,6 @@
-var app = angular.module('app', ['ngRoute','ngTagsInput']);
+var app = angular.module('app', ['ngRoute','ngTagsInput','autocomplete']);
 app.config(['$routeProvider', '$httpProvider',
+            
     function($routeProvider, $httpProvider) {
         $httpProvider.defaults.headers.common["X-Requested-With"] = 'XMLHttpRequest';
         $routeProvider
@@ -224,10 +225,9 @@ app.controller('viewbooks', ['$scope', '$rootScope', '$http', '$routeParams', fu
     	        method: 'GET',
     	        url: '/bookk/'+bookid,
     	    }).then(function(response) {
-    	    	alert(response.data);
-    	    	debugger;
+    	    	    	    	
     	        $rootScope.abcde = angular.copy(response.data);
-    	    	debugger;
+    	    
     })
     }
 	 			
@@ -250,6 +250,39 @@ app.controller('viewbooks', ['$scope', '$rootScope', '$http', '$routeParams', fu
 		$rootScope.getNumber=function(num){
 			return new Array(num);
 		}
+		$scope.autofetch = function(search) {
+			//alert("Injected");
+
+			        // var status=$scope.state.title;
+			        $http({
+			            method: 'GET',
+			            url: '/autosearchbytitle/'+search  ,
+			            
+			                          
+			        }).then(function(response) {
+			        
+			            $scope.names = response.data;
+			            
+			        });
+			    }
+			    
+			    
+			    
+			    $scope.fetchbytitle = function(query) {
+
+			      
+			        $http({
+			            method: 'GET',
+			            url: '/searchbytitle/' +query,
+			           
+			   
+			        }).then(function(response) {
+			            $scope.books =[];
+			            $scope.books.push(response.data);
+			        });
+			    }
+
+
 }])
 
 
@@ -265,6 +298,7 @@ app.controller('viewcatofbookctrl', ['$scope', '$rootScope', '$http', '$routePar
          * headers : { 'Authorization' : 'Basic ' + encodedAuthData }
          */
     }).then(function(response) {
+    	debugger;
         $rootScope.catofbooks = response.data;
     });
 
@@ -302,7 +336,7 @@ app.controller('addbookctrl', ['$scope', '$rootScope', '$location', '$http', fun
     $scope.loadTags = function(query) {
         return $http({
             method: 'GET',
-            url: '/categories',
+            url: '/categories/'+query,
         });
     }
         
@@ -491,7 +525,14 @@ app.controller('editcategoryctrl', ['$scope', '$rootScope', '$http', '$routePara
         }).then(function(response) {
                 if (response.data.status) {
              alert('Category edited Successfully!');
-             location.reload();
+             $http({
+                 method: 'GET',
+                 url: '/categories',
+             }).then(function(response) {
+                 $rootScope.categories = response.data;
+             });
+
+             
             } else {
              alert('Category editing Failed!');
             }
@@ -507,6 +548,7 @@ app.controller('viewhistoryctrl', ['$scope', '$rootScope', '$http', '$routeParam
         url: '/viewmybooks',
     }).then(function(response) {
         $rootScope.mybooks= response.data;
+       
     });
 
 }])
@@ -600,19 +642,7 @@ app.controller('editfinectrl', ['$scope', '$rootScope', '$http', '$routeParams',
         $rootScope.fines = angular.copy(response.data);
     });
 
-    $scope.editCategory = function() {
-        $http({
-            method: 'POST',
-            url: '/editfine',
-            data: $rootScope.categories
-        }).then(function(response) {
-            if (response.data.status) {
-               /* alert('Category edited Successfully!');*/
-            } else {
-                /*alert('Category editing Failed!');*/
-            }
-        });
-    }
+   
 
 }])
 
@@ -720,6 +750,7 @@ app.controller('viewcopyctrl', ['$scope', '$rootScope', '$http', '$routeParams',
         url: '/book/' + $routeParams.bookid,
     }).then(function(response) {
         $rootScope.x = response.data;
+       
     });
     
     $scope.addcopy=function(bookid)
@@ -730,10 +761,16 @@ app.controller('viewcopyctrl', ['$scope', '$rootScope', '$http', '$routeParams',
     		url :'/addcopy1/'+bookid,
     	}).then(function(response) {
     		$rootScope.x = response.data;
-    		location.reload();
+    		/*location.reload();*/
+    		 $http({
+    	            method: 'GET',
+    	            url: '/book/' + $routeParams.bookid,
+    	        }).then(function(response) {
+    	            $rootScope.x = response.data;
+    	        });
+
     	});
-    	
-    }
+    	    }
 
 
     $scope.delete = function(quantity,index) {
@@ -742,9 +779,14 @@ app.controller('viewcopyctrl', ['$scope', '$rootScope', '$http', '$routeParams',
         $http.delete('/deletecopy/' + quantity.accountId)
             .success(function(data, status, headers) {
                 alert("deleted successfully");
-               // $rootScope.x.quantity[quantity.accountId].status="Removed";
-                /*  $rootScope.x.quantity.splice(index, 1);  */
-                location.reload();
+              
+                $http({
+                    method: 'GET',
+                    url: '/book/' + $routeParams.bookid,
+                }).then(function(response) {
+                    $rootScope.x = response.data;
+                   
+                });
             })
             .error(function(data, status, header, config) {
                /* alert("deleted failed");*/
@@ -772,8 +814,14 @@ app.controller('editbookctrl',['$scope', '$rootScope', '$location', '$http', fun
              if (response.data.status) {
             	 debugger;
           alert('book edited Successfully!');
+          $http({
+              method: 'GET',
+              url: '/viewallbooks',
+                        }).then(function(response) {
+              $rootScope.books = response.data;
+          });
           
-          location.reload();
+         
          } else {
         	 debugger;
           alert('book editing Failed!');

@@ -68,7 +68,11 @@ public class BookController {
 	public List<Category> getCategories() {
 		return (List<Category>) categoryrepository.findAll();
 	}
-
+	@RequestMapping("/categories/{cat}")
+	public List<Category>getcat(@PathVariable("cat") String cat)
+	{
+		return categoryrepository.findByName("%"+cat+"%");
+	}
 	@RequestMapping("/viewallbooks")
 	public List<Book> getBooks(){
 		return bookrepository.findAll();
@@ -409,11 +413,12 @@ public Member getmyprofile(){
  String s=	SecurityContextHolder.getContext().getAuthentication().getName();  
  User user=userrepository.findByUserName(s);
  int j=user.getId();
+ System.out.println(user);
  System.out.println(user.getPassword());
  Member result;
 
     result= memberrespository.findByUserId(j);
-
+System.out.println(result);
  return result;
 }
 
@@ -446,6 +451,11 @@ public HashMap<String,Object>addcopy(@PathVariable("bookid") int bookid) {
 	}
 
 	return returnParams;
+}
+
+@RequestMapping("/autosearchbytitle/{title}")
+public List<String>getNames(@PathVariable("title") String title){
+	return bookrepository.findByTitBook("%"+title+"%");
 }
 
 @RequestMapping("/viewmybooks")

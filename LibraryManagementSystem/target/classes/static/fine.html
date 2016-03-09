@@ -1,16 +1,14 @@
 
 
-<body ng-controller="viewfinectrl" align="centre">
+<div ng-controller="viewfinectrl" align="centre">
 	<div class="container">
 		<div class=" col-md-offset-4 "
 			style="padding-top =: 40px; padding-top: 60px; margin-left: 260px;">
 			<!-- Description of fines -->
 			<div>
 				<!-- list will start here -->
-				<ul>
-					<div>
-						<!-- list item will start here -->
-						<li class="overlay panel"
+				
+					<div class="overlay panel"
 							style="background-color: black"
 							ng-repeat="x in finesview">
 
@@ -27,8 +25,9 @@
 							
 					
 					<!-- list item will start here -->
-					</li>
-					<li class="overlay panel"
+					
+					</div>
+					<div class="overlay panel"
 							style="background-color: black"
 							ng-repeat="x in finesview">
 
@@ -42,9 +41,8 @@
 								</p>
 							</div>
 							
-					</li>
 					</div>
-				</ul>
+				
 				<!-- list will end here -->
 				
 			</div>
@@ -106,4 +104,4 @@
 			</div>
 
 		</div>
-</body>
+</div>

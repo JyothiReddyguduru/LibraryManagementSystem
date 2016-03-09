@@ -1,10 +1,11 @@
 <div ng-controller="viewcategories">
 	<div class="container">
 		<div class="row">
-			<div class="col-xs-4 pull-left">
+			<div class="col-md-10 ">
+			<br>
 				<h2 style="color: hotpink">List Of Categories</h2>
 			</div>
-			<div class="col-xs-4 pull-right">
+			<!-- <div class="col-xs-4 pull-right">
 				<form class="col-md-11" style="padding-top: 10px">
 					<div id="custom-search-input" style="height: 58px;">
 						<div class="input-group col-md-12">
@@ -17,10 +18,10 @@
 						</div>
 					</div>
 				</form>
-			</div>
-			<br>
+			</div> -->
+		
 			<div class="col-md-10">
-				<br> <br>
+				<br> 
 
 				<div>
 					<div class="col-lg-4 col-md-4 col-sm-6 col-xs-12"
@@ -79,7 +80,7 @@
 					<div class="modal-body"
 						style="padding-left: 30px; padding-right: 30px; padding-bottom: 30px;">
 						<form>
-							Category Name<input type="text" id="categoryname"
+							<label>Category Name</label><input type="text" id="categoryname"
 								class="form-control" ng-model="catname.categoryname" /> <br>
 							<br>
 							<button class="btn btn-info" type="submit"

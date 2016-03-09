@@ -30,7 +30,7 @@ public class Book {
 	int bookid;
 	
     @JsonIgnore
-	@ManyToMany(fetch=FetchType.EAGER)
+	@ManyToMany(fetch=FetchType.LAZY)
     @JoinTable(
 	            name = "books_category",
 	            joinColumns={@JoinColumn(name = "book_id")},

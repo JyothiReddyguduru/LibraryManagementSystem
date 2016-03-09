@@ -51,11 +51,13 @@
 
 
 <body ng-controller="accesshistoryctrl">
-<div class="container">
-<div class="panel col-md-10" style="background-color: Black;margin-top: 80px;color:whitesmoke">
+<div class="container" style="  margin-left: 300px;" >
+<div class="panel col-md-10" style="margin-top: 80px;color:whitesmoke;background-color:rgba(4, 8, 5, 0.51);
+					
+					border: 2px solid cyan;">
 <h2 style="color:hotpink" > Access History</h2>
 <form class="col-md-7" style="padding-top:40px;margin-left: 200px;margin-bottom: 40px;">
-                            <label class="pull-left">Search By Member,Account Id's &nbsp; </label> <input type="text"
+                            <label class="pull-left">Search By Member,Account Id &nbsp; </label> <input type="text"
 							style="margin-left: 170px; margin-right: 210px; width: 226px;"
 							class="form-control" placeholder="Enter MemberId,AccountId"
 							ng-model="search.$" required>
@@ -68,7 +70,7 @@
                                 
 </form>
 
- <div>
+ <div >
 
  <table class="table" style="margin-top: 80px">
  <thead>

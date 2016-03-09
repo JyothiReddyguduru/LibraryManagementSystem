@@ -44,7 +44,8 @@
 					<a role="button" ng-show=admin ng-click="addcopy(x.bookid)" href="" style="color: cyan; padding-bottom: 15px;"> <i
 						class="fa fa-plus-circle fa-3x"></i>&nbsp;&nbsp;<b>add copy </b><span
 						style="color: cyan" class="arrow"></span></a>
-					<table class="table" border="1"
+									<span style="color:black" ng-show="x.quantity==''">This Book Has No Copies</span> 
+					<table  ng-hide="x.quantity==''" class="table" border="1"
 						style="background-color: rgba(21, 23, 23, 0.86);">
 						<thead style="text-align: centre">
 							<tr>
@@ -57,9 +58,9 @@
 							<tr >
 								<td>{{y.accountId}}</td>
 								<td>{{y.status}}</td>
-								<td ng-show=admin><button  ng-click="delete(y,$index)" class="btn btn-sm" 
+								<td ng-show=admin><button  ng-click="delete(y,$index)" class="btn btn-info" 
 								style="margin-bottom: 0px; margin-right: 0px; margin-top: 0px; 
-								margin-left: 0px; width: 74px;">delete</button></td>
+								margin-left: 0px; width: 80px;">delete</button></td>
 							</tr>
 						</tbody>
 					</table>
