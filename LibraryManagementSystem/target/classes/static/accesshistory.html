@@ -1,76 +1,28 @@
-<!--   History for clerk    -->
 
-<!-- 
-<body ng-controller="accesshistoryctrl">
-
-<div class="container">
-
-<form class="col-md-7" style="padding-top:20px;margin-left: 200px;">
-									<div id="custom-search-input">
-										<div class="input-group col-md-12">
-											<input type="text" class="form-control input-lg"
-												placeholder="Search for a Member..." /> <span
-												class="input-group-btn">
-												<button class="btn btn-info btn-lg"
-													ng-click="fetchbytitle();sho='true'" type="button">
-													<i class="glyphicon glyphicon-search"></i>
-												</button>
-											</span>
-										</div>
-									</div>
-								</form>
-		<div class="row">
-		
-		
-			<div class="col-md-10">
-				&nbsp;&nbsp;
-				<h1  style="color:hotpink" ><b>List Of Members<b></h1><br>
-				<div class="col-lg-4 col-md-4 col-sm-6 col-xs-12" ng-repeat="x in history">
-				<div class="overlay panel " style="background-color: rgba(0, 0, 0, 0.47);border-radius:80%;-webkit-border-radius: 99px 0px 99px 0px;-moz-border-radius: 99px 0px 99px 0px">
-				<h2 style="color: cyan" >{{x.firstName}}&nbsp;{{x.lastName}}</h2>
-				<h4 style="color: hotpink" >{{x.email}}</h4>
-				<h4>
-								<br>
-								 <a style="color: White" href=#viewhistory/{{x.memid}}>View</a>
-								&nbsp;&nbsp; 
-								
-							</h4>
-				
-				</div>
-			
-					</div>
-				</div>
-			</div>
-		</div>
-</body> 
-
-
-
-
- -->
-
+	
 
 <body ng-controller="accesshistoryctrl">
 <div class="container" style="  margin-left: 300px;" >
 <div class="panel col-md-10" style="margin-top: 80px;color:whitesmoke;background-color:rgba(4, 8, 5, 0.51);
 					
-					border: 2px solid cyan;">
+					border: 2px solid #407aa8;">
 <h2 style="color:hotpink" > Access History</h2>
-<form class="col-md-7" style="padding-top:40px;margin-left: 200px;margin-bottom: 40px;">
-                            <label class="pull-left">Search By Member,Account Id &nbsp; </label> <input type="text"
+<form class="col-md-7" style="padding-top:40px;margin-left: 200px;margin-bottom: 40px;" name="hisform">
+                            <label class="pull-left">Search By Member/Account Id &nbsp; </label> <input type="text" name="abc"
 							style="margin-left: 170px; margin-right: 210px; width: 226px;"
 							class="form-control" placeholder="Enter MemberId,AccountId"
-							ng-model="search.$" required>
-                               <!--  <input type="button" value="Search" href=#memhistory> -->
-                               <br />
-                             <!-- <label class="pull-left"> Search By Account ID</label> <input type="text"
-							style="margin-left: 170px; margin-right: 210px; width: 226px;"
-							class="form-control" placeholder="Enter AccountId" ng-model="search.quantity.accountId" required> -->
+							ng-model="search.$" ng-pattern="/^[a-zA-Z0-9]*$/"
+							ng-required="true">
+							<p style="color:white" ng-show="hisform.abc.$error.pattern">The id doesn't contain Symbols!!</p>
+							 <span style="color: white"
+							ng-show="hisform.abc.$invalid">
+							<p style="color:white" ng-show="hisform.abc.$touched && hisform.abc.$error.required">Sorry!No Results</p></span> 
                                
-                                
+                               <br />
+                            
 </form>
 
- <div >
+ <div>
 
  <table class="table" style="margin-top: 80px">
  <thead>
@@ -91,11 +43,14 @@
   <td>{{book.quantity.accountId}}</td>
   <td>{{book.issueDate | date: 'yyyy-MM-dd' }}</td>
   <td>{{book.dueDate | date: 'yyyy-MM-dd'}}</td>
-  <td>{{book.returnDate | date: 'yyyy-MM-dd'}}</td>
-  <td>{{book.fine}}</td>
+  <td>{{book.returnDate | date: 'yyyy-MM-dd'}} <span  ng-show=book.returnDate==null  style="color:hotpink">Borrowed</span></td>
+  <td>{{book.fine}} <span  ng-show=book.fine==null  style="color:hotpink">None</span></td>
   </tr>
  </tbody>
- </table></div>
+ </table>
+ <uib-pagination total-items="bigTotalItems" ng-model="currentPage" 
+ max-size="maxSize" class="pagination-sm" num-pages="numPages"  items-per-page="pageSize" ng-change="setPage(currentPage)"></uib-pagination>
+ </div>
  </div></div>
  
  </body>

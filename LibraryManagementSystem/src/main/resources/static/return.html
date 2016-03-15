@@ -5,23 +5,31 @@
 			<div class="col-md-8 ">
 				<div class="col-md-offset-4 panel"
 					style="padding-left: 70px; padding-right: 70px; margin-left: 140px; padding-top: 30px; padding-bottom: 50px; 
-					background-color: rgba(4, 8, 8, 0.62); margin-top: 50px; border: 2px solid cyan; margin-left: 100px; width: 894px;">
+					background-color: rgba(49, 66, 74, 0.85); margin-top: 50px; border: 2px solid cyan; margin-left: 100px; width: 894px;">
 					<h2 style="color: hotpink">Mark a Book</h2>
 					<br>
 					
 					<div>
-					<form ng-submit="fetchbymember();showtable='true'"">
+					<form ng-submit="fetchbymember();showtable='true'" name="returnform" novalidate>
 						<b style="color: whitesmoke">Filter By Member id:</b>
 					     
-						<input type="text"
+						<input type="text" name="memid"
 							style="margin-left: 260px; margin-right: 210px; width: 226px;"
 							class="form-control" placeholder="Enter MemberId to mark a book"
-							ng-model="member.id" />
-							<input class="btn btn-info " type="submit"  value="fetch"></input>
+							ng-model="member.id" ng-pattern="/^[0-9]+$/"
+															ng-required="true"/>
+											<p style="color: white; font-style: italic;"
+													ng-show="returnform.memid.$touched && returnform.memid.$error.required">Required!!</p>
+															
+															
+												<p style="color: white; font-style: italic;"
+													ng-show="returnform.memid.$error.pattern">MemberId is only a number!</p>
+															
+							<input class="btn btn-info " type="submit"  value="fetch" ng-disabled="returnform.$invalid"></input>
 					</form>
 					</div>
 					
-					
+		
 					<h3 style="color: cyan" ng-show=showtable >Books issued</h3>
 					<table class="table" border="0" ng-show=showtable 
 						style="font-weight: 600; background-color:none;">

@@ -20,12 +20,16 @@
     padding-right: 30px;
     padding-bottom: 30px;
 ">
-							<form>
-								Category Name<input type="text" id="categoryname" 
-									class="form-control" ng-model="catname" /> <br>
+							<form name="editcatform" novalidate="novalidate">
+								Category Name<input type="text" name="categoryname" 
+									class="form-control" ng-model="catname" ng-pattern="/^[a-zA-Z]*$/" ng-required="true" /> <span style="color: white; font-style: italic;"
+													ng-show="editcatform.categoryname.$touched && editcatform.categoryname.$error.required">Required!!</span>
+												<p style="color: white; font-style: italic;"
+													ng-show="editcatform.categoryname.$error.pattern">Name
+													contains only characters.</p> <br>
 								<br>
 								<button class="btn btn-info" type="submit"
-									ng-click="editCategory()" data-dismiss="modal">Submit</button>
+									ng-click="editCategory()" data-dismiss="modal" ng-disabled="editcatform.$invalid">Submit</button>
 							</form>
 						</div>
 					</div>

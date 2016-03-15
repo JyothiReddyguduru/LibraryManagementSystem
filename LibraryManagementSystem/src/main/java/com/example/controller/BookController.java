@@ -24,6 +24,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.Status;
@@ -61,8 +62,8 @@ public class BookController {
 	QuantityRepository quantityrepository;
 	@Autowired
 	UserRepository userrepository;
-	private String lastName;
-	private String DateofBirth; 
+	/*private String lastName;
+	private String DateofBirth; */
 
 	@RequestMapping("/categories")
 	public List<Category> getCategories() {
@@ -78,7 +79,7 @@ public class BookController {
 		return bookrepository.findAll();
 	}
 	
-	@RequestMapping("/books")
+	/*@RequestMapping("/books")
 public Page<Book> getbooks(@RequestBody HashMap<String , Integer> map ) {
 	
 	int pageCount= map.get("pageCount");
@@ -86,12 +87,33 @@ public Page<Book> getbooks(@RequestBody HashMap<String , Integer> map ) {
 	PageRequest pageRequest=new PageRequest(pageCount,pageSize);
   return (Page<Book>) bookrepository.findAll(pageRequest);
 }
+	*/
 	
-
+	
+	//pagination
+	@RequestMapping("/books")
+	public Page<Book> getbooks(@RequestParam("ps")int pageSize,@RequestParam("pc")int pc) {
+		//pageSize-no of elements to be displayed
+			int pageCount;
+		if(pc==0)
+		{
+		 pageCount = 0;
+		}
+		else
+		{
+			pageCount=pc-1;
+		}
+		  
+		PageRequest pageRequest=new PageRequest(pageCount,pageSize);
+	  return (Page<Book>) bookrepository.findAll(pageRequest);
+	}
+		
+	//viewing copies of a particular book
 	@RequestMapping("/book/{bookid}")
 	public Book get(@PathVariable("bookid") int bookid) {
-		return bookrepository.findOne(bookid);
 
+		return bookrepository.findOne(bookid);
+		
 	}
 
 	//viewing books of a particular category
@@ -170,8 +192,18 @@ public Page<Book> getbooks(@RequestBody HashMap<String , Integer> map ) {
 		HashMap<String, Object> returnParams = new HashMap<String, Object>();
 
 		try {
+			int i=0;
 		//Category categorynamee=categoryrepository.findOne(categoryid);
 			//System.out.println(categorynamee.getCategoryname());
+			List<Quantity>qan=book.getQuantity();
+			Iterator<Quantity>it=qan.iterator();
+			while(it.hasNext())
+			{
+				Quantity q=(Quantity)it.next();
+				q.setBook(book);
+				i++;
+			}
+			book.setCopies(i);
 		bookrepository.save(book);
 		
 			returnParams.put("status", true);
@@ -193,9 +225,16 @@ public Page<Book> getbooks(@RequestBody HashMap<String , Integer> map ) {
 	
 	
 	@RequestMapping("/bookk/{bookId}")
-	public Book getbookname(@PathVariable("bookId") int bookId){
+	public HashMap<Object,Object> getbookname(@PathVariable("bookId") int bookId){
 		Book bookname=bookrepository.findOne(bookId);
-		return bookname;
+		HashMap<Object,Object>returnmap=new HashMap<>();
+		returnmap.put("bookid",bookname.getBookid());
+		returnmap.put("author",bookname.getAuthor());
+		returnmap.put("isbn", bookname.getIsbn());
+		returnmap.put("title",bookname.getTitle());
+		returnmap.put("cats",bookname.getCats());
+		returnmap.put("quantity",bookname.getQuantity());
+		return returnmap;
 		
 	}
 	
@@ -259,13 +298,30 @@ public Page<Book> getbooks(@RequestBody HashMap<String , Integer> map ) {
 	
 	
 	
-	@RequestMapping("/bookdetails")
+	/*@RequestMapping("/bookdetails")
 	public List<BookDetail> bookdetail() {
 		
 		return (List<BookDetail>) bookdetailrepository.findAll();
 		
 	}
-
+*/
+	@RequestMapping("/bookdetails")
+	public Page<BookDetail> gethistclerk(@RequestParam("ps")int pageSize,@RequestParam("pc")int pc) {
+		//pageSize-no of elements to be displayed
+			int pageCount;
+		if(pc==0)
+		{
+		 pageCount = 0;
+		}
+		else
+		{
+			pageCount=pc-1;
+		}
+		  
+		PageRequest pageRequest=new PageRequest(pageCount,pageSize);
+	  return (Page<BookDetail>) bookdetailrepository.findAll(pageRequest);
+	}
+	
 	@SuppressWarnings("unchecked")
 	@RequestMapping("/bookdetails/{memberid}")
 	public List<BookDetail> bookdetail(@PathVariable("memberid") int memid) {
@@ -276,8 +332,18 @@ public Page<Book> getbooks(@RequestBody HashMap<String , Integer> map ) {
 	public List<Quantity> quantity() {
 		return (List<Quantity>) quantityrepository.findAll();
 	}
+	
+	@RequestMapping("/getusername/{id}")
+	public Map<String,String> userName(@PathVariable("id")int id)
+	{
+		Member m=memberrespository.findOne(id);
+		String name=m.getUser().getUserName();
+		Map<String,String> returnMap =  new HashMap<>();
+		returnMap.put("name", name);
+		return returnMap;
+	}
 
-	@RequestMapping("/abc")
+	@RequestMapping("/issue")
 	public HashMap<String, Object> issubook(@RequestBody BookDetail bookdetail) {
 		HashMap<String, Object> returnParams = new HashMap<String, Object>();
 
@@ -315,12 +381,13 @@ public Page<Book> getbooks(@RequestBody HashMap<String , Integer> map ) {
 	}
 
 	@RequestMapping("/markabook/{bookid}")
-	public HashMap<String, Object> markbook(@PathVariable("bookid") int bookid) {
+	public BookDetail markbook(@PathVariable("bookid") int bookid) {
 		HashMap<String, Object> returnParams = new HashMap<String, Object>();
+		BookDetail bookdetail = bookdetailrepository.findOne(bookid);
+
 		try {
 			int fine;
-			BookDetail bookdetail = bookdetailrepository.findOne(bookid);
-
+			
 			Date today = new Date();
 			SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 
@@ -359,7 +426,7 @@ public Page<Book> getbooks(@RequestBody HashMap<String , Integer> map ) {
 			returnParams.put("msg", "Failed to add Category!!");
 		}
 
-		return returnParams;
+		return bookdetail;
 
 	}
 	

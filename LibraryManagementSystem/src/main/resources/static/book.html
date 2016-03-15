@@ -1,99 +1,123 @@
 <!-- html page to display the list of books in the database -->
 
 <body id="top" ng-controller="viewbooks">
-	<div class="container" style="
-    width: 1230px;
-">
-			<div class="col-xs-4 pull-left">
-				<strong><h2 style="color:hotpink">List Of Books</h2></strong>
-			</div>
-			<div class="col-xs-4 pull-right">
-				<form class="col-md-11" style="padding-top: 10px">
-					<div id="custom-search-input" >
-						<div class="input-group col-md-12">
-							<!-- <input type="text" class="form-control input-lg"
-								placeholder="Enter title..." />  -->
-								<autocomplete ng-model="yourchoice" placeholder="abc" data="names" ng-keyup="autofetch(yourchoice)"></autocomplete>
-              
-								 													<span class="input-group-btn">
-								<button class="btn btn-info btn-lg" ng-click="fetchbytitle(yourchoice)" type="button">
-									<i class="glyphicon glyphicon-search"></i>
-								</button>
-							</span>
-						</div>
-					</div>
-				</form>
-			</div>
-			<br>
-			<div class="col-md-10">
-				<br> <br>
-				<div class="col-lg-4 col-md-4 col-sm-6 col-xs-12"
-					ng-repeat="x in books" style="width: 320px;">
-					<div class="">
-						<div class="overlay panel"
-							style="height: 175px; background-color: black">
-							<a style="color: cyan" href=#viewcat/{{x.bookid}}><h4>{{x.title}}</h4></a>
-							<h4 style="color: white">By</h4>
-							<h4 style="color: hotpink">{{x.author}}</h4>
-							<br> <i ng-show=admin  style="color: White" class="fa fa-pencil"></i>
-								<a role=button ng-show=admin  style="color: White" data-toggle="modal" 
-								data-target="#editbookmodal" ng-click="showbook(x.bookid)">Edit
-								</a> &nbsp;&nbsp;</a>
-							<!-- <a style="color: white" href=#viewcat/{{x.bookid}}><i
-								class="fa fa-eye"></i>View Categories</a>&nbsp; --> <a
-								style="color: white" href=#viewcopy/{{x.bookid}}><i
-								class="fa fa-eye"></i>View Copies</a>&nbsp;
-						</div>
+	<div class="container" style="width: 1230px;">
+		<div class="col-xs-4 pull-left">
+			<strong><h2 style="color:#407aa8">List Of Books</h2></strong>
+		</div>
+		<div class="pull-right" style="padding-top: 13px;font-size:15px">
+			<label style="color: black">View as:</label> <a role=button style="color: #407aa8"" alt="as grid"
+				ng-click="a=false"> &nbsp; <i class="fa fa-th-large"></i></a> <a style="color: #407aa8"" alt="as list"
+				
+				role=button ng-click="a=true"> <i class="fa fa-list"></i></a>
+		</div>
+		<div class="col-xs-4 pull-center">
+			<!-- <div class="centeralign"> -->
+			<form class="col-md-11 " style="padding-top: 10px" name="bookform">
+				<div id="custom-search-input">
+					<div class="input-group col-md-12">
+						<autocomplete ng-model="yourchoice" name="t" placeholder="abc"
+							data="names" ng-keyup="autofetch(yourchoice)"
+							ng-pattern="/^[a-zA-Z]*$/" ng-required="true">
+						<p style="color: white" ng-show="bookform.t.$error.pattern">Invalid
+							search!!</p>
+						</autocomplete>
+
+						<span class="input-group-btn">
+							<button class="btn btn-info btn-lg"
+								ng-click="fetchbytitle(yourchoice)" type="button">
+								<i class="glyphicon glyphicon-search"></i>
+							</button>
+						</span>
 					</div>
 				</div>
-			
-		
-</div>
 
-<div class="footer" style="
-    margin-top: 400px;
-">
-	<ul class="pagination " >
-			<!-- <li><a href="" ng-click="prevPage()">&laquo;</a></li> -->
- <li ng-repeat="n in page track by $index" >
-  <a ng-click="toPageId($index)">{{$index+1}}</a>
-  </li>
- <!--  <li><a href="" ng-click="nextPage()">&raquo;</a></li> --></ul>  
+			</form>
+
+		</div>
+
+		<br>
+		<!-- Grid -->
+		<div ng-hide=a class="col-md-10">
+			<br> <br>
+			<div class="col-lg-4 col-md-4 col-sm-6 col-xs-12"
+				ng-repeat="x in books" style="width: 300px;">
+				<div class="">
+					<div class="overlay panel"
+						style="height: 130px; background-color:  rgba(116, 127, 132, 0.72) ">
+						<a style="color: cyan" href=#viewcopy/{{x.bookid}}><h4>{{x.title}}</h4></a>
+						<h4 style="color: white">By</h4>
+						<h4 style="color: hotpink">{{x.author}}</h4>
+						 <i ng-show=admin style="color: White"
+							class="fa fa-pencil"></i> <a role=button ng-show=admin
+							style="color: White" data-toggle="modal"
+							data-target="#editbookmodal" ng-click="showbook(x.bookid)">Edit
+						</a> &nbsp;&nbsp;
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- Grid -->
+		<br>
+		
+		<br>
+		<br>
+		<!-- List -->
+		<div style="text-align: left;font-family: inherit; font-size:18px" ng-show=a>
+			<ul  style="color:#407aa8;line-height:">
+				<li  style="list-style-type:square;line-height: 2.29;"ng-repeat="x in books"><a style="color:purple"
+					href=#viewcopy/{{x.bookid}}>{{x.title}}</a> - <span style="color:#407aa8"> {{x.author}} </span>
+					&nbsp;&nbsp;&nbsp; 
+					<span style="align:center"><i ng-show=admin style="color: White"
+							></i> <a role=button ng-show=admin
+							style="color: black" data-toggle="modal"
+							data-target="#editbookmodal" ng-click="showbook(x.bookid)"><u>Edit</u>
+						</a></span></li>
+			</ul>
+		</div>
+<!-- List -->
+		<div class="footer" style="margin-top: 400px;">
+			<div align="right">
+  <uib-pagination total-items="bigTotalItems" ng-model="currentPage" 
+ max-size="maxSize" class="pagination-sm" num-pages="numPages" ng-change="setPage(currentPage)"items-per-page="pageSize" ></uib-pagination>
 </div>
 
 
 		</div>
-		
-		
+		</div>
+
+	</div>
+
 </body>
 <div ng-controller="editbookctrl">
-	<div class="container">
+	<div class="container" tabindex='-1'>
 		<!-- Trigger the modal with a button -->
-		
+
 		<!-- Modal -->
-		<div class="modal fade" id="editbookmodal" role="dialog">
+		<div class="modal fade" id="editbookmodal" role="dialog" tabindex='-1'>
 			<div class="modal-dialog">
 
 				<!-- Modal content-->
-				<div class="modal-content">
+				<div class="modal-content"
+					style="border: 4px solid black; background-color: white">
 					<div class="modal-header">
-						<button type="button" class="close" data-dismiss="modal">&times;</button>
-						<h4 class="modal-title" style="color: Hotpink;">Edit Book Details</h4>
+						<!--<button type="button" class="close" data-dismiss="modal">&times;</button> -->
+						<h4 class="modal-title" style="color: black;">Edit Book
+							Details</h4>
 					</div>
 					<div class="modal-body">
 						<form>
 							<label>Book Title</label><input type="text" id="booktitle"
-								class="form-control" ng-model="abcde.title" /> <br>
-							<br>
+								class="form-control" ng-model="abcde.title" /> <br> <br>
 							<label>Author</label><input type="text" id="author"
-								class="form-control" ng-model="abcde.author" /> <br>
-							<br>
+								class="form-control" ng-model="abcde.author" /> <br> <br>
 							<button class="btn btn-default" type="submit"
-								ng-click="EditBook()" data-dismiss="modal">Edit and Save</button>
+								ng-click="EditBook()" data-dismiss="modal">Edit and
+								Save</button>
 						</form>
 					</div>
 				</div>
 			</div>
 		</div>
-</div>
 	</div>
+</div>

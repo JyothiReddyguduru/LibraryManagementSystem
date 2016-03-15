@@ -1,7 +1,7 @@
 @CHARSET "ISO-8859-1";
 
 .nav-side-menu {
-  overflow: hidden;
+ 
   font-family: verdana;
   font-size: 12px;
   font-weight: 200;
@@ -80,7 +80,7 @@
 }
 .nav-side-menu ul .sub-menu li,
 .nav-side-menu li .sub-menu li {
-  background-color: #181c20;
+  background-color: rgba(8, 11, 35, 0.78);;
   border: none;
   line-height: 28px;
   border-bottom: 1px solid #23282e;
@@ -89,7 +89,7 @@
 .nav-side-menu ul .sub-menu li:hover,
 .nav-side-menu li .sub-menu li:hover {
   background-color: #c0c0c0;
-  color:Black;
+  color:#024381;
 }
 .nav-side-menu ul .sub-menu li:before,
 .nav-side-menu li .sub-menu li:before {
@@ -107,7 +107,7 @@
 }
 .nav-side-menu li a {
   text-decoration: none;
-  color: black;
+  color: C3C3E5;
 }
 .nav-side-menu ul a {
   text-decoration: none;
@@ -167,10 +167,9 @@ body {
     border: medium none;
     font-family: inherit;
     font-size: inherit;
-    color:cyan;
+    color:#407aa8;
     background: transparent none repeat scroll 0% 0%;
     cursor: pointer;
-    
     display: inline-block;
     margin: 15px 30px;
     text-transform: uppercase;
@@ -207,7 +206,7 @@ body {
 }
 .navbar {
     border-radius: 0px;
-        background-color: black;
+        background-color: #024381;
  padding-bottom: 25px;
     margin-bottom: 0px;
     

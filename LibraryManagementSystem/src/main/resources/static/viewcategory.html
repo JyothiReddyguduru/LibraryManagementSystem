@@ -3,7 +3,7 @@
 		<div class="row">
 			<div class="col-md-10 ">
 			<br>
-				<h2 style="color: hotpink">List Of Categories</h2>
+				<h2 style="color: #407aa8">List Of Categories</h2>
 			</div>
 			<!-- <div class="col-xs-4 pull-right">
 				<form class="col-md-11" style="padding-top: 10px">
@@ -26,8 +26,8 @@
 				<div>
 					<div class="col-lg-4 col-md-4 col-sm-6 col-xs-12"
 						ng-repeat="x in categories">
-						<div class="overlay panel" style="background-color: black;">
-							<h2 style="color: cyan">{{x.categoryname}}</h2>
+						<div class="overlay panel" style="background-color: rgba(116, 127, 132, 0.28);">
+							<h2 style="color:#407aa8">{{x.categoryname}}</h2>
 							<h4>
 								<br> <a style="color: White" href=#viewbook/{{x.catid}}>View</a>
 								&nbsp;&nbsp; <a role="button" ng-show="admin"
@@ -61,20 +61,20 @@
 	</div>
 </div>
 <div ng-controller="editcategoryctrl">
-	<div class="container">
+	<div class="container" tabindex='-1'>
 		<!-- Trigger the modal with a button -->
 		<!-- <button type="button" class="btn btn-info btn-lg" data-toggle="modal"
 			data-target="#editModal">Edit</button>
 		 -->
 		<!-- Modal -->
-		<div class="modal fade" id="editModal" role="dialog">
+		<div class="modal fade" id="editModal" role="dialog" tabindex='-1'>
 			<div class="modal-dialog">
 
 				<!-- Modal content-->
 				<div class="modal-content" align="centre"
-					style="background-color: none;">
+					style="border: 4px solid black;background-color:white">
 					<div class="modal-header">
-						<button type="button" class="close" data-dismiss="modal">&times;</button>
+						<!-- <button type="button" class="close" data-dismiss="modal">&times;</button> -->
 						<h4 class="modal-title" style="color: Hotpink;">Edit Category</h4>
 					</div>
 					<div class="modal-body"

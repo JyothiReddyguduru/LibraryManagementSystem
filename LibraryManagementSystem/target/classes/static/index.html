@@ -77,7 +77,9 @@ table {
 <script
 	src="http://cdnjs.cloudflare.com/ajax/libs/ng-tags-input/2.0.0/ng-tags-input.min.js"></script>
 <script src="js/autocomplete.js"></script>
+<script src="js/uibootstrap.js"></script>
 <script src="app.js"></script>
+
 <link rel="stylesheet" type="text/css" href="css/loginform.css">
 <link rel="stylesheet" type="text/css"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.css">
@@ -98,6 +100,18 @@ table {
 	border-spacing: 0;
 	color: whitesmoke;
 }
+.attribute_bubble {
+    border-radius: 9px;
+    background: #31708F;
+    padding: 8px;
+    font-size: 13px;
+    font-weight: bold;
+    color: white;
+    text-align: center;
+    margin: 3px;
+    cursor: pointer;
+}
+
 </style>
 </head>
 
@@ -105,7 +119,7 @@ table {
 
 
 <body id="page" ng-app="app" ng-controller="animationctrl"
-	style="background-image: url('images/wallp.jpg');">
+	style="background-image: url('../images/images.jpg');background-repeat: no-repeat;">
 	<!-- <ul class="cb-slideshow">
 		<li><span>Image 01</span> -->
 	<!-- 	<div class="cb-slideshow">
@@ -135,29 +149,29 @@ table {
 				<h3></h3>
 			</div></li> 
 	</ul> -->
-	<nav class="navbar navbar-inverse"
-		style="padding-bottom: 0px; position: static;">
+	<nav class="navbar navbar-default"
+		style="padding-bottom: 0px;background-color:#eaeef0; position: static;">
 
 		<!-- <ul>
 <li id="home" class="navbar-brand active"  style="float:left;"></li></ul> -->
 
-		<a class="navbar-brand active" href="#view"
-			style="padding-bottom: 20px; padding-top: 30px; color: cyan"
-			data-hover="hi"><i style="color: whitesmoke" class="fa fa-book"></i>
+		<a class="navbar-brand " href="#view"
+			style="padding-bottom: 20px; padding-top: 30px; color: #407aa8"
+			data-hover="hi"><i style="color: #2096D0" class="fa fa-book"></i>
 			<b>Library Management System</b></a>
 		<div class="centeralign">
 			<ul class="nav navbar-nav">
-				<li class="nav-item active"><a class="nav-link"
-					style="padding-top: 30px;"> <i style="color: cyan"
-						class="fa fa-phone-square"></i> &nbsp;Phone &nbsp;040-2405332<span
+				<li class="nav-item "><a class="nav-link"
+					style="padding-top: 30px;color: #407aa8"> <i style="color: #2096D0"
+						class="fa fa-phone-square"></i> <b>&nbsp;Phone</b> &nbsp;040-2405332<span
 						class="sr-only">(current)</span></a></li>
 
 			</ul>
 
 			<ul class="nav navbar-nav">
-				<li class="nav-item active"><a class="nav-link"
-					style="padding-top: 30px;"> <i class="fa fa-envelope-o fa-fw"
-						style="color: cyan"></i>&nbsp;Email
+				<li class="nav-item "><a class="nav-link"
+					style="padding-top: 30px;color: #407aa8"> <i class="fa fa-envelope-o fa-fw"
+						style="color: #2096D0"></i>&nbsp;<b>Email</b>
 						&nbsp;LibraryManagement@gmail.com
 				</a></li>
 
@@ -166,26 +180,26 @@ table {
 
 
 		<ul style="margin-top: 24px;" class="nav navbar-nav pull-right" ng-hide=authenticated>
-			<li class="nav-item active"><i style="color: whitesmoke"
-				class="fa fa-angle-double-right fa-2x bounce"></i></li>
-			<li class="nav-item active"><a
-				style="margin-top: 0px; margin-left: 1px; margin-bottom: 0px; padding-bottom: 0px; padding-top: 4px;"
+			<li class="nav-item "><i style="color: #2096D0"
+				class="fa fa-angle-double-right fa-2x bounce"></i></li> 
+			<li class="nav-item"><a
+				style="margin-top: 0px; margin-left: 1px; margin-bottom: 0px; padding-bottom: 0px; padding-top: 4px;color: #407aa8"
 				class="btn btn-success"  data-toggle="modal"
-				data-target="#register" data-keyboard="true">Register here</a></ul>
+				data-target="#register"  data-keyboard="true">Register here</a></ul>
 				<ul class="nav navbar-nav pull-right"> <li class="nav-item active"><a
-				class="nav-link" href="#viewprofile" ng-show=authenticated
-				style="padding-top: 30px;"> <i style="color: cyan"
-					class="fa fa-user fa-lg"></i>&nbsp;{{CurrentUser}}
+				class="nav-link" href="#viewprofile" ng-show=user
+				style="padding-top: 30px;color: #407aa8"> <i style="color: #2096D0"
+					class="fa fa-user fa-lg"></i>&nbsp;<b>{{CurrentUser}}</b>
 			</a></li>
-			<li class="nav-item active" ng-show=user><a
+			<li class="nav-item " ng-show=user><a
 				ng-click="EditProfile()" role="button" href="#editprofile"
-				ng-show=authenticated style="padding-top: 30px;"> <i
-					style="color: cyan" class="fa fa-pencil fa-lg"></i>&nbsp; Edit
-					Profile
+				ng-show=authenticated style="padding-top: 30px;color: #407aa8"> <i
+					style="color: #2096D0" class="fa fa-pencil fa-lg"></i>&nbsp;<b> Edit
+					Profile</b>
 			</a></li>
-			<li class="nav-item active"><a ng-click="logOut()" role="button"
-				ng-show=authenticated style="padding-top: 30px;"> <i
-					style="color: cyan" class="fa fa-power-off"></i>&nbsp; LogOut
+			<li class="nav-item "><a ng-click="logOut()" role="button"
+				ng-show=authenticated style="padding-top: 30px;color: #407aa8"> <i
+					style="color: #2096D0" class="fa fa-power-off"></i>&nbsp;<b> LogOut</b>
 			</a></li>
 		</ul>
 	</nav>
@@ -194,18 +208,18 @@ table {
 	<!-- Side-Nav bar -->
 
 	<div ng-show=authenticated class="nav-side-menu   pull-left"
-		style="padding-top: 0px; font-family: verdana, sans-serif; font-size: 14px; margin-top: 30px; font-weight: 400; color: #21D2D2; background-color: none;">
+		style="padding-top: 0px; font-family: verdana, sans-serif; font-size: 14px; margin-top: 30px; font-weight: 400; color: #407aa8; background-color: 6D929B;">
 
 		<br>
 		<div
-			style="height: 800px; background-color: black; padding-top: 10px; width: 200px;"
+			style="height: 800px; background-color: #eaeef0; padding-top: 10px; width: 200px;"
 			class="menu-list">
 			<ul id="menu-content" class="">
 				<div ng-show=admin>
 					<li data-target="#admin"><a
-						style="color: white; padding-bottom: 15px;"> <i
-							style="color: cyan" class="fa fa-user fa-lg"></i>&nbsp;{{CurrentUser}}
-							<span style="color: cyan" class="arrow"></span></a></li>
+						style="color: #407aa8; padding-bottom: 15px;"> <i
+							style="color: #2096D0" class="fa fa-user fa-lg"></i>&nbsp;{{CurrentUser}}
+							<span style="color:#2096D0" class="arrow"></span></a></li>
 					<ul class="sub-menu" id="admin">
 						<li role="presentation"><a href="#view">Categories</a></li>
 						<li><a href="#home">Books</a></li>
@@ -219,8 +233,8 @@ table {
 
 				<div ng-show=clerk>
 					<li data-toggle="collapse" data-target="#clerk" class="collapsed">
-						<a style="color: white"><i style="color: cyan"
-							class="fa fa-user fa-lg"></i>&nbsp;Clerk<span style="color: cyan"
+						<a style="color:#407aa8"><i style="color: #2096D0"
+							class="fa fa-user fa-lg"></i>&nbsp;Clerk<span style="color: #2096D0"
 							class="arrow"></span></a>
 					</li>
 					<ul class="sub-menu " id="clerk">
@@ -239,15 +253,15 @@ table {
 
 				<div ng-show=user>
 					<li data-toggle="collapse" data-target="#new" class="collapsed">
-						<a style="color: white"><i style="color: cyan"
+						<a style="color:#407aa8"><i style="color: #2096D0"
 							class="fa fa-user fa-lg"></i>&nbsp; Member<span
-							style="color: cyan" class="arrow"></span></a>
+							style="color: #2096D0" class="arrow"></span></a>
 					</li>
-					<ul class="sub-menu " id="new">
+					<ul class="sub-menu "  id="new">
 						<li role="presentation"><a href="#view">Categories</a></li>
 						<li><a href="#mybooks">My Books</a></li>
 						<li><a href="#home">Search Book</a></li>
-						<li><a href="#viewhistory/2">History</a></li>
+						
 						<li><a href="#fine">Fine Details</a></li>
 					</ul>
 				</div>
@@ -319,21 +333,21 @@ table {
 		ng-hide=authenticated>
 		<div class="col-md-7 ">
 			<div class="col-md-offset-4 panel"
-				style="padding-left: 70px; margin-left: 300px; padding-right: 70px; color: white; padding-top: 20px; padding-bottom: 50px; background-color: rgba(62, 56, 56, 0.89); margin-top: 50px; border: 2px solid cyan; width: 504px;">
-				<h2 style="color: hotpink">Sign In!</h2>
+				style="padding-left: 70px; margin-left: 300px; padding-right: 70px; color: white; padding-top: 20px; padding-bottom: 50px; background-color: rgba(49, 66, 74, 0.02); margin-top: 50px; border: 2px solid white ; width: 504px;">
+				<h2 style="color:#407aa8">Sign In!</h2>
 
 				<form class=" " name="loginform" novalidate>
-					<br> <b for="username">Username</b>
+					<br> <b for="username">UserName</b>
 					<div class="icon-container">
 						<i class="fa fa-user"></i> <input type="text" style=""
 							class="form-control" name="username" ng-model="auth.userName"
 							placeholder="username" ng-pattern="/^[a-zA-Z0-9]*$/"
 							ng-required="true"> <span style="color: white"
 							ng-show="loginform.username.$invalid">
-							<p style="color:red"
+							<p style="color:white"
 								ng-show="loginform.username.$touched && loginform.username.$error.required">UserName
 								is required!!</p>
-							<p style="color:red" ng-show="loginform.username.$error.pattern">UserName
+							<p style="color:white" ng-show="loginform.username.$error.pattern">UserName
 								is only alphanumeric</p>
 					</div>
 					<br> <b for="password">Password</b>
@@ -342,11 +356,11 @@ table {
 							class="form-control" name="upwd" ng-model="auth.password"
 							placeholder="password" ng-pattern="/^[a-zA-Z0-9]*$/"
 							ng-required="true">
-						<p style="color:red"
+						<p style="color:white"
 							ng-show="loginform.upwd.$touched && loginform.upwd.$error.required">Password
 							is required.</p>
 					</div>
-					<input type="submit" class="btn btn-info " ng-click="login()"
+					<input type="submit" class="btn btn-primary " ng-click="login()"
 						ng-disabled="loginform.$invalid" value="Login" />
 				</form>
 			</div>
@@ -387,12 +401,12 @@ table {
 						</button> -->
 		<!-- Modal -->
 		<div class="modal fade" id="register" role="dialog"
-			style="width: 100%; height: 100%" tabindex=''>
-			<div class="modal-dialog">
+			 tabindex='-1'>
+			<div class="modal-dialog" style="width: 50%; height: 50%;">
 				<!-- Modal content-->
-				<div class="modal-content">
+				<div class="modal-content" style="border: 4px solid Black;">
 					<div class="modal-header">
-						<button type="button" class="close" data-dismiss="modal">&times;</button>
+						<!-- <button type="button" class="close" data-dismiss="modal">&times;</button> -->
 						<h1 class="modal-title" style="color: Hotpink;">Sign Up</h1>
 					</div>
 					<br>
@@ -409,13 +423,14 @@ table {
 												<input type="text" name="firstname" placeholder="firstname"
 													class="form-control" ng-model="members.firstName"
 													ng-pattern="/^[a-zA-Z]*$/" ng-required="true">
-											</div>
+											
 											<span style="color: red; font-style: italic;"
-												ng-show="registerform.firstname.$touch && registerform.firstname.$error.required">Firstname
+												ng-show="registerform.firstname.$touched && registerform.firstname.$error.required">FirstName
 												is required.</span>
 											<p style="color: red; font-style: italic;"
-												ng-show="registerform.firstname.$error.pattern">Firstname
+												ng-show="registerform.firstname.$error.pattern">FirstName
 												contains only characters.</p>
+												</div>
 										</div>
 										<div class="col-sm-5">
 											<input type="text" name="lastname" class="form-control"
@@ -431,10 +446,11 @@ table {
 										<label for="dateofbirth" class="control-label pull-left">Birthday</label>
 										<div class="col-sm-6">
 											<div style="padding-left: 10px">
-												<input type="date" name="Bday" class="form-control"
-													ng-model="members.dateOfBirth" placeholder="dd/mm/yyyy">
+												<input type="date" name="Bday" class="form-control" min="1900-01-01"
+                              											max="2016-03-30"		ng-model="members.dateOfBirth" placeholder="dd/mm/yyyy">
+                              											<p class="text-muted" ng-show="register.Bday.max.$error">Required!!</p> 
 											</div>
-											<!--  <p class="text-muted" ng-show="register.Bday.$touched &&loginform.Bday.$error.required">Required!!</p> -->
+											  
 										</div>
 									</div>
 								</div>
@@ -483,7 +499,7 @@ table {
 							<div class="form-group">
 								<div class="row">
 									<div class="col-sm-12">
-										<label for="Username" class="control-label pull-left">Username</label>
+										<label for="Username" class="control-label pull-left">UserName</label>
 										<div class="col-sm-6">
 											<input type="text" name="username" class="form-control"
 												ng-model="members.user.userName" placeholder='username'
@@ -558,7 +574,7 @@ table {
 								</div>
 							</div>
 							<br>
-							<button type="button" class="btn btn-info" ng-click="register()"
+							<button type="button" class="btn btn-info" ng-disabled="registerform.$invalid" ng-click="register()"
 								data-dismiss="modal">SignUp</button>
 						</form>
 					</div>

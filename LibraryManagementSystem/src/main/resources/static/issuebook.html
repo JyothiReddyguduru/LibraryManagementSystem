@@ -1,15 +1,23 @@
 <body ng-controller="issuebookctrl">
-	<div class="row">
-		<div class="container">
-			<div class="col-md-8 ">
-				<div class="col-md-offset-4 panel"
-					style="padding-left: 70px; padding-right: 70px; color: white; padding-top: 20px; padding-bottom: 50px; background-color: rgba(62, 56, 56, 0.89); margin-top: 50px; border: 2px solid cyan; margin-left: 250px; width: 604px;">
-					<h2 style="color: hotpink">Issue Book</h2>
-					<!-- <form class="col-md-11">
+
+	<div class="container">
+		<div class="col-sm-8 ">
+			<div class=" panel"
+				style="padding-left: 70px; padding-right: 70px; color: white; padding-top: 16px; padding-bottom: 50px; background-color:rgba(49, 66, 74, 0.85); margin-top: 50px; border: 2px solid #407aa8; margin-left: 200px; width: auto; height: auto;">
+				<h2 style="color:whitesmoke">Issue Book</h2>
+				<div>
+					<!-- top  -->
+					<div class="" style="width: 388px;">
+						<br> <b style="font-weight: bold; text-transform: uppercase;">Title</b>
 						<div id="custom-search-input">
 							<div class="input-group col-md-12">
-								<input type="text" class="form-control input-lg"
-									placeholder="Enter title..." /> <span class="input-group-btn">
+								<input list="title" name="title" class="form-control"
+									ng-model="state.title" placeholder="Enter title" />
+								<datalist id="title">
+									<option ng-repeat="book in books| filter : filterEntity"
+										value="{{book.title}}">{{book.title}}</option>
+								</datalist>
+								<span class="input-group-btn">
 									<button class="btn btn-info btn-lg"
 										ng-click="fetchbytitle();sho='true'" type="button">
 										<i class="glyphicon glyphicon-search"></i>
@@ -17,87 +25,102 @@
 								</span>
 							</div>
 						</div>
-					</form> -->
-					<form>
-						<br> 
-						<div>
-							<!-- <div class=""><b>TITLE</b> <select style="width: 426px;" class="form-control"
-								ng-model="state.title">
-								<option ng-repeat="book in books| filter : filterEntity"
-									value="{{book.title}}">{{book.title}}</option>
+						<br>
 
-							</select></div> -->
-							<form class="col-md-11" >
-					<div id="custom-search-input">
-						<div class="input-group col-md-12">
-							<input list="title" name="title"  class="form-control"
-								ng-model="state.title" placeholder="Enter title to issue"/> <datalist id="title">
-    <option ng-repeat="book in books| filter : filterEntity" value="{{book.title}}">{{book.title}}</option>
-     </datalist><span class="input-group-btn">
-								<button class="btn btn-info btn-lg"  ng-click="fetchbytitle();sho='true'" type="button">
-									<i class="glyphicon glyphicon-search"></i>
-								</button>
-							</span>
+					</div>
+				</div>
+				<form name="issueform" novalidate>
+					<!-- top -->
+					<!-- bottom -->
+
+					<!-- bottom left -->
+
+					<!-- bottom left -->
+					<!-- bottom right -->
+					<div class="" style="width: 700px; text-align: left" ng-show=sho>
+						<div class="">
+							<strong>ISBN</strong><label class="attribute_bubble"
+								style="background: #004040;" ng-model="book.isbn">{{book.isbn}}</label>
+							<br> <strong>AUTHOR</strong><label class="attribute_bubble"
+								style="background: #004040;" ng-model="book.author">{{book.author}}</label>
+							<br> <strong>ACCOUNTID</strong><b ng-show=sho><label
+								class="attribute_bubble" style="background: #004040;"
+								ng-model="bookdetail.quantity.accountId">{{bookdetail.quantity.accountId}}</label></b>
+							<span ng-hide=true>Select Account ID to issue!</span> <b
+								ng-show=sho><button ng-show=sho type="button"
+									class="btn btn-info" data-toggle="modal" data-target="#copies">Select</button></b>
+							<br> <br> <Label class="col-xs-2 pull-left"
+								style="padding-left: 0px; padding-right: 0px; width: 90px;">MEMBER
+								ID </Label><input type="text" style="color: black; width: 10%"
+								class="form-control  col-xs-2" name="memid"
+								ng-model="bookdetail.members.memid"
+								ng-keyup="get(bookdetail.members.memid)" ng-pattern="/^[0-9]+$/"
+								ng-required="true" /> <br> <span
+								style="color: white; font-style: italic;"
+								ng-show="issueform.memid.$touched && issueform.memid.$error.required">Required!!</span>
+							<p style="color: white; font-style: italic;"
+								ng-show="issueform.memid.$error.pattern">MemberId is only a
+								number!</p>
+							<br>
+							<strong>USER NAME</strong><label class="attribute_bubble"
+								style="background: #004040; text-transform: uppercase;"
+								ng-model="s.name">{{s.name}}</label>
+
 						</div>
 					</div>
-				</form>
-							<!-- <input list="title" name="title" style="width: 426px;" class="form-control"
-								ng-model="state.title" placeholder="Enter title to issue"><span class="input-group-btn">
-								<button class="btn btn-info btn-lg" ng-click="fetchbytitle();sho='true'" type="button">
-									<i class="glyphicon glyphicon-search"></i>
-								</button>
-  <datalist id="title">
-    <option ng-repeat="book in books| filter : filterEntity" value="{{book.title}}">{{book.title}}</option>
-     </datalist><div class="col-sm-6"><button class="btn btn-info btn-sm pull-right" 
-								ng-click="fetchbytitle();sho='true'" type="button">
-								<i class="glyphicon glyphicon-search"></i>
-							</button></div></span></div> -->
-							
-							
-							
-						
-						<br> <b>ISBN</b><input type="text" id="isbn"
-							class="form-control" ng-model="books.isbn" /> <br>
-						<div>
-							<b ng-show=sho>AVAILABLE COPIES</b>
-							<table ng-show=sho class="table" border="1"
-								style="font-weight: 600; padding-right: 25px; background-color: rgba(0, 0, 0, 0.58);">
-								<thead font-size="50px">
-									<tr>
-										<th>AccountId</th>
-										<th>Status</th>
-										<th>Select</th>
-									</tr>
-								<tbody ng-repeat="y in books.quantity">
-									<tr ng-show=y.status=="Available">
-										<td>{{y.accountId}}</td>
-										<td>{{y.status}}</td>
+					<!-- bottom right -->
+					<button type="button" class="btn btn-info " ng-click="issueBook()"
+						ng-disabled="issueform.$invalid">ISSUE</button>
+			</div>
+			<!-- bottom -->
 
-										<td>
-										 <button class="btn btn-info"
-												 ng-click="change(y.accountId)"
-												style="margin-bottom: 0px; margin-right: 0px; margin-top: 0px; margin-left: 0px; width: 74px;">select
-											</button> </td>
-									</tr>
-								</tbody>
-							</table>
-						</div>
-						
-						<b>ACCOUNT ID</b> <input type="text" id="author"
-							class="form-control" ng-model="bookdetail.quantity.accountId"/>
-							
-						<br> <b>AUTHOR</b> <input type="text" id="author"
-							class="form-control" ng-model="books.author" /> <br> <b>MEMBER
-							ID</b> <input type="text" class="form-control"
-							ng-model="bookdetail.members.memid">
-							<br> <input type="submit"
-							class="btn btn-info" ng-click="issueBook()" value="Issue" />
-					</form>
+		</div>
+	</div>
+
+	<div tabindex='-1'>
+		<!-- Trigger the modal with a button -->
+		<!-- <button type="button" class="btn btn-info btn-lg" data-toggle="modal"
+			data-target="#editModal">Edit</button>
+		 -->
+		<!-- Modal -->
+		<div class="modal fade" id="copies" role="dialog" tabindex='-1'>
+			<div class="modal-dialog">
+
+				<!-- Modal content-->
+				<div class="modal-content" align="centre"
+					style="border: 4px solid black; background-color: white">
+					<div class="modal-header">
+						<!-- <button type="button" class="close" data-dismiss="modal">&times;</button> -->
+						<h4 align="center" class="modal-title" style="color: Hotpink;">Available
+							Copies</h4>
+					</div>
+					<div class="modal-body"
+						style="padding-left: 30px; padding-right: 30px; padding-bottom: 30px;">
+						<table class="table table-striped" border="0"
+							style="font-weight: 600; padding-right: 15px; background-color: None; color: Black">
+							<thead align="center" font-size="50px">
+								<tr>
+									<th>AccountId</th>
+									<!-- <th>Status</th> -->
+									<th>Select</th>
+								</tr>
+							<tbody ng-repeat="y in book.quantity">
+								<tr ng-show=y.status=="Available">
+									<td>{{y.accountId}}</td>
+									<!-- <td>{{y.status}}</td> -->
+
+									<td>
+										<button class="btn btn-info" ng-click="change(y.accountId);"
+											style="margin-bottom: 0px; margin-right: 0px; margin-top: 0px; margin-left: 0px; width: 74px;"
+											data-dismiss="modal">select</button>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
 				</div>
 			</div>
 		</div>
 	</div>
-	<!-- ng-model="y.accountId" ng-value="accountId"
-              id="{{accountId}}"
-              name="accountId" -->
-              <!-- <div class="btn-group"><label class="btn btn-success" btn-radio="''" ng-change="change()" ng-model="newItemType"> -->
+	</form>
+</body>

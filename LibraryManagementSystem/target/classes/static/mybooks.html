@@ -1,51 +1,67 @@
-<body ng-controller="viewmybooksctrl">
-	<div class="container">
-		<div class="col-md-10">
+<body  ng-controller="viewmybooksctrl">
+	<div class="container" style="font-size: 18px;">
 
-			<h1 style="color: hotpink">
-			<br>
-				<b>My Books</b>
-			</h1>
-			<br>
-			<div class="panel"align="center" 
-				style="background-color:rgb(19, 20, 21); border: 2px solid cyan; height: 214px; width: 700px;" ng-repeat="x in mybooks">
+		<div class="pull-right">
+			<a role=button style="color: cyan" ng-click="a=true"> History</a>
+			&nbsp;&nbsp; <a role=button style="color: cyan" ng-click="a=false">
+				My Books</a>
+		</div>
+		<h1 style="color: black">
+			<b ng-hide=a>My Books</b> <b ng-show=a>History</b>
+		</h1>
+		<br>
 
-				<!-- top row div -->
-				<div class="row"
-					style="padding-top: 15px; padding-left: 30px; padding-right: 40px; height: 204px;">
-					<!-- image to the left -->
-					<!-- <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
-						<div class="hovereffect pull-left">
-							<img src="images/team3.jpg" style="height: 140px;"
-								class="img-responsive" alt="team img 1"> <br>
-
-							<div class="overlay" style="height: 155px;" >
-							<br>
-							<br>
-								<h4 style="color: cyan">{{x.title}}</h4>
+		<div class="col-md-10" ng-hide=a>
+			<br> <br>
+			<div>
+				<div class="col-lg-4 col-md-4 col-sm-6 col-xs-12"
+					ng-repeat="x in mybooks">
+					<div class="overlay panel" style="background-color: rgba(49, 66, 74, 0.85);">
+						<div>
+							<div style="color: white; width: 280px;padding-top: 15px;padding-bottom: 15px;">
+								Title: {{x.title}}<br> Author :{{x.author}} <br> Issue
+								Date : {{x.bookDetail.issueDate | date: 'yyyy-MM-dd'}} <br>
+								Due Date : {{x.bookDetail.dueDate | date: 'yyyy-MM-dd'}} <br>
+								</h4>
 							</div>
+							<!-- data to the right end-->
+
 						</div>
-					</div> -->
-					<!-- image to the left end-->
-					<!-- data to the right end-->
-					<div  font-size="300px" 
-						font-weight="300px" style="text-align: left">
-						<h4 style="color:Whitesmoke;line-height:1.8; width: 500px;margin-left: 80px;">
-							Title: {{x.title}}<br>
-						Author :{{x.author}} <br>
-							Quantity Id : {{x.bookDetail.quantity.accountId}}<br>
-							Issue Date : {{x.bookDetail.issueDate | date: 'yyyy-MM-dd'}} <br> 
-							Due Date : {{x.bookDetail.dueDate | date: 'yyyy-MM-dd'}} <br>
-</h4>
+						<!-- top row div end -->
 					</div>
-					<!-- data to the right end-->
+				</div>
+			</div>
+		</div>
+
+		<div class="col-md-10" ng-show=a>
+			<br> <br>
+
+			<div>
+				<div class="col-lg-4 col-md-4 col-sm-6 col-xs-12"
+					ng-repeat="x in mybooks">
+					<div class="overlay panel" style="background-color:rgba(49, 66, 74, 0.85);">
+						<div>
+							<div style="color: white; width: 280px;padding-top: 15px;padding-bottom: 15px">
+								Title: {{x.title}}<br> Author :{{x.author}} <br> Issue
+								Date : {{x.bookDetail.issueDate | date: 'yyyy-MM-dd'}} <br>
+								Due Date : {{x.bookDetail.dueDate | date: 'yyyy-MM-dd'}} <br>
+								Return Date :<span style="color: hotpink"
+									ng-show=x.bookDetail.returnDate==null>Yet to be returned</span>{{x.bookDetail.returnDate
+								| date: 'yyyy-MM-dd'}}<br> Fine : <span
+									style="color: hotpink" ng-show=x.bookDetail.fine==null>None
+								</span>{{x.bookDetail.fine}}
+
+							</div>
+							<!-- data to the right end-->
+
+						</div>
+						<!-- top row div end -->
+					</div>
 
 				</div>
-				<!-- top row div end -->
 			</div>
 
 		</div>
 	</div>
-
-
+	</div>
 </body>

@@ -23,7 +23,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		.antMatchers("/admin/**").access("hasRole('ADMIN')")
 		.antMatchers("/member/**").access("hasRole('USER')")
 		.antMatchers("/clerk/**").access("hasRole('CLERK')")
-				.and().logout().invalidateHttpSession(false)
+				.and().logout().invalidateHttpSession(true)
                 .logoutUrl("/logout").logoutSuccessUrl("/index.html")
 				.and().csrf().disable();
 	}

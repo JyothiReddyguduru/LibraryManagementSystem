@@ -3,44 +3,44 @@
 
 <body ng-controller="viewhistoryctrl">
 
-<div class="container">
+	<div class="container">
 		<div class="row">
-		
-		
-		<div>
-		
-				<h2 style="color: hotpink">History</h2>
+
+
+			<div>
+
+				<h2 style="color: black">History</h2>
 			</div>
 			<br>
 			<div class="col-md-10">
 				<br> <br>
-		
+
 				<div>
-				<div  class="col-lg-4 col-md-4 col-sm-6 col-xs-12" ng-repeat="x in mybooks">
-				<div   class="overlay panel" style="background-color :black;">
-				<div >
-				<h4 style="color: cyan; width: 280px;">
-						Title:{{x.title}} <br> <br> Author :{{x.author}} <br>
-						<br> Issue Date :{{x.bookDetail.issueDate | date:
-						'yyyy-MM-dd'}} <br>
-						<br> Due Date :{{x.bookDetail.dueDate | date:
-						'yyyy-MM-dd'}}  <br>
-						<br> Date of Return :<span ng-show=x.bookDetail.returnDate==null>Yet to be returned</span>{{x.bookDetail.returnDate | date:
-						'yyyy-MM-dd'}}<br>Fine
-						:{{x.bookDetail.fine}}
-					</h4>
-				</div>
-				
-				</div>
-			
-					
+					<div class="col-lg-4 col-md-4 col-sm-6 col-xs-12"
+						ng-repeat="x in mybooks">
+						<div class="overlay panel" style="background-color: black;">
+							<div>
+								<div style="color: white; width: 280px;">
+								<h4>
+									Title :{{x.title}} <br> <br> Author :{{x.author}} <br>
+									<br> Issue Date :{{x.bookDetail.issueDate | date:
+									'yyyy-MM-dd'}} <br> <br> Due Date
+									:{{x.bookDetail.dueDate | date: 'yyyy-MM-dd'}} <br> <br>
+									Date of Return :<span style="color:Red"  ng-show=x.bookDetail.returnDate==null>Yet
+										to be returned</span>{{x.bookDetail.returnDate | date: 'yyyy-MM-dd'}}<br>
+									<br>Fine : <span style="color:Red"  ng-show=x.bookDetail.fine==null>None
+										</span>{{x.bookDetail.fine}}
+</h4>
+								</div>
+
+							</div>
+
+</div>
+						</div>
 					</div>
 				</div>
 			</div>
-			</div>
-			</div>
-			
-			
+		</div>
 </body>
 
 

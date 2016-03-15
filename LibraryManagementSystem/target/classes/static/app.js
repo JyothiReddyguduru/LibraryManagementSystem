@@ -1,4 +1,4 @@
-var app = angular.module('app', ['ngRoute','ngTagsInput','autocomplete']);
+var app = angular.module('app', ['ngRoute','ngTagsInput','autocomplete','ui.bootstrap']);
 app.config(['$routeProvider', '$httpProvider',
             
     function($routeProvider, $httpProvider) {
@@ -16,6 +16,7 @@ app.config(['$routeProvider', '$httpProvider',
             templateUrl: 'viewprofile.html',
             controller: 'viewprofilectrl'
             })
+            
            .when('/editprofile', {
             templateUrl: 'editprofile.html',
             controller: 'editprofilectrl'
@@ -36,12 +37,8 @@ app.config(['$routeProvider', '$httpProvider',
                 templateUrl: 'fine.html',
                 controller: 'viewfinectrl'
             })
-            .when('/viewhistory/:id', {
-                templateUrl: 'viewhistory.html',
-                controller: 'viewhistoryctrl'
-            })
-
-        .when('/issuebook', {
+    
+            .when('/issuebook', {
                 templateUrl: 'issuebook.html',
                 controller: 'issuebookctrl'
             })
@@ -193,7 +190,7 @@ app.directive("passwordVerify", function() {
 
 app.controller('registerctrl', ['$scope', '$rootScope', '$http', '$routeParams', function($scope, $rootScope, $http, $routeParams) {
 	 $rootScope.members = {};
-		    $scope.register = function() {
+	 		    $scope.register = function() {
 	        $http({
 	            method: 'POST',
 	            url: '/savemember',
@@ -201,15 +198,13 @@ app.controller('registerctrl', ['$scope', '$rootScope', '$http', '$routeParams',
 
 
 	        }).then(function(response) {
-	              /*  alert('registered Successfully!');*/
-	                $rootScope.members = response.data;
-	                $rootScope.user=response.data;
-	              
+	               alert('registered Successfully!');
+	               
 	                });
 	    };
   }])
 
-app.controller('viewbooks', ['$scope', '$rootScope', '$http', '$routeParams', function($scope, $rootScope, $http, $routeParams) {
+/*app.controller('viewbooks', ['$scope', '$rootScope', '$http', '$routeParams', function($scope, $rootScope, $http, $routeParams) {
 
     $scope.title = 'List of Books';
 
@@ -284,7 +279,80 @@ app.controller('viewbooks', ['$scope', '$rootScope', '$http', '$routeParams', fu
 
 
 }])
+*/
+  app.controller('viewbooks', ['$scope', '$rootScope', '$http', '$routeParams', function($scope, $rootScope, $http, $routeParams) {
 
+    $scope.title = 'List of Books';
+
+   
+    
+    
+    $scope.maxSize=5;
+    $scope.currentPage=0;
+
+    $scope.getAllBooks=function(){
+    	$scope.pageSize=6;
+          $http.get('/books?pc='+$scope.currentPage+'&ps='+$scope.pageSize)
+               .success(function(data){
+            	   debugger;
+                        $rootScope.allTaskCount=data.totalElements;
+                        $rootScope.books=data.content;
+                       
+                        $scope.bigTotalItems = data.totalElements;
+                        
+          })
+      
+    }
+    $scope.getAllBooks();
+     $scope.setPage = function(currentpage) { 
+    $scope.currentPage=currentpage;
+
+    $scope.getAllBooks();
+     }
+    $scope.showbook=function(bookid){
+    	$http({
+    	        method: 'GET',
+    	        url: '/bookk/'+bookid,
+    	    }).then(function(response) {
+    	    	    	    	
+    	        $rootScope.abcde = angular.copy(response.data);
+    	    
+    })
+    }
+	 			
+	 
+		$scope.autofetch = function(search) {
+			
+			        $http({
+			            method: 'GET',
+			            url: '/autosearchbytitle/'+search  ,
+			            
+			                          
+			        }).then(function(response) {
+			        
+			            $scope.names = response.data;
+			            
+			        });
+			    }
+			    
+			    
+			    
+			    $scope.fetchbytitle = function(query) {
+
+			      
+			        $http({
+			            method: 'GET',
+			            url: '/searchbytitle/' +query,
+			           
+			   
+			        }).then(function(response) {
+			            $scope.books =[];
+			            $scope.books.push(response.data);
+			        });
+			    }
+
+
+}])
 
 
 app.controller('viewcatofbookctrl', ['$scope', '$rootScope', '$http', '$routeParams', function($scope, $rootScope, $http, $routeParams) {
@@ -294,9 +362,7 @@ app.controller('viewcatofbookctrl', ['$scope', '$rootScope', '$http', '$routePar
     $http({
         method: 'GET',
         url: '/book/category/'+$routeParams.bookid,
-        /*
-         * headers : { 'Authorization' : 'Basic ' + encodedAuthData }
-         */
+        
     }).then(function(response) {
     	debugger;
         $rootScope.catofbooks = response.data;
@@ -348,11 +414,11 @@ app.controller('addbookctrl', ['$scope', '$rootScope', '$location', '$http', fun
             data: $rootScope.books
         }).then(function(response) {
             if (response.data.status) {
-                alert('book Added Successfully!');
+               /* alert('book Added Successfully!');*/
                 $rootScope.books = {};
                 $location.url("/home");
             } else {
-                alert('book Addition Failed!');
+               /* alert('book Addition Failed!');*/
             }
         })
     }
@@ -377,7 +443,7 @@ $rootScope.authenticated=false;
         }).then(function(response) {
             $rootScope.response = response.data;
             $rootScope.CurrentUser=response.data.name;
-            alert('authentication Successfull');
+            /*alert('authentication Successfull');*/
             $rootScope.authenticated = true;
             $location.url("/view");
             if ($rootScope.response.role == 'user') {
@@ -407,7 +473,7 @@ $rootScope.authenticated=false;
         }, function(response) {
             $rootScope.authenticated = false;
        /*     alert('authentication failed');*/
-            alert($rootScope.authenticated);
+            /*alert($rootScope.authenticated);*/
             
         });
     }
@@ -437,11 +503,11 @@ $rootScope.authenticated=false;
 			data:$rootScope.Mydetails
 		}).then(function(response) {
             if (response.data.status) {
-                alert('Member Edited Successfully!');
+               /* alert('Member Edited Successfully!');*/
              /*   $rootScope.books = {};*/
                 $location.url("/viewprofile");
             } else {
-                alert('Member Editing Failed!');
+                /*alert('Member Editing Failed!');*/
             }
         })	
     }
@@ -482,10 +548,12 @@ app.controller('editprofilectrl', ['$scope', '$rootScope', '$http', function($sc
 
 }])
 
-app.controller('returnbookctrl', ['$scope', '$rootScope', '$http', function($scope, $rootScope, $http) {
+app.controller('returnbookctrl', ['$scope', '$rootScope', '$http', '$location', function($scope, $rootScope, $http, $location) {
 	$scope.title="Pankaj";
 	$scope.member={};
+	debugger;
 	$scope.fetchbymember=function(){
+		debugger;
 		$http({
 			method : 'GET',
 			url : '/searchbymember/'+ $scope.member.id,
@@ -493,18 +561,25 @@ app.controller('returnbookctrl', ['$scope', '$rootScope', '$http', function($sco
 					'Authorization' : 'Basic ' + encodedAuthData
 				}*/
 		}).then(function(response) {
+			debugger;
 			$rootScope.bookdetails= response.data;
+			debugger;
 		});
 	}
-			
+	debugger;
 			$scope.mark=function(accountid){
+				debugger;
 				$http({
 					method : 'POST',
 					url :'/markabook/'+accountid,
 				}).then(function(response) {
-					if(response.data.status){
+					debugger;
+					if(response.data){
 					/*	alert('Book Successfully Returned...!');*/
-						location.reload();
+						$scope.returnbook=response.data;
+						debugger;
+						alert($scope.returnbook.fine);
+						$location.url("/accesshistory");
 					}
 					else {
 						/*alert('Return not successfull...!');*/
@@ -524,7 +599,7 @@ app.controller('editcategoryctrl', ['$scope', '$rootScope', '$http', '$routePara
            
         }).then(function(response) {
                 if (response.data.status) {
-             alert('Category edited Successfully!');
+            /* alert('Category edited Successfully!');*/
              $http({
                  method: 'GET',
                  url: '/categories',
@@ -534,27 +609,12 @@ app.controller('editcategoryctrl', ['$scope', '$rootScope', '$http', '$routePara
 
              
             } else {
-             alert('Category editing Failed!');
+          /*   alert('Category editing Failed!');*/
             }
         });
     }
 
 }])
-app.controller('viewhistoryctrl', ['$scope', '$rootScope', '$http', '$routeParams', function($scope, $rootScope, $http, $routeParams) {
-
-
-    $http({
-        method: 'GET',
-        url: '/viewmybooks',
-    }).then(function(response) {
-        $rootScope.mybooks= response.data;
-       
-    });
-
-}])
-
-
-
 app.controller('viewcategories', ['$scope', '$rootScope', '$http', '$routeParams', function($scope, $rootScope, $http, $routeParams) {
 
     $scope.title = 'List of Categories';
@@ -649,14 +709,13 @@ app.controller('editfinectrl', ['$scope', '$rootScope', '$http', '$routeParams',
 
 //controller to issue a book
 app.controller('issuebookctrl', ['$scope', '$rootScope', '$http', '$location', function($scope, $rootScope, $http, $location) {
-    $scope.state = {};
-
-    $http({
+    $scope.state=[];
+$http({
         method: 'GET',
         url: '/viewallbooks',
-        /*
-         * headers : { 'Authorization' : 'Basic ' + encodedAuthData }
-         */
+        
+         
+         
     }).then(function(response) {
         $rootScope.books = response.data;
     });
@@ -672,7 +731,8 @@ app.controller('issuebookctrl', ['$scope', '$rootScope', '$http', '$location', f
              * headers : { 'Authorization' : 'Basic ' + encodedAuthData }
              */
         }).then(function(response) {
-            $rootScope.books = response.data;
+        	debugger;
+            $rootScope.book = response.data;
         });
     }
     /*
@@ -687,30 +747,58 @@ app.controller('issuebookctrl', ['$scope', '$rootScope', '$http', '$location', f
     	$scope.bookdetail.quantity.accountId=accountId;
     	
     }
-  
+    debugger;
+   
+   /* $scope.issue=function(){
+   	 var MemberId = document.forms["issueform"]["memid"].value;
+   	 if(MemberId=='/^[0-9]*$/')
+    	{
+    	alert("entered");
+    	}
+   	 else
+   		 {
+   		 alert("enter memberid to issue");
+   		 }
+   		 }*/
+    $scope.get=function(query)
+    {
+    	
+    	  
+        $http({
+            method: 'GET',
+            url: '/getusername/'+query,
+                  }).then(function(response) {
+                	  
+                	  
+            $scope.s = response.data;
+            
+        });
+    }
     $scope.issueBook = function() {
     	
     	//$rootScope.bookdetail.quantity.accountId=$rootScope.a;
         $http({
             method: 'POST',
-            url: '/abc',
+            url: '/issue',
             data: $rootScope.bookdetail
 
 
         }).then(function(response) {
             if (response.data.status) {
-                alert('issued Successfully!');
-                $location.url("/view");
-               /* $rootScope.bookdetail = {};
-                $rootScope.books = {};*/
+                /*alert('issued Successfully!');
+               */
+              $scope.alertmsg=true;
+                /*$location.url("/view");*/
+               $rootScope.bookdetail = {};
+                $rootScope.book = {};
             } else {
-                alert('issuing Failed!');
+              /*  alert('issuing Failed!');*/
             }
         });
     }
 }]);
 
-//controller to search a member to access history
+/*//controller to search a member to access history
 app.controller('accesshistoryctrl', ['$scope', '$rootScope', '$http', function($scope, $rootScope, $http) {
 
     $http({
@@ -722,7 +810,31 @@ app.controller('accesshistoryctrl', ['$scope', '$rootScope', '$http', function($
     });
 
 }])
+*/
+//controller to search a member to access history
+app.controller('accesshistoryctrl', ['$scope', '$rootScope', '$http', function($scope, $rootScope, $http) {
+	 $scope.maxSize=5;
+	    $scope.currentPage=0;
 
+	    $scope.getAll=function(){
+	        $scope.pageSize=6;
+	          $http.post('/bookdetails?pc='+$scope.currentPage+'&ps='+$scope.pageSize)
+	               .success(function(data){
+	            	   //debugger;
+	                        $rootScope.allTaskCount=data.totalElements;
+	                        $rootScope.bookdetails=data.content;
+	                        
+	                        $scope.bigTotalItems =data.totalElements;
+	          })
+	      
+	    }
+	    $scope.getAll();
+	     $scope.setPage = function(currentpage) { 
+	    $scope.currentPage=currentpage;
+
+	    $scope.getAll();
+	     }
+}])
 app.controller('viewbookctrl', ['$scope', '$rootScope', '$http', '$routeParams', function($scope, $rootScope, $http, $routeParams) {
 
     $scope.title = 'List of Books..!';
@@ -749,8 +861,22 @@ app.controller('viewcopyctrl', ['$scope', '$rootScope', '$http', '$routeParams',
         method: 'GET',
         url: '/book/' + $routeParams.bookid,
     }).then(function(response) {
+    	 debugger;
         $rootScope.x = response.data;
-       
+        
+       debugger;
+        for( var i=0;i<=$rootScope.x.copies;i++){
+        	var y=i;
+       if( $rootScope.x.quantity[y].status=='Available')
+    	  $scope.available=i;
+       /*else
+   	{
+   	var blue=0;
+   	$scope.available=blue;
+   	}
+  */
+       }
+        
     });
     
     $scope.addcopy=function(bookid)
@@ -778,13 +904,26 @@ app.controller('viewcopyctrl', ['$scope', '$rootScope', '$http', '$routeParams',
     	if(quantity.status=="Available"){
         $http.delete('/deletecopy/' + quantity.accountId)
             .success(function(data, status, headers) {
-                alert("deleted successfully");
+            	debugger;
+            /*    alert("deleted successfully");*/
               
                 $http({
                     method: 'GET',
                     url: '/book/' + $routeParams.bookid,
                 }).then(function(response) {
+                	debugger;
                     $rootScope.x = response.data;
+                    for( var i=0;i<=$rootScope.x.copies;i++){
+                    	var y=i;
+                   if( $rootScope.x.quantity[y].status=='Available')
+                	  $scope.available=i;
+                   /*else
+               	{
+               	var blue=0;
+               	$scope.available=blue;
+               	}
+              */
+                   }
                    
                 });
             })
@@ -796,6 +935,16 @@ app.controller('viewcopyctrl', ['$scope', '$rootScope', '$http', '$routeParams',
     		/*alert("Can't be deleted because the status is Unavailable..")*/
     	}
     }
+    
+    //view categories for a book
+    $http({
+        method: 'GET',
+        url: '/book/category/'+$routeParams.bookid,
+       
+    }).then(function(response) {
+    	debugger;
+        $rootScope.catofbooks = response.data;
+    });
 
 }]);
 
@@ -813,7 +962,7 @@ app.controller('editbookctrl',['$scope', '$rootScope', '$location', '$http', fun
     	 debugger;
              if (response.data.status) {
             	 debugger;
-          alert('book edited Successfully!');
+          /*alert('book edited Successfully!');*/
           $http({
               method: 'GET',
               url: '/viewallbooks',
@@ -824,7 +973,7 @@ app.controller('editbookctrl',['$scope', '$rootScope', '$location', '$http', fun
          
          } else {
         	 debugger;
-          alert('book editing Failed!');
+         /* alert('book editing Failed!');*/
          }
      });
  }

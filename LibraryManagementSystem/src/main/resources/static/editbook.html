@@ -1,44 +1,47 @@
 <div ng-controller="editbookctrl">
 	<div class="container">
 		<!-- Trigger the modal with a button -->
-		
+
 		<!-- Modal -->
 		<div class="modal fade" id="editbookmodal" role="dialog">
 			<div class="modal-dialog">
 
 				<!-- Modal content-->
-				<div class="modal-content">
+				<div class="modal-content"
+					style="border: 2px solid cyan; background-color: black">
 					<div class="modal-header">
-						<button type="button" class="close" data-dismiss="modal">&times;</button>
+						<!-- <button type="button" class="close" data-dismiss="modal">&times;</button> -->
 						<h4 class="modal-title">Edit Book Details</h4>
-					</div></div>
-					<div class="modal-body">
-						<form name="editbookform" novalidate>
-							Book Title<input type="text" name="booktitle"
-								class="form-control" ng-model="books.title" ng-pattern="/^[a-zA-Z]*$/" ng-required="true">
-												
-												<span style="color: red; font-style: italic;"
-													ng-show="editbookform.booktitle.$touched && editbookform.booktitle.$error.required">Required!!</span>
-												<p style="color: red; font-style: italic;"
-													ng-show="editbookform.booktitle.$error.pattern">Title
-													contains only characters.</p> <br>
-							<br>
-							Author<input type="text" name="author"
-								class="form-control" ng-model="books
-								.author" ng-pattern="/^[a-zA-Z]*$/" ng-required="true">
-												</div>
-												<span style="color: red; font-style: italic;"
-													ng-show="editbookform.author.$touched && editbookform.author.$error.required">Required!!</span>
-												<p style="color: red; font-style: italic;"
-													ng-show="editbookform.author.$error.pattern">Author
-													contains only characters.</p> <br> <br>
-													
-							<br>
-							<button class="btn btn-default" type="submit"
-								ng-click="EditBook()" data-dismiss="modal">Edit and Save</button>	
-				</form>		
+					</div>
+				
+				<div class="modal-body">
+					<form name="editbookform" >
+						Book Title<input type="text" name="booktitle" class="form-control"
+							ng-model="books.title" 
+							ng-required="true"> <span
+							style="color: white; font-style: italic;"
+							ng-show="editbookform.booktitle.$touched && editbookform.booktitle.$error.required">Required!!</span>
+						<p style="color: white; font-style: italic;"
+							ng-show="editbookform.booktitle.$error.pattern">Title
+							contains only characters.</p>
+						<br> <br> Author<input type="text" name="author"
+							class="form-control" ng-model="books
+								.author"
+							ng-pattern="/^[a-zA-Z]*$/" ng-required="true">
+				
+				<span style="color: white; font-style: italic;"
+					ng-show="editbookform.author.$touched && editbookform.author.$error.required">Required!!</span>
+				<p style="color: white; font-style: italic;"
+					ng-show="editbookform.author.$error.pattern">Author contains
+					only characters.</p>
+				<br> <br> <br>
+				<button class="btn btn-default" type="submit" ng-click="EditBook()"
+					data-dismiss="modal" ng-disabled="true">Edit
+					and Save</button>
+				</form>
+				</div>
+				</div>
+			</div>
+		</div>
 	</div>
-	</div>
-	</div>
-	</div>
-	
+</div>

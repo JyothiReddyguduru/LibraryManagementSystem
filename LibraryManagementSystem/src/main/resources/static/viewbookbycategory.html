@@ -3,10 +3,11 @@
  <body ng-controller="viewbookctrl">
     		<div class="container">
     		<div style="padding-bottom:12px" ng-repeat="y in booksbycategories" ><br>
-    		<a  class="pull-right" href="#view" style="color:cyan"> <i  style="color:cyan" class="fa fa-chevron-left fa-3x"></i> <span class="sr-only"></span></a>
-<h2 style="color:hotpink">&nbsp;&nbsp; List of books in {{y.categoryname}}</h2>
+    		<a  class="pull-right" href="#view" style="color:rgba(49, 66, 74, 0.85)"> <i  style="color:rgba(49, 66, 74, 0.85)" class="fa fa-chevron-left fa-3x"></i> <span class="sr-only"></span></a>
+<h2 style="color:#407aa8">&nbsp;&nbsp; List of books in {{y.categoryname}}</h2>
 
-           
+           <span  style="color:rgba(49, 66, 74, 0.85)"ng-show=y.book==''> <label><br>
+           <br> <h3>This Category Has no Books</h3></label></span>
 		<div class="row">
 	
 			
@@ -16,7 +17,7 @@
 		
 				<div>
 				<div class="col-lg-4 col-md-4 col-sm-6 col-xs-12" ng-repeat="x in y.book">
-				<div class="overlay panel" style="background-color :black;">
+				<div class="overlay panel" style="background-color :rgba(49, 66, 74, 0.85);">
 				<h4 style="color:cyan">{{x.title}}</h4>
     								 <h4 style="color:White">By<br> <h4 style="color:hotpink">{{x.author}}</h4></h4>
     							<h4 style="color:cyan">{{x.isbn}}</h4>
@@ -26,7 +27,11 @@
     			 			
     		</div>
     		</div>
+    		</div>
+    		</div>
+    		</div>
     		
+    		</div>
 </body> 
 <!-- <body ng-controller="viewbookctrl">
     	<table>
