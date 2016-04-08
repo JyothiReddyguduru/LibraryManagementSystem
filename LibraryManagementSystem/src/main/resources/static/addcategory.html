@@ -6,22 +6,22 @@
     padding-right: 70px;
     padding-top: 30px;
     padding-bottom: 30px;
-    background-color: rgba(49, 66, 74, 0.85);
+    background-color: rgba(4, 8, 5, 0.12);
     margin-top: 50px;
-    border: 2px solid cyan;
+    border: 2px solid #407aa8;
     margin-left: 250px;
-    width: 604px;color:white;
+    width: 604px;color: #2096D0;
     " > 
-<h2 style="color:hotpink">Add Category</h2>
+<h2 style="color:#407aa8">Add Category</h2>
 <br>
 					<form name="addcatform" novalidate>
 					<div class="form-group">
 						<label> Category Name</label><input type="text" name="categorynameadd"
 							class="form-control" ng-model="categories.categoryname" ng-pattern="/^[a-zA-Z]*$/" ng-required="true">
 							<p ng-show="addcatform.categorynameadd.$invalid">
-												<p style="color: white; font-style: italic;"
+												<p style="color:red; font-style: italic;"
 													ng-show="addcatform.categorynameadd.$touched && addcatform.categorynameadd.$error.required">Required!!</p>
-												<p style="color: white; font-style: italic;"
+												<p style="color:red; font-style: italic;"
 													ng-show="addcatform.categorynameadd.$error.pattern">Category
 													contains only characters.</p> 
 							

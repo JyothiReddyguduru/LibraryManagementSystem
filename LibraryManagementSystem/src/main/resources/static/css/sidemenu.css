@@ -77,10 +77,11 @@
 .nav-side-menu ul .sub-menu li.active a,
 .nav-side-menu li .sub-menu li.active a {
   color: cyan;
+  background-color: white;
 }
 .nav-side-menu ul .sub-menu li,
 .nav-side-menu li .sub-menu li {
-  background-color: rgba(8, 11, 35, 0.78);;
+  background-color: rgba(45, 63, 97, 0.88);
   border: none;
   line-height: 28px;
   border-bottom: 1px solid #23282e;

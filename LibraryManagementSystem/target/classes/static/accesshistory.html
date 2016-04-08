@@ -1,56 +1,64 @@
 
-	
+
 
 <body ng-controller="accesshistoryctrl">
-<div class="container" style="  margin-left: 300px;" >
-<div class="panel col-md-10" style="margin-top: 80px;color:whitesmoke;background-color:rgba(4, 8, 5, 0.51);
-					
-					border: 2px solid #407aa8;">
-<h2 style="color:hotpink" > Access History</h2>
-<form class="col-md-7" style="padding-top:40px;margin-left: 200px;margin-bottom: 40px;" name="hisform">
-                            <label class="pull-left">Search By Member/Account Id &nbsp; </label> <input type="text" name="abc"
-							style="margin-left: 170px; margin-right: 210px; width: 226px;"
-							class="form-control" placeholder="Enter MemberId,AccountId"
-							ng-model="search.$" ng-pattern="/^[a-zA-Z0-9]*$/"
-							ng-required="true">
-							<p style="color:white" ng-show="hisform.abc.$error.pattern">The id doesn't contain Symbols!!</p>
-							 <span style="color: white"
-							ng-show="hisform.abc.$invalid">
-							<p style="color:white" ng-show="hisform.abc.$touched && hisform.abc.$error.required">Sorry!No Results</p></span> 
-                               
-                               <br />
-                            
-</form>
+	<div class="container" style="margin-left: 300px;">
+		<div class="panel col-md-10"
+			style="margin-top: 80px; color: whitesmoke; background-color: rgba(4, 8, 5, 0.12); border: 2px solid #407aa8;">
+			<h2 style="color: #407aa8">Access History</h2>
+			<form class="col-md-7"
+				style="padding-top: 40px; margin-left: 200px; margin-bottom: 40px; color: #407aa8"
+				name="hisform">
+				<label class="pull-left">Search By Member Id &nbsp; </label> <input
+					type="text" name="abc" ng-touched="value=true"
+					style="margin-left: 170px; margin-right: 210px; width: 226px;"
+					class="form-control" placeholder="Enter MemberId"
+					ng-model="search.id" ng-pattern="/^[a-zA-Z0-9]*$/"
+					ng-required="true">
+				<p style="color: red" ng-show="hisform.abc.$error.pattern">The
+					id doesn't contain Symbols!!</p>
+				<span style="color: white" ng-show="hisform.abc.$invalid">
+					<p style="color: red"
+						ng-show="hisform.abc.$touched && hisform.abc.$error.required">Sorry!No
+						Results</p>
+				</span> <br />
 
- <div>
+			</form>
 
- <table class="table" style="margin-top: 80px">
- <thead>
- <tr>
- <th>Id</th>
- <th>Name</th>
- <th>Accountid</th>
- <th>Issued Date</th>
- <th>Submission Date</th>
- <th>Return Date</th>
- <th>fine</th>
- </tr>
- </thead>
- <tbody ng-repeat="book in bookdetails| filter : search">
- <tr>
-  <td>{{book.id}}</td>
-  <td>{{book.members.user.userName}}</td>
-  <td>{{book.quantity.accountId}}</td>
-  <td>{{book.issueDate | date: 'yyyy-MM-dd' }}</td>
-  <td>{{book.dueDate | date: 'yyyy-MM-dd'}}</td>
-  <td>{{book.returnDate | date: 'yyyy-MM-dd'}} <span  ng-show=book.returnDate==null  style="color:hotpink">Borrowed</span></td>
-  <td>{{book.fine}} <span  ng-show=book.fine==null  style="color:hotpink">None</span></td>
-  </tr>
- </tbody>
- </table>
- <uib-pagination total-items="bigTotalItems" ng-model="currentPage" 
- max-size="maxSize" class="pagination-sm" num-pages="numPages"  items-per-page="pageSize" ng-change="setPage(currentPage)"></uib-pagination>
- </div>
- </div></div>
- 
- </body>
+			<div>
+
+				<table class="table" style="margin-top: 80px">
+					<thead>
+						<tr style="color: #2096D0">
+							<th>Id</th>
+							<th>Name</th>
+							<th>Accountid</th>
+							<th>Issued Date</th>
+							<th>Submission Date</th>
+							<th>Return Date</th>
+							<th>fine</th>
+						</tr>
+					</thead>
+					<tbody ng-repeat="book in bookdetails| filter : search">
+						<tr style="color: #2096D0">
+							<td>{{book.id}}</td>
+							<td>{{book.members.user.userName}}</td>
+							<td>{{book.quantity.accountId}}</td>
+							<td>{{book.issueDate | date: 'yyyy-MM-dd' }}</td>
+							<td>{{book.dueDate | date: 'yyyy-MM-dd'}}</td>
+							<td>{{book.returnDate | date: 'yyyy-MM-dd'}} <span
+								ng-show=book.returnDate==null style="color: hotpink">Borrowed</span></td>
+							<td>{{book.fine}} <span ng-show=book.fine==null
+								style="color: hotpink">None</span></td>
+						</tr>
+					</tbody>
+				</table>
+				<uib-pagination ng-hide=value total-items="bigTotalItems"
+					ng-model="currentPage" max-size="maxSize" class="pagination-sm"
+					num-pages="numPages" items-per-page="pageSize"
+					ng-change="setPage(currentPage)"></uib-pagination>
+			</div>
+		</div>
+	</div>
+
+</body>

@@ -24,7 +24,7 @@
 								Category Name<input type="text" name="categoryname" 
 									class="form-control" ng-model="catname" ng-pattern="/^[a-zA-Z]*$/" ng-required="true" /> <span style="color: white; font-style: italic;"
 													ng-show="editcatform.categoryname.$touched && editcatform.categoryname.$error.required">Required!!</span>
-												<p style="color: white; font-style: italic;"
+												<p style="color:red; font-style: italic;"
 													ng-show="editcatform.categoryname.$error.pattern">Name
 													contains only characters.</p> <br>
 								<br>

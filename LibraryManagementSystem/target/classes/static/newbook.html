@@ -9,42 +9,42 @@
     padding-right: 70px;
     padding-top: 30px;
     padding-bottom: 50px;
-    background-color: rgba(49, 66, 74, 0.85);
+   background-color:rgba(4, 8, 5, 0.12);
     margin-top: 50px;
-    border: 2px solid cyan;
+    border: 2px solid #407aa8;
     margin-left: 250px;
-    width: 604px;color:white;
+    width: 604px;color:#2096D0;
     " > 
-<h2 style="color:hotpink">Add Book</h2>
+<h2 style="color:#407aa8">Add Book</h2>
 					<form name="addbookform" method="post" novalidate>
 						<label> ISBN</label><input type="text" name="bookisbn"
 							class="form-control" ng-model="books.isbn" ng-pattern="/^[a-zA-Z0-9]*$/" ng-required="true">
-								<p style="color:white; font-style:italic;"
+								<p style="color:red; font-style:italic;"
 														ng-show="addbookform.bookisbn.$touched && addbookform.bookisbn.$error.required">
 														Field required!</p> 
-														<p style="color:white; font-style: italic;"
+														<p style="color:red; font-style: italic;"
 													ng-show="addbookform.bookisbn.$error.pattern">Not valid input!!</p> 
 														<br> 
 					 <label>TITLE</label><input
 							type="text" name="title" class="form-control"
-							ng-model="books.title" ng-pattern="/^[a-zA-Z]*$/" ng-required="true">
-												<span style="color:white; font-style: italic;"
+							ng-model="books.title" ng-pattern="/^[a-zA-Z0-9]*$/" ng-required="true">
+												<span style="color:red; font-style: italic;"
 													ng-show="addbookform.title.$touched&&addbookform.title.$error.required">Required!!</span>
-												<p style="color:white; font-style: italic;"
+												<p style="color:red; font-style: italic;"
 													ng-show="addbookform.title.$error.pattern">Title
-													contains only characters.</p>  <br>
+													contains only characters and digits.</p>  <br>
 							<label>AUTHOR</label> <input
 							type="text" name="author" class="form-control"
 							ng-model="books.author" ng-pattern="/^[a-zA-Z]*$/" ng-required="true">
-												<span style="color:white; font-style: italic;"
+												<span style="color:red; font-style: italic;"
 													ng-show="addbookform.author.$touched&&addbookform.author.$error.required">Required!!</span>
-												<p style="color:white; font-style: italic;"
+												<p style="color:red; font-style: italic;"
 													ng-show="addbookform.author.$error.pattern">Author
 													contains only characters.</p>   <br> 
 							<label>COPIES</label><input
 							type="number" id="copies" class="form-control" name="copies"
 							ng-model="books.copies"/>
-								<p style="color:white; font-style: italic;"
+								<p style="color:red; font-style: italic;"
 														ng-show="addbookform.copies.$touched && addbookform.copies.$error.required">
 														Enter only the number of copies!!</p> <br>
 <label>CATEGORIES</label>
@@ -60,10 +60,10 @@
                   allow-leftover-text="false"
                   add-on-paste="true"
                  style="color:black"
-                  placeholder="Add categories to your books" ng-required="true">
+                  placeholder="Add categories to your books" style="box-shadow: rgba(18, 81, 154, 0.6)" ng-required="true">
      <auto-complete  min-length="1"  source="loadTags($query)"></auto-complete>
       </tags-input>
-					<p style="color:white; font-style: italic;"
+					<p style="color:red; font-style: italic;"
 														ng-show="addbookform.dftags.$touched && addbookform.dftags.$error.required">
 														Select a category to add!!</p> <br> 
 						

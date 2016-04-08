@@ -1,23 +1,25 @@
 <body id="top" ng-controller="viewcopyctrl">
 	<div class="container">
 		<div class="col-md-10">
-			<br>  <br>
+			<br> <br>
 			<!-- panel div -->
 			<div class="panel"
-				style="background-color: rgba(24, 22, 22, 0.6); border: 2px solid cyan;">
+				style="background-color: rgba(4, 8, 5, 0.12); border:2px solid #407aa8;height:auto">
 				<!-- top row div end -->
 				<div class="row"
-					style="padding-top: 30px; padding-left: 30px; padding-right: 40px; height: auto;">
+					style="padding-top: 30px; padding-left: 30px; padding-right: 40px; height: auto;padding-bottom: 20px;">
 
 					<!-- image to the left -->
 					<div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
-						<div class="hovereffect">
-							<img src="images/team3.jpg" class="img-responsive"
+						<div class="hovereffect" style="
+    height: 190px;
+">
+							<img src="images/slideshow5.jpg" class="img-responsive"
 								alt="team img 1"> <br>
 
 							<div class="overlay">
-								<br> <br>
-								<h4 style="color: cyan">{{x.title}}</h4>
+								<br> <br> <br>
+								<h4 style="color:whitesmoke">{{x.title}}</h4>
 							</div>
 						</div>
 					</div>
@@ -25,44 +27,40 @@
 					<!-- data to the right end-->
 					<div class="col-lg-4 col-md-4 col-sm-6 col-xs-12" font-size="300px"
 						font-weight="300px" style="text-align: left">
-						<h3 style="color: whitesmoke; width: 600px">
-							
-								<p >Title
-							
-								:{{x.title}}</p>
+						<h3 style="color:#2096D0; width: 600px">
 
-								<p >Author
-								:{{x.author}}</p>
-								
-								<p >ISBN
-								
-								: {{x.isbn}}</p>
+							<p>Title :{{x.title}}</p>
 
-<p  ng-hide=admin>Availability: {{available+1}}/{{x.copies}}</p>
+							<p>Author :{{x.author}}</p>
 
-							
+							<p>ISBN : {{x.isbn}}</p>
 
-							Categories:<span  class="attribute_bubble" ng-show="catofbooks.Categories==''">No Categories!</span>  <span class="attribute_bubble"
-								ng-repeat="x in catofbooks.Categories"> {{x}} </span>
+							<p ng-hide=admin>Availability: {{available+1}}/{{x.copies}}</p>
+
+
+							Categories:<span class="attribute_bubble"
+								ng-show="catofbooks.Categories==''">No Categories!</span> <span
+								class="attribute_bubble" ng-repeat="x in catofbooks.Categories">
+								{{x}} </span>
 
 						</h3>
 					</div>
 					<!-- data to the right end-->
 					<div>
-						<a href="#home" style="color: cyan"> <i style="color: cyan"
+						<a href="#home" style="color:cyan"> <i style="color:#407aa8"
 							class="fa fa-chevron-left fa-3x"></i></a>
 					</div>
 
 				</div>
 				<div ng-show=admin
 					style="padding-left: 50px; padding-right: 50px; text-align: left;">
-					<h2 style="color: whitesmoke" >{{title}}</h2>
+					<h2 style="color:#407aa8">{{title}}</h2>
 					<a role="button" ng-show=admin ng-click="addcopy(x.bookid)" href=""
-						style="color: cyan; padding-bottom: 15px;"> <i
+						style="color:#407aa8; padding-bottom: 15px;"> <i
 						class="fa fa-plus-circle fa-3x"></i>&nbsp;&nbsp;<b>add copy </b><span
-						style="color: cyan" class="arrow"></span></a> <span
-						style="color: whitesmoke" ng-show="x.quantity==''">This Book Has
-						No Copies</span>
+						style="color: #407aa8" class="arrow"></span></a> <span
+						style="color: whitesmoke" ng-show="x.quantity==''">This
+						Book Has No Copies</span>
 					<table ng-hide="x.quantity==''" class="table" border="1"
 						style="background-color: rgba(21, 23, 23, 0.86);">
 						<thead style="text-align: centre">

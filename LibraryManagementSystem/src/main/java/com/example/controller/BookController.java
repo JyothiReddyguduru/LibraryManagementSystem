@@ -64,7 +64,28 @@ public class BookController {
 	UserRepository userrepository;
 	/*private String lastName;
 	private String DateofBirth; */
-
+	@RequestMapping("/admin/editfine/{id}")
+	public Fine getFine(@PathVariable("id")int id)
+	{
+		return finerepository.findOne(id);
+	}
+	@RequestMapping("/admin/editf")
+public HashMap<Object,Object>editfine(@RequestBody Fine fine)
+{
+	HashMap<Object,Object>returnmap=new HashMap<>();
+	try
+	{
+		finerepository.save(fine);
+		returnmap.put("status",true);
+		
+	}
+	catch(Exception e)
+	{
+		returnmap.put("status",false);
+	}
+	return returnmap;
+	
+}
 	@RequestMapping("/categories")
 	public List<Category> getCategories() {
 		return (List<Category>) categoryrepository.findAll();
@@ -91,6 +112,12 @@ public Page<Book> getbooks(@RequestBody HashMap<String , Integer> map ) {
 	
 	
 	//pagination
+	@RequestMapping("/viewfines")
+	public List<Fine>getFines()
+	{
+		return finerepository.findAll();
+	}
+	
 	@RequestMapping("/books")
 	public Page<Book> getbooks(@RequestParam("ps")int pageSize,@RequestParam("pc")int pc) {
 		//pageSize-no of elements to be displayed
@@ -124,7 +151,7 @@ public Page<Book> getbooks(@RequestBody HashMap<String , Integer> map ) {
 		
 	
 	
-	@RequestMapping("/deletecopy/{accountid}")
+	@RequestMapping("/admin/deletecopy/{accountid}")
 	public void delete(@PathVariable("accountid") String accountid) {
 		
 		Quantity qu=quantityrepository.findByAccountId(accountid);
@@ -151,7 +178,7 @@ public Page<Book> getbooks(@RequestBody HashMap<String , Integer> map ) {
 		return (List<BookDetail>) bookdetailrepository.findOne(id);
 	}
 
-	@RequestMapping("/addCategory")
+	@RequestMapping("/admin/addCategory")
 	public HashMap<String, Object> addcategory(@RequestBody Category category) {
 		HashMap<String, Object> returnParams = new HashMap<String, Object>();
 
@@ -166,7 +193,7 @@ public Page<Book> getbooks(@RequestBody HashMap<String , Integer> map ) {
 		return returnParams;
 	}
 	
-	@RequestMapping("/editcategoryname")
+	@RequestMapping("/admin/editcategoryname")
 	public HashMap<String, Object> ediyy(@RequestBody Category category) {
 		HashMap<String, Object> returnParams = new HashMap<String, Object>();
 		try{
@@ -187,7 +214,7 @@ public Page<Book> getbooks(@RequestBody HashMap<String , Integer> map ) {
 		}
 
 	
-	@RequestMapping("/BookEditing")
+	@RequestMapping("/admin/BookEditing")
 	public HashMap<String, Object> editbook(@RequestBody Book book) {
 		HashMap<String, Object> returnParams = new HashMap<String, Object>();
 
@@ -254,7 +281,7 @@ public Page<Book> getbooks(@RequestBody HashMap<String , Integer> map ) {
 		return returnParams;
 	}
 
-	@RequestMapping("/addBook")
+	@RequestMapping("/admin/addBook")
 	public HashMap<String, Object> addbook(@RequestBody Book book) {
 		HashMap<String, Object> returnParams = new HashMap<String, Object>();
 
@@ -305,7 +332,7 @@ public Page<Book> getbooks(@RequestBody HashMap<String , Integer> map ) {
 		
 	}
 */
-	@RequestMapping("/bookdetails")
+	@RequestMapping("/clerk/bookdetails")
 	public Page<BookDetail> gethistclerk(@RequestParam("ps")int pageSize,@RequestParam("pc")int pc) {
 		//pageSize-no of elements to be displayed
 			int pageCount;
@@ -343,7 +370,7 @@ public Page<Book> getbooks(@RequestBody HashMap<String , Integer> map ) {
 		return returnMap;
 	}
 
-	@RequestMapping("/issue")
+	@RequestMapping("/clerk/issue")
 	public HashMap<String, Object> issubook(@RequestBody BookDetail bookdetail) {
 		HashMap<String, Object> returnParams = new HashMap<String, Object>();
 
@@ -380,7 +407,7 @@ public Page<Book> getbooks(@RequestBody HashMap<String , Integer> map ) {
 		return (List<Member>) memberrespository.findAll();
 	}
 
-	@RequestMapping("/markabook/{bookid}")
+	@RequestMapping("/clerk/markabook/{bookid}")
 	public BookDetail markbook(@PathVariable("bookid") int bookid) {
 		HashMap<String, Object> returnParams = new HashMap<String, Object>();
 		BookDetail bookdetail = bookdetailrepository.findOne(bookid);
@@ -436,8 +463,16 @@ public Page<Book> getbooks(@RequestBody HashMap<String , Integer> map ) {
 public List<BookDetail>getDetails(@PathVariable("memid") int memid)
 {
 	Member member=memberrespository.findOne(memid);
-	return member.getBookdetail();
-	
+	List<BookDetail>b= member.getBookdetail();
+	List<BookDetail>add=new ArrayList<BookDetail>();
+	Iterator<BookDetail>it=b.iterator();
+	while(it.hasNext())
+	{
+		BookDetail book=(BookDetail)it.next();
+		if(book.getReturnDate()==null)
+			add.add(book);
+	}
+	return add;
 }
 
 
@@ -490,7 +525,7 @@ System.out.println(result);
 }
 
 
-@RequestMapping("/addcopy1/{bookid}")
+@RequestMapping("/admin/addcopy1/{bookid}")
 public HashMap<String,Object>addcopy(@PathVariable("bookid") int bookid) {
 	HashMap<String, Object> returnParams = new HashMap<String, Object>();
 	try

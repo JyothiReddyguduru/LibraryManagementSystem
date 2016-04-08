@@ -20,9 +20,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity http) throws Exception {
 
 		http.httpBasic().and().authorizeRequests().antMatchers("/").permitAll()
-		.antMatchers("/admin/**").access("hasRole('ADMIN')")
-		.antMatchers("/member/**").access("hasRole('USER')")
-		.antMatchers("/clerk/**").access("hasRole('CLERK')")
+		.antMatchers("/admin/**").hasAuthority("ADMIN")
+		.antMatchers("/member/**").hasAuthority("USER")
+		.antMatchers("/clerk/**").hasAuthority("CLERK")
 				.and().logout().invalidateHttpSession(true)
                 .logoutUrl("/logout").logoutSuccessUrl("/index.html")
 				.and().csrf().disable();

@@ -1,21 +1,23 @@
 
 
-<div ng-controller="viewfinectrl" align="centre">
+<div ng-controller="viewfinectrl" align="center">
 	<div class="container">
 		<div class=" col-md-offset-4 "
 			style="padding-top =: 40px; padding-top: 60px; margin-left: 260px;">
 			<!-- Description of fines -->
 			<div>
 				<!-- list will start here -->
-				
 					<div class="overlay panel"
 							style="background-color: rgba(49, 66, 74, 0.85)"
-							ng-repeat="x in finesview|limitTo:1">
+							ng-repeat="x in finesview">
 
 							<div style="padding-top: 10px;">
 								<p style="color: white">
 									<b>Late Submission of any book by {{x.numberOfDays}} Days
 										will lead to a fine of Rs.{{x.amount}} per day</b> &nbsp;&nbsp;
+										<a role=button ng-show=admin style="color: black"
+							data-toggle="modal" data-target="#editfineModal"
+							ng-click="editfine(x.id)"><u>Edit</u> </a>
 
 									<!-- <button class="btn btn-primary" type="submit"
 										style="margin-top: 5px; margin-bottom: 5px;" ng-click=""
@@ -27,7 +29,7 @@
 					<!-- list item will start here -->
 					
 					</div>
-					<div class="overlay panel"
+					<!-- <div class="overlay panel"
 							style="background-color:rgba(49, 66, 74, 0.85)"
 							ng-repeat="x in finesview|limitTo:1">
 
@@ -35,14 +37,14 @@
 								<p style="color: white">
 									<b>Late Submission of any book after {{x.numberOfDays}} Days
 										will lead to a fine of Rs.{{x.amount+4}} per day</b> &nbsp;&nbsp;
-										<!-- <button class="btn btn-primary" type="submit"
+										<button class="btn btn-primary" type="submit"
 										style="margin-top: 5px; margin-bottom: 5px;" ng-click=""
-										data-toggle="modal" data-dismiss="modal">Edit</button> -->
+										data-toggle="modal" data-dismiss="modal">Edit</button>
 								</p>
 							</div>
 							
 					</div>
-				
+				 -->
 				<!-- list will end here -->
 				
 			</div>
@@ -52,7 +54,7 @@
 		</div>
 
 
-		<div class="panel  col-md-offset-4 " ng-show=addrule
+		<!-- <div class="panel  col-md-offset-4 " ng-show=addrule
 			style="height: 242px; width: 502px; padding-left: 30px; border-right-width: 40px; padding-top: 40px; margin-left: 460px;">
 			<form>
 				<b>Number Of Days</b> <input type="text" id="days"
@@ -65,7 +67,7 @@
 			</form>
 
 		</div>
-	</div>
+	</div> -->
 
 
 <!-- Modal for editing a fine rule by Admin -->
@@ -92,11 +94,11 @@
 							style="padding-left: 30px; padding-right: 30px; padding-bottom: 30px;">
 							<form>
 								Fine Rules <input type="text" id="fineid" class="form-control"
-									ng-model="finesview.numberOfDays" /> <input type="text"
-									id="fineid" class="form-control" ng-model="finesview.amount" />
+									ng-model="fine.numberOfDays" /> <input type="text"
+									id="fineid" class="form-control" ng-model="fine.amount" />
 								<br> <br>
 								<button class="btn btn-primary" type="submit"
-									ng-click="editfinerule()" data-dismiss="modal">Submit</button>
+									ng-click="edit()" data-dismiss="modal">Submit</button>
 							</form>
 						</div>
 					</div>
